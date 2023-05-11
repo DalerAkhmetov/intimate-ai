@@ -2,6 +2,7 @@ const path = require('path');
 const glob = require('glob');
 const PugPlugin = require('pug-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 const PATHS = {
@@ -52,7 +53,7 @@ module.exports = (env, argv) => {
         },
         plugins: [
             new PugPlugin({
-                pretty: true,
+                pretty: isDev,
                 js: {
                     filename: '[name].[contenthash:8].js',
                 },
@@ -122,7 +123,19 @@ module.exports = (env, argv) => {
             ],
         },
         optimization: {
+            minimize: !isDev,
             minimizer: [
+                new TerserPlugin({
+                    exclude: [/\.min\.(js|ts)$/],
+                    terserOptions: {
+                        compress: true,
+                        toplevel: true,
+                        output: {
+                            comments: false,
+                        },
+                    },
+                    extractComments: false,
+                }),
                 new ImageMinimizerPlugin({
                     minimizer: {
                         implementation: ImageMinimizerPlugin.imageminMinify,
