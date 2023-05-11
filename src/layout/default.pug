@@ -1,0 +1,15 @@
+extends @layout/base
+
+append vars
+    - link.appleTouchIcon180x180 = `${baseDir}favicon/apple-touch-icon.png`
+    - link.icon32x32 = `${baseDir}favicon/favicon-32x32.png`
+    - link.icon192x192 = `${baseDir}favicon/android-chrome-192x192.png`
+    - link.icon16x16 = `${baseDir}favicon/favicon-16x16.png`
+    - link.manifest = `${baseDir}site.webmanifest`
+    - link.icon = `${baseDir}favicon/favicon.ico`
+    - meta.msapplicationTileColor = '#da532c'
+    - meta.msapplicationConfig = `${baseDir}browserconfig.xml`
+    - meta.themeColor = '#ffffff'
+
+block content
+    block page

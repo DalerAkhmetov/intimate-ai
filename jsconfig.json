@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@dist/*": ["./dist/*"],
+            "@src/*": ["./src/*"],
+            "@assets/*": ["./src/assets/*"],
+            "@fonts/*": ["./src/assets/fonts/*"],
+            "@images/*": ["./src/assets/images/*"],
+            "@scripts/*": ["./src/assets/scripts/*"],
+            "@styles/*": ["./src/assets/styles/*"],
+            "@components/*": ["./src/components/*"],
+            "@layout/*": ["./src/layout/*"],
+            "@pages/*": ["./src/pages/*"],
+            "@static/*": ["./static/*"]
+        }
+    },
+    "exclude": ["node_modules", "dist"]
+}

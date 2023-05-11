@@ -1,0 +1,47 @@
+.for-desktop {
+    @include tablet {
+        display: none !important;
+    }
+}
+
+.for-tablet {
+    @include desktop {
+        display: none !important;
+    }
+
+    @include mobile {
+        display: none !important;
+    }
+}
+
+.for-mobile {
+    @include desktop {
+        display: none !important;
+    }
+
+    @include tablet-only {
+        display: none !important;
+    }
+}
+
+.not-for-desktop {
+    @include desktop {
+        display: none !important;
+    }
+}
+
+.not-for-tablet {
+    @include tablet-only {
+        display: none !important;
+    }
+}
+
+.not-for-mobile {
+    @include mobile {
+        display: none !important;
+    }
+}
+
+.is-hidden {
+    display: none !important;
+}

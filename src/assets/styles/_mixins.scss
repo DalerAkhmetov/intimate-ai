@@ -1,0 +1,69 @@
+@mixin desktop {
+    @media (min-width: ($bp-desktop * 1px)) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: ($bp-desktop - 1px)) {
+        @content;
+    }
+}
+
+@mixin tablet-only {
+    @include tablet {
+        @media (min-width: ($bp-tablet * 1px)) {
+            @content;
+        }
+    }
+}
+
+@mixin mobile {
+    @media (max-width: ($bp-tablet - 1px)) {
+        @content;
+    }
+}
+
+@mixin font-face($font-name, $font-local: null, $font-weight: 400, $font-style: normal) {
+    $path: '@fonts/';
+    $local: ();
+
+    $font-weights: (
+        100: 'Thin',
+        200: 'ExtraLight',
+        300: 'Light',
+        400: 'Regular',
+        500: 'Medium',
+        600: 'SemiBold',
+        700: 'Bold',
+        800: 'ExtraBold',
+        900: 'Black',
+    );
+
+    $font-type: map-get($font-weights, $font-weight) + if($font-style == italic, 'Italic', '');
+
+    @if $font-local {
+        @each $local-name in $font-local {
+            $local: append($local, local($local-name) + ',');
+        }
+    }
+
+    @font-face {
+        font-display: swap;
+        font-family: $font-name;
+        font-style: $font-style;
+        font-weight: $font-weight;
+        src: if($local != '', $local, null) url('#{$path}#{$font-name}/#{$font-name}-#{$font-type}.woff2') format('woff2'), url('#{$path}#{$font-name}/#{$font-name}-#{$font-type}.woff') format('woff');
+    }
+}
+
+@mixin text-border($color, $border, $ieColor, $width: 1px, $ieWidth: 1px) {
+    text-shadow: ($ieWidth) ($ieWidth) $border, 0 0 $border, $width ($ieWidth) $border, 0 $width $border;
+    color: $ieColor;
+
+    @supports (-webkit-text-stroke: $width $border) {
+        text-shadow: none;
+        -webkit-text-stroke: $width $border;
+        color: $color;
+    }
+}
