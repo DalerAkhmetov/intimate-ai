@@ -6,34 +6,49 @@ const $button = $sectionIntro.querySelector('.main__button');
 const $frame = $sectionIntro.querySelectorAll('.main__frame');
 const $name = $sectionIntro.querySelector('.main__name');
 
-const animate = () => {
+const animateAfterLoad = () => {
     return new Promise((resolve) => {
         gsap.timeline({
+            onStart() {
+                $sectionIntro.classList.remove('is-loading');
+            },
             onComplete() {
                 gsap.set([$title, $title.querySelectorAll('.main__title-char'), $button], { clearProps: 'all' });
 
                 resolve();
             },
         })
-            .to($title.querySelectorAll('.main__title-char'), {
-                stagger: 0.05,
-                x: 0,
-                y: 0,
-            })
-            .to($title, {
-                onStart() {
-                    $sectionIntro.classList.remove('is-loading');
+            .fromTo(
+                $title,
+                {
+                    y: gsap.getProperty($title, 'y'),
                 },
-                y: 0,
-            })
-            .to(
+                {
+                    delay: 0.5,
+                    y: 0,
+                }
+            )
+            .fromTo(
                 $button,
                 {
+                    opacity: gsap.getProperty($button, 'opacity'),
+                },
+                {
                     opacity: 1,
-                    y: 0,
                 },
                 '<'
             );
+    });
+};
+
+const animateOnLoad = () => {
+    return new Promise((resolve) => {
+        gsap.to($title.querySelectorAll('.main__title-char'), {
+            duration: 2,
+            x: 0,
+            y: 0,
+            onComplete: resolve,
+        });
     });
 };
 
@@ -119,5 +134,6 @@ const init = () => {
 export default {
     init,
     resize,
-    animate,
+    animateOnLoad,
+    animateAfterLoad,
 };

@@ -8,6 +8,7 @@ import vh from '@scripts/vh';
 
 import form from '@components/form';
 import popup from '@components/popup';
+import preloader from '@components/preloader';
 import input from '@components/ui/input';
 
 import main from '@pages/main';
@@ -37,11 +38,19 @@ const init = () => {
     uaParser.init();
     vh.init();
 
-    form.init();
-    popup.init();
-    input.init();
+    preloader
+        .init(async () => {
+            form.init();
+            popup.init();
+            input.init();
 
-    main.init();
+            main.init();
+
+            await main.animateOnLoad();
+        })
+        .then(() => {
+            main.animateAfterLoad();
+        });
 
     resizeWidth = innerWidth;
 

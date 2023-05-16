@@ -329,12 +329,7 @@
 
         #{$p}__button {
             opacity: 0;
-            transform: translateY(vpc(80));
             pointer-events: none;
-
-            @include mobile {
-                transform: translateY(vpc(68));
-            }
         }
 
         #{$p}__bg {
