@@ -1,0 +1,103 @@
+@use 'sass:math';
+
+.input {
+    $p: &;
+
+    position: relative;
+    z-index: 1;
+
+    &__field {
+        appearance: none;
+        display: block;
+        outline: none;
+        border: 1px solid $color-dove-gray;
+        border-radius: vpc(100);
+        padding: vpc(16.5) vpc(19);
+        width: 100%;
+        min-height: vpc(56);
+        box-shadow: none;
+        font-family: inherit;
+        font-weight: 400;
+        font-size: vpc(16);
+        line-height: math.div(21, 16);
+        text-transform: uppercase;
+        color: $color-white;
+        background-color: transparent;
+        resize: none;
+        transition: border-color $transition, color $transition;
+
+        &::placeholder {
+            color: $color-dusty-gray;
+            opacity: 1;
+        }
+
+        &::-webkit-search-decoration,
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration {
+            display: none;
+        }
+
+        &::-ms-clear {
+            display: none;
+        }
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            appearance: none;
+            margin: 0;
+        }
+
+        &:focus,
+        #{$p}.is-filled & {
+            border-color: $color-silver;
+        }
+
+        &:disabled,
+        &.is-disabled,
+        #{$p}.is-disabled & {
+            border-color: $color-dove-gray;
+            color: $color-dove-gray;
+            pointer-events: none;
+
+            &::placeholder {
+                color: $color-dove-gray;
+            }
+        }
+
+        #{$p}.is-error & {
+            border-color: $color-cinnabar;
+        }
+
+        @include desktop {
+            #{$p}:not(.is-error) &:hover:not(:focus) {
+                border-color: $color-conifer;
+            }
+        }
+
+        @include mobile {
+            padding-top: vpc(12.5);
+            padding-bottom: vpc(12.5);
+            min-height: vpc(48);
+        }
+    }
+
+    &__error {
+        display: none;
+        margin-top: vpc(4);
+        margin-left: vpc(20);
+        font-size: vpc(14);
+        line-height: math.div(15, 14);
+        color: $color-cinnabar;
+        cursor: pointer;
+
+        #{$p}.is-error & {
+            display: block;
+        }
+
+        @include mobile {
+            font-size: vpc(12);
+            line-height: math.div(13, 12);
+        }
+    }
+}

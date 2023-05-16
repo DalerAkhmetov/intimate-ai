@@ -1,0 +1,7 @@
+mixin link-mask(props = {})
+    +b({ tag: props.link ? 'a' : 'button' }).link-mask(
+        href=props.link
+        type=props.link ? undefined : 'button'
+    )&attributes(attributes)
+        +e.hover(data-text=props.text aria-hidden="true")
+        = props.text

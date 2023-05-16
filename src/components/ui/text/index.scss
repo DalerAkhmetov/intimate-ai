@@ -1,0 +1,119 @@
+@use 'sass:math';
+
+.text {
+    $p: &;
+
+    font-weight: 400;
+    font-size: vpc(16);
+    line-height: math.div(16, 21);
+
+    &--max,
+    &--h1,
+    &--h2,
+    &--h3,
+    &--h4,
+    &--h5 {
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    &--max {
+        font-size: vpc(180);
+        line-height: math.div(198, 180);
+        letter-spacing: -0.025em;
+
+        @include tablet {
+            font-size: vpc(160);
+            line-height: math.div(176, 160);
+        }
+
+        @include mobile {
+            font-size: vpc(80);
+            line-height: math.div(88, 80);
+            letter-spacing: 0;
+        }
+    }
+
+    &--h1 {
+        font-size: vpc(128);
+        line-height: math.div(115, 128);
+
+        @include tablet {
+            font-size: vpc(76);
+            line-height: math.div(68, 76);
+        }
+
+        @include mobile {
+            font-size: vpc(68);
+            line-height: math.div(61, 68);
+        }
+    }
+
+    &--h2 {
+        font-size: vpc(64);
+        line-height: 1;
+
+        @include tablet {
+            font-size: vpc(60);
+        }
+
+        @include mobile {
+            font-size: vpc(38);
+            line-height: math.div(42, 38);
+        }
+    }
+
+    &--h3 {
+        font-size: vpc(48);
+        line-height: math.div(58, 48);
+
+        @include tablet {
+            font-size: vpc(44);
+            line-height: math.div(53, 44);
+        }
+
+        @include mobile {
+            font-size: vpc(32);
+            line-height: math.div(38, 32);
+        }
+    }
+
+    &--h4 {
+        font-size: vpc(36);
+        line-height: math.div(43, 36);
+
+        @include tablet {
+            font-size: vpc(32);
+            line-height: math.div(38, 32);
+        }
+
+        @include mobile {
+            font-size: vpc(24);
+            line-height: math.div(29, 24);
+        }
+    }
+
+    &--h5 {
+        font-weight: 700;
+        font-size: vpc(32);
+        line-height: 1;
+
+        @include tablet {
+            font-size: vpc(24);
+        }
+
+        @include mobile {
+            font-size: vpc(20);
+        }
+    }
+
+    &--sm {
+        font-size: vpc(14);
+        line-height: math.div(15, 14);
+
+        @include tablet {
+            font-size: vpc(12);
+            line-height: math.div(13, 12);
+        }
+    }
+}

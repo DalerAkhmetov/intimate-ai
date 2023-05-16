@@ -1,0 +1,8 @@
+mixin input(props = {})
+    +b.input(class=props.error ? 'is-error' : undefined)&attributes(attributes)
+        +e.INPUT.field(
+            id=props.id
+            name=props.id
+        )&attributes(props.attrs)
+
+        +e.LABEL.error(for=props.id)!= props.error

@@ -1,0 +1,11 @@
+mixin button(props = {})
+    - const isArrow = props.modifier === 'arrow';
+
+    +b({ tag: props.link ? 'a' : 'button' }).button(
+        class=props.modifier ? `--${props.modifier}` : undefined
+        href=props.link
+        type=props.link ? undefined : 'button'
+        aria-label=(isArrow && props.text ? props.text : undefined)
+    )&attributes(attributes)!= isArrow ? null : props.text
+        if props.arrow || isArrow
+            include images/arrow.svg

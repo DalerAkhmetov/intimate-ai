@@ -1,0 +1,142 @@
+@use 'sass:math';
+
+.button {
+    $p: &;
+
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: vpc(100);
+    padding: vpc(14) vpc(35.5);
+    min-height: vpc(56);
+    font-weight: 700;
+    font-size: vpc(20);
+    line-height: math.div(26, 20);
+    text-align: center;
+    text-transform: uppercase;
+    color: $color-mine-shaft2;
+    background-color: $color-white;
+    transition: border-color $transition, color $transition, background-color $transition;
+
+    svg {
+        flex-shrink: 0;
+        margin: vpc(-2) 0 vpc(-2) vpc(10);
+        width: vpc(28);
+        height: vpc(28);
+    }
+
+    &:disabled,
+    &.is-disabled {
+        background-color: $color-dove-gray;
+        pointer-events: none;
+    }
+
+    @include desktop {
+        &::before {
+            content: '';
+            position: absolute;
+            left: -1px;
+            right: -1px;
+            top: -1px;
+            bottom: -1px;
+            z-index: -1;
+            display: block;
+            border-radius: inherit;
+            background-color: $color-conifer;
+            transform: scaleX(0);
+            transform-origin: right center;
+            transition: transform $transition;
+        }
+
+        &:hover {
+            border-color: $color-conifer;
+
+            &::before {
+                transform-origin: left center;
+                transform: none;
+            }
+        }
+    }
+
+    @include tablet {
+        padding-top: vpc(15.5);
+        padding-bottom: vpc(15.5);
+        font-size: vpc(18);
+        line-height: math.div(23, 18);
+
+        svg {
+            width: vpc(24);
+            height: vpc(24);
+        }
+    }
+
+    @include mobile {
+        padding-top: vpc(12.5);
+        padding-bottom: vpc(12.5);
+        min-height: vpc(48);
+        font-size: vpc(16);
+        line-height: math.div(21, 16);
+    }
+
+    &--secondary {
+        border-color: $color-conifer;
+        color: $color-conifer;
+        background-color: transparent;
+
+        &:disabled,
+        &.is-disabled {
+            border-color: $color-woodland;
+            color: $color-woodland;
+            background-color: transparent;
+        }
+
+        @include desktop {
+            &:hover {
+                color: $color-mine-shaft2;
+            }
+        }
+    }
+
+    &--small {
+        border: 0;
+        padding: vpc(7) vpc(20);
+        min-height: vpc(32);
+        font-weight: 500;
+        font-size: vpc(14);
+        line-height: math.div(18, 14);
+        color: $color-mine-shaft;
+        background: $gradient-accent;
+
+        @include desktop {
+            &::before {
+                opacity: 0;
+                transform: none;
+                transition: opacity $transition;
+            }
+
+            &:hover::before {
+                opacity: 1;
+            }
+        }
+    }
+
+    &--arrow {
+        border-radius: 50%;
+        padding: 0;
+        width: vpc(56);
+        height: vpc(56);
+
+        svg {
+            margin: 0;
+        }
+
+        @include mobile {
+            width: vpc(48);
+            height: vpc(48);
+        }
+    }
+}

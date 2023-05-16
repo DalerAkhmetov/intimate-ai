@@ -1,0 +1,25 @@
+mixin image(props = {})
+    -
+        const src = `${props.path}.${props.ext}?format=webp`;
+        const srcTablet = !props.noTablet ? `${props.path}-t.${props.ext}?format=webp` : null;
+        const srcMobile = !props.noMobile ? `${props.path}-m.${props.ext}?format=webp` : null;
+        const alt = props.alt ?? '';
+        const mime = props.mime ?? props.ext;
+        const decoding = props.decoding ?? 'async';
+        const mediaDesktop = '(min-width: 1024px)';
+        const mediaTablet = '(max-width: 1023px)';
+        const mediaMobile = '(max-width: 767px)';
+
+    if srcTablet || srcMobile
+        picture&attributes(attributes)
+            if srcMobile
+                source(srcset=require(srcMobile) type=`image/${mime}` media=mediaMobile)
+
+            if srcTablet
+                source(srcset=require(srcTablet) type=`image/${mime}` media=mediaTablet)
+
+            source(srcset=require(src) type=`image/${mime}` media=mediaDesktop)
+            img(src=require(src) alt=alt decoding=decoding width=props.width height=props.height)
+
+    else
+        img(src=require(src) alt=alt decoding=decoding width=props.width height=props.height)&attributes(attributes)
