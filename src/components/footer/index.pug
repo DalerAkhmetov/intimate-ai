@@ -1,0 +1,56 @@
++b.FOOTER.footer
+    +e.section--top
+        +e.subscribe
+            +e.H2.title.text--h4 Join our newsletter
+            +e.P.text Get all the latest news about the future of&nbsp;App
+
+            +e.FORM.form.form(action="#" method="post" novalidate data-success-message="The subscription has been successfully issued")
+                +e.input
+                    +input({
+                        id: 'subscribe-email',
+                        attrs: {
+                            type: 'email',
+                            name: 'email',
+                            placeholder: 'your@emeil.com',
+                            required: true,
+                        },
+                    })
+
+                +e.button
+                    +button({
+                        modifier: 'arrow',
+                        text: 'Send',
+                    })(type="submit")
+
+        +e.links
+            +link-mask({
+                link: '#',
+                text: 'On facebook'
+            }).__link--big.text--h5(target="_blank")
+
+            +link-mask({
+                link: '#',
+                text: 'On instagram'
+            }).__link--big.text--h5(target="_blank")
+
+            +link-mask({
+                link: '#',
+                text: 'On twitter'
+            }).__link--big.text--h5(target="_blank")
+
+            +link-mask({
+                link: '#',
+                text: 'On youtube'
+            }).__link--big.text--h5(target="_blank")
+
+    +e.section--bottom
+        +e.contacts
+            +e.H2.title.text--h4 Get in&nbsp;touch
+
+            +e.A.link--small(href="mailto:contact@intimate.ai") contact@intimate.ai
+
+        +e.info.text--sm
+            +e.A.link(href="#" target="_blank") Privacy Policy &amp;&nbsp;Cookies
+            +e.A.link(href="#" target="_blank") Legal Notice
+
+            +e.P.copy &copy;&nbsp;2023 Intimate.ai
