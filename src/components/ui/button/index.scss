@@ -27,6 +27,7 @@
         margin: vpc(-2) 0 vpc(-2) vpc(10);
         width: vpc(28);
         height: vpc(28);
+        transform: translateZ(0);
     }
 
     &:disabled,

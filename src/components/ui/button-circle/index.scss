@@ -53,6 +53,7 @@
         margin-left: vpc(-23);
         width: vpc(45);
         height: vpc(38);
+        transform: translateZ(0);
 
         @include tablet {
             margin-top: vpc(-11);
