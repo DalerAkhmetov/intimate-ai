@@ -28,7 +28,7 @@
         }
 
         &:nth-child(2) {
-            #{$p}__ticker-wrapper {
+            #{$p}__ticker-part {
                 -webkit-text-fill-color: transparent;
                 background: $gradient-accent;
                 background-clip: text;
