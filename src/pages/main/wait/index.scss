@@ -1,0 +1,96 @@
+@use 'sass:math';
+
+.main__section--wait {
+    $p: '.main';
+
+    position: relative;
+    z-index: 2;
+    display: flex;
+    padding: vpc(24) vpc(48);
+    height: vpc(704);
+
+    @include tablet {
+        padding: vpc(24) vpc(32) vpc(32);
+        height: vpc(884);
+    }
+
+    @include mobile {
+        padding: vpc(28) vpc(16) vpc(24);
+        height: vpc(639);
+    }
+
+    #{$p}__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        flex-grow: 1;
+        border: vpc(3) solid $color-white;
+        border-radius: vpc(30);
+        padding: vpc(45) vpc(37);
+
+        @include tablet {
+            align-items: center;
+            padding: vpc(117) vpc(35);
+            text-align: center;
+        }
+
+        @include mobile {
+            padding: vpc(105) vpc(19);
+        }
+    }
+
+    #{$p}__title {
+        max-width: vpc(360);
+
+        @include tablet {
+            max-width: vpc(440);
+        }
+
+        @include mobile {
+            max-width: vpc(270);
+        }
+    }
+
+    #{$p}__button {
+        position: absolute;
+        left: 50%;
+        bottom: vpc(-118);
+        z-index: 1;
+        margin-left: vpc(-142);
+
+        @include tablet {
+            bottom: vpc(-56);
+            margin-left: vpc(-92);
+        }
+
+        @include mobile {
+            bottom: vpc(-68);
+        }
+    }
+
+    #{$p}__bg {
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            z-index: 1;
+            display: block;
+            width: 100%;
+            height: vpc(337);
+            background: linear-gradient(to bottom, rgba($color-black, 0), $color-cod-gray);
+        }
+
+        @include tablet {
+            &::before {
+                height: vpc(380);
+            }
+        }
+
+        @include mobile {
+            &::before {
+                height: vpc(272);
+            }
+        }
+    }
+}
