@@ -10,7 +10,7 @@ const PATHS = {
 };
 
 function getPagesSync() {
-    return glob.sync(`{${PATHS.PAGES}/*.pug,${PATHS.PAGES}/**/index.pug}`).map((file) => {
+    return glob.sync(`{${PATHS.PAGES}/*.pug,${PATHS.PAGES}/**/_index.pug}`).map((file) => {
         const name = file.split(PATHS.PAGES)[1];
 
         return name.substring(1, name.lastIndexOf('.'));
