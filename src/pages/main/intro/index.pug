@@ -1,0 +1,29 @@
++e.SECTION.section--intro.is-loading
+    +e.content
+        +e.H1.title.text--h1 Ignite Your Hidden Desires
+
+        +e.button
+            +button({
+                link: '#',
+                text: 'Start chatting',
+                arrow: true,
+            })(target="_blank")
+
+    +e.bg
+        +image({
+            path: `@pages/main/intro/images/bg`,
+            ext: 'jpg',
+            mime: 'webp',
+        })
+
+    +e.bg--bw
+        +image({
+            path: `@pages/main/intro/images/bg-bw`,
+            ext: 'jpg',
+            mime: 'webp',
+        })
+
+    +e.frame: canvas
+    +e.frame--loading: canvas
+
+    +e.name Intimate.ai
