@@ -1,0 +1,43 @@
+@use 'sass:math';
+
+.popup[data-id='form-success'] {
+    $p: '.popup';
+
+    #{$p}__content {
+        padding-top: vpc(72);
+        padding-bottom: vpc(98);
+
+        @include tablet {
+            padding-top: vpc(92);
+            padding-bottom: vpc(86);
+        }
+
+        @include mobile {
+            padding-bottom: vpc(76);
+        }
+    }
+
+    #{$p}__icon {
+        margin: 0 auto;
+        width: vpc(98);
+
+        @include mobile {
+            width: vpc(60);
+        }
+    }
+
+    #{$p}__text {
+        margin: vpc(40) auto 0;
+        max-width: vpc(275);
+        text-align: center;
+        color: $color-conifer;
+
+        @include tablet {
+            margin-top: vpc(24);
+        }
+
+        @include mobile {
+            max-width: vpc(240);
+        }
+    }
+}

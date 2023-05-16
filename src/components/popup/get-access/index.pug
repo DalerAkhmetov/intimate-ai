@@ -1,0 +1,32 @@
++popup({ id: 'get-access' })
+    +e.H4.title.text--h4 Get access
+
+    +e.FORM.form.form(action="#" method="post" novalidate)
+        +e.input
+            +input({
+                id: 'ga-name',
+                attrs: {
+                    name: 'name',
+                    placeholder: 'Your name',
+                    required: true,
+                },
+            })
+
+        +e.input
+            +input({
+                id: 'ga-email',
+                attrs: {
+                    type: 'email',
+                    name: 'email',
+                    placeholder: 'your@emeil.com',
+                    required: true,
+                },
+            })
+
+        +e.button
+            +button({
+                text: 'Send',
+                arrow: true,
+            })(type="submit")
+
+            +e.error.form__error

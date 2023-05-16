@@ -1,0 +1,108 @@
+@use 'sass:math';
+
+.popup {
+    $p: &;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: flex-start;
+    overflow: hidden;
+    overflow-y: auto;
+    padding: vpc(32);
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color-black, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity $transition, visibility 0s $transition-duration;
+    -webkit-overflow-scrolling: touch;
+    pointer-events: none;
+
+    &.is-active {
+        opacity: 1;
+        visibility: visible;
+        transition-delay: 0s;
+        pointer-events: auto;
+    }
+
+    @include mobile {
+        padding: vpc(16);
+    }
+
+    &__container {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        margin: auto;
+        border-radius: vpc(30);
+        width: 100%;
+        max-width: vpc(584);
+        color: $color-white;
+        background-color: $color-mine-shaft2;
+        transform: scale(0.9);
+        transition: transform $transition;
+
+        #{$p}.is-active & {
+            transform: none;
+        }
+
+        @include tablet {
+            max-width: vpc(464);
+        }
+
+        @include mobile {
+            max-width: none;
+        }
+    }
+
+    &__close {
+        position: absolute;
+        right: vpc(20);
+        top: vpc(20);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: vpc(40);
+        height: vpc(40);
+        transition: color $transition;
+
+        svg {
+            width: vpc(32);
+            height: vpc(32);
+            transition: transform $transition;
+        }
+
+        @include desktop {
+            &:hover {
+                color: $color-conifer;
+
+                svg {
+                    transform: rotate(90deg);
+                }
+            }
+        }
+
+        @include tablet {
+            right: vpc(16);
+        }
+
+        @include mobile {
+            top: vpc(16);
+        }
+    }
+
+    &__content {
+        padding: vpc(40) vpc(32);
+
+        @include tablet {
+            padding-right: vpc(24);
+            padding-left: vpc(24);
+        }
+    }
+}
+
+@import 'form-success';
+@import 'get-access';

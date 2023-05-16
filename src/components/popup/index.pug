@@ -1,0 +1,8 @@
+mixin popup(props = {})
+    +b.popup(data-id=props.id)&attributes(attributes)
+        +e.container
+            +e.BUTTON.close(type="button" aria-label="Close modal")
+                include images/close.svg
+
+            +e.content
+                block

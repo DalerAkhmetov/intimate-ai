@@ -1,0 +1,65 @@
+@use 'sass:math';
+
+.popup[data-id='get-access'] {
+    $p: '.popup';
+
+    #{$p}__content {
+        padding-top: vpc(27);
+
+        @include tablet {
+            padding-top: vpc(24);
+        }
+    }
+
+    #{$p}__title {
+        color: $color-conifer;
+    }
+
+    #{$p}__form {
+        margin-top: vpc(24);
+
+        @include mobile {
+            margin-top: vpc(20);
+        }
+    }
+
+    #{$p}__input {
+        margin-top: vpc(16);
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        @include mobile {
+            margin-top: vpc(12);
+        }
+    }
+
+    #{$p}__button {
+        display: flex;
+        flex-direction: column;
+        margin-top: vpc(32);
+
+        @include mobile {
+            margin-top: vpc(24);
+        }
+    }
+
+    #{$p}__error {
+        display: none;
+        margin-top: vpc(4);
+        margin-left: vpc(20);
+        font-size: vpc(14);
+        line-height: math.div(15, 14);
+        color: $color-cinnabar;
+
+        &.is-active {
+            display: block;
+        }
+
+        @include mobile {
+            font-size: vpc(12);
+            line-height: math.div(13, 12);
+        }
+    }
+}
