@@ -1,3 +1,4 @@
+import sectionDream from '@pages/main/dream';
 import sectionIntro from '@pages/main/intro';
 
 const $main = document.querySelector('.main');
@@ -10,6 +11,7 @@ const resize = () => {
         return;
     }
 
+    sectionDream.resize();
     sectionIntro.resize();
 };
 
@@ -18,6 +20,7 @@ const init = () => {
         return;
     }
 
+    sectionDream.init();
     sectionIntro.init();
 };
 
