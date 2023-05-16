@@ -1,0 +1,9 @@
+@use 'sass:math';
+
+@function vh($value) {
+    @return calc(var(--vh) * $value);
+}
+
+@function vpc($value) {
+    @return calc(#{$value} * var(--width-multiplier));
+}

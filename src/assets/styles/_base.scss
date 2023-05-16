@@ -1,5 +1,37 @@
 @use 'sass:math';
 
+:root {
+    --width-base: #{$layout-width-desktop};
+    --width-current: 100vw;
+    --width-multiplier: var(--width-current) / var(--width-base);
+
+    // @include desktop-h {
+    //     --width-base: #{$layout-height-desktop};
+    //     --width-current: #{vh(100)};
+    // }
+
+    @include tablet {
+        --width-base: #{$layout-width-tablet};
+        // --width-current: 100vmin;
+        --width-current: 100vw;
+    }
+
+    // @include tablet-h {
+    //     --width-base: #{$layout-height-tablet};
+    //     --width-current: #{vh(100)};
+    // }
+
+    @include mobile {
+        --width-base: #{$layout-width-mobile};
+        --width-current: 100vmin;
+    }
+
+    // @include mobile-h {
+    //     --width-base: #{$layout-height-mobile};
+    //     --width-current: #{vh(100)};
+    // }
+}
+
 *,
 *::before,
 *::after {
@@ -26,18 +58,18 @@ html {
 body {
     overflow-x: hidden;
     width: 100%;
-    min-height: calc(var(--vh) * 100);
-    // font-family: $font-name;
+    min-height: vh(100);
+    font-family: $font-inter;
     -webkit-font-smoothing: antialiased;
-    font-size: 16px;
-    line-height: math.div(20, 16);
+    font-size: vpc(16);
+    line-height: math.div(21, 16);
     text-decoration-skip: objects;
     text-rendering: optimizeLegibility;
     text-size-adjust: 100%;
-    color: $color-black;
+    color: $color-white;
     -webkit-tap-highlight-color: transparent;
     -moz-osx-font-smoothing: grayscale;
-    background-color: $color-white;
+    background-color: $color-cod-gray;
 }
 
 main {

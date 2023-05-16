@@ -1,7 +1,19 @@
 @import 'normalize.css/normalize';
 
 @import '@styles/vars';
+@import '@styles/functions';
 @import '@styles/mixins';
 @import '@styles/fonts';
 @import '@styles/base';
 @import '@styles/helpers';
+
+@import '@components/ui/button';
+@import '@components/ui/button-circle';
+@import '@components/ui/input';
+@import '@components/ui/link-mask';
+@import '@components/ui/text';
+
+@import '@components/footer';
+@import '@components/popup';
+
+@import '@pages/main';

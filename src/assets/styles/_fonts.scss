@@ -1,2 +1,6 @@
-// FontName
-// @include font-face('FontName', 'FontName');
+// Inter
+@include font-face('Inter');
+@include font-face('Inter', null, 500);
+@include font-face('Inter', null, 600);
+@include font-face('Inter', null, 700);
+@include font-face('Inter', null, 800);
