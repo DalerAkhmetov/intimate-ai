@@ -1,0 +1,73 @@
+@use 'sass:math';
+
+.main__section--app {
+    $p: '.main';
+
+    overflow: hidden;
+    padding: vpc(72) vpc(50);
+    height: vh(100);
+    color: $color-mine-shaft2;
+    background-color: $color-whisper;
+
+    @include tablet {
+        padding: vpc(72) vpc(32);
+    }
+
+    @include mobile {
+        padding: vpc(60) vpc(16) vpc(55);
+    }
+
+    #{$p}__title {
+        @include tablet {
+            max-width: vpc(460);
+        }
+
+        @include mobile {
+            max-width: vpc(320);
+            line-height: math.div(35, 32);
+        }
+    }
+
+    #{$p}__images {
+        display: flex;
+        justify-content: space-between;
+        margin-top: vpc(35);
+
+        @include tablet {
+            margin-top: vpc(39);
+            margin-left: vpc(-5);
+        }
+
+        @include mobile {
+            margin-top: vpc(35);
+            margin-left: vpc(3);
+        }
+    }
+
+    #{$p}__image {
+        flex-shrink: 0;
+        width: vpc(250);
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        @include tablet {
+            margin-left: vpc(22);
+        }
+    }
+
+    #{$p}__light {
+        width: vpc(312);
+        height: vpc(312);
+        opacity: 0.35;
+        filter: blur(vpc(75));
+
+        @include mobile {
+            width: vpc(250);
+            height: vpc(250);
+            background: $color-purple-heart2;
+            filter: blur(vpc(25));
+        }
+    }
+}

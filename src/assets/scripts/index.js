@@ -6,6 +6,7 @@ import { isTablet } from '@scripts/helpers';
 import uaParser from '@scripts/ua-parser';
 import vh from '@scripts/vh';
 
+import animationTextScramble from '@components/animation/text-scramble';
 import form from '@components/form';
 import popup from '@components/popup';
 import preloader from '@components/preloader';
@@ -40,6 +41,7 @@ const init = () => {
 
     preloader
         .init(async () => {
+            animationTextScramble.init();
             form.init();
             popup.init();
             input.init();

@@ -2,56 +2,8 @@ import { gsap } from 'gsap';
 
 const $section = document.querySelector('.main__section--dream');
 const $ticker = $section.querySelectorAll('.main__ticker');
-const $light = $section.querySelector('.main__light');
 
 let tickerAnimation = null;
-let lightObserver = null;
-
-const lightMove = () => {
-    if (!$light) {
-        return;
-    }
-
-    const lightHalfWidth = $light.clientWidth / 2;
-    const maxX = $section.clientWidth - lightHalfWidth;
-    const maxY = $section.clientHeight - lightHalfWidth;
-
-    gsap.killTweensOf($light);
-
-    gsap.set($light, {
-        x: maxX / 2,
-        y: maxY / 2,
-    });
-
-    const animation = gsap.to($light, {
-        duration: 5,
-        ease: 'none',
-        paused: true,
-        repeat: -1,
-        repeatRefresh: true,
-        x: `random(${-lightHalfWidth}, ${maxX})`,
-        y: `random(${-lightHalfWidth}, ${maxY})`,
-    });
-
-    if (lightObserver) {
-        lightObserver.disconnect();
-    }
-
-    lightObserver = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    animation.play();
-                } else {
-                    animation.pause();
-                }
-            });
-        },
-        { threshold: 0.025 }
-    );
-
-    lightObserver.observe($section);
-};
 
 const tickerMove = () => {
     if (!$ticker.length) {
@@ -109,7 +61,6 @@ const resize = () => {
     }
 
     tickerMove();
-    lightMove();
 };
 
 const init = () => {
@@ -118,7 +69,6 @@ const init = () => {
     }
 
     tickerMove();
-    lightMove();
 };
 
 export default {

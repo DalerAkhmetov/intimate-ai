@@ -15,6 +15,11 @@
         padding-bottom: vpc(148);
     }
 
+    &__section {
+        position: relative;
+        z-index: 1;
+    }
+
     &__bg {
         position: absolute;
         left: 0;
@@ -32,8 +37,34 @@
             object-fit: cover;
         }
     }
+
+    &__light {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        border-radius: 50%;
+        width: vpc(394);
+        height: vpc(394);
+        background: linear-gradient(-133.55deg, $color-purple-heart 7.65%, $color-heliotrope 50.74%, $color-heliotrope2 94.94%);
+        opacity: 0.45;
+        filter: blur(vpc(100));
+        pointer-events: none;
+
+        @include tablet {
+            width: vpc(258);
+            height: vpc(258);
+        }
+
+        @include mobile {
+            width: vpc(306);
+            height: vpc(306);
+            filter: blur(vpc(40));
+        }
+    }
 }
 
+@import 'app';
 @import 'dream';
 @import 'intro';
 @import 'wait';
