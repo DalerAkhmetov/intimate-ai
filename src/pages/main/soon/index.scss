@@ -1,0 +1,230 @@
+@use 'sass:math';
+
+.main__section--soon {
+    $p: '.main';
+
+    @include grid-container;
+
+    overflow: hidden;
+    padding-top: vpc(354);
+    padding-bottom: vpc(132);
+
+    @include tablet {
+        padding-top: vpc(440);
+        padding-bottom: vpc(159);
+    }
+
+    @include mobile {
+        padding-top: vpc(378);
+        padding-bottom: vpc(72);
+    }
+
+    #{$p}__content {
+        @include grid-container;
+
+        grid-row: 2;
+        grid-column: 1 / -1;
+        align-items: center;
+        margin-top: vpc(36);
+        padding: 0 !important;
+
+        @include tablet {
+            display: block;
+            margin-top: vpc(60);
+        }
+
+        @include mobile {
+            margin-top: vpc(24);
+        }
+    }
+
+    #{$p}__title {
+        grid-column: 1 / span 6;
+        padding-right: vpc(40);
+        color: $color-conifer;
+
+        @include tablet {
+            margin-left: vpc(8);
+            padding-right: 0;
+            max-width: vpc(550);
+        }
+
+        @include mobile {
+            margin-left: 0;
+            max-width: none;
+        }
+    }
+
+    #{$p}__description {
+        grid-column: 7 / -1;
+        margin-top: vpc(-2);
+        padding-right: vpc(40);
+
+        @include tablet {
+            margin-top: vpc(20);
+            padding-right: 0;
+        }
+
+        @include mobile {
+            margin-top: vpc(12);
+        }
+    }
+
+    #{$p}__text {
+        color: $color-dusty-gray;
+
+        @include tablet-only {
+            max-width: vpc(550);
+        }
+
+        @include mobile {
+            padding-right: vpc(10);
+        }
+    }
+
+    #{$p}__button {
+        display: flex;
+        flex-direction: column;
+        margin-top: vpc(24);
+        width: vpc(328);
+
+        @include tablet {
+            width: 100%;
+        }
+
+        @include mobile {
+            margin-top: vpc(32);
+        }
+    }
+
+    #{$p}__soon {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        grid-row: 1;
+        grid-column: 1 / -1;
+    }
+
+    #{$p}__soon-mask {
+        display: flex;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-left: vpc(-24);
+        width: vpc(1348);
+        height: vpc(616);
+        mask-image: url('@pages/main/soon/images/mask.svg');
+        mask-size: 100%;
+
+        @include tablet {
+            margin-left: 0;
+            width: vpc(802);
+            height: vpc(366);
+        }
+
+        @include mobile {
+            width: vpc(370);
+            height: vpc(169);
+        }
+    }
+
+    #{$p}__soon-bg {
+        position: relative;
+        left: vpc(13);
+        top: vpc(-182);
+        flex-shrink: 0;
+        width: vpc(1374);
+        max-width: none;
+        pointer-events: none;
+        user-select: none;
+
+        @include tablet {
+            left: vpc(8);
+            top: vpc(-109);
+            width: vpc(817);
+        }
+
+        @include mobile {
+            left: 0;
+            top: vpc(-6);
+            width: vpc(399);
+        }
+    }
+
+    #{$p}__lines {
+        position: absolute;
+        left: vpc(62);
+        right: vpc(62);
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        display: flex;
+        justify-content: space-between;
+        pointer-events: none;
+
+        @include tablet {
+            left: vpc(32);
+            right: vpc(32);
+        }
+
+        @include mobile {
+            left: vpc(50);
+            right: vpc(50);
+        }
+    }
+
+    #{$p}__line {
+        position: relative;
+        width: 1px;
+        height: 100%;
+        background-color: $color-mine-shaft4;
+
+        @include tablet {
+            &:nth-child(n + 5) {
+                display: none;
+            }
+        }
+    }
+
+    #{$p}__line-light {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        display: block;
+        margin-left: vpc(-12);
+        width: vpc(24);
+        height: vpc(190);
+
+        svg {
+            &:last-child {
+                display: none;
+            }
+        }
+
+        @include mobile {
+            height: vpc(126);
+
+            svg {
+                display: none;
+
+                &:last-child {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    #{$p}__fill-circle {
+        position: absolute;
+        left: 100%;
+        bottom: 0;
+        z-index: 1;
+        display: block;
+        border-radius: 50%;
+        margin-bottom: vmax(-50);
+        margin-left: vmax(-100);
+        width: vmax(200);
+        height: vmax(200);
+        background-color: $color-whisper;
+        transform: scale(0);
+    }
+}

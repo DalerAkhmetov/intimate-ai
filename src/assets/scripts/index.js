@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { isTablet } from '@scripts/helpers';
 import uaParser from '@scripts/ua-parser';
-import vh from '@scripts/vh';
+import vUnits from '@src/assets/scripts/v-units';
 
 import animationTextScramble from '@components/animation/text-scramble';
 import form from '@components/form';
@@ -28,7 +28,7 @@ const resize = () => {
     }
 
     uaParser.resize();
-    vh.resize();
+    vUnits.resize();
 
     main.resize();
 
@@ -37,7 +37,7 @@ const resize = () => {
 
 const init = () => {
     uaParser.init();
-    vh.init();
+    vUnits.init();
 
     preloader
         .init(async () => {

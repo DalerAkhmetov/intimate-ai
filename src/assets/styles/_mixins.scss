@@ -100,21 +100,23 @@
     }
 }
 
-@mixin grid-container($cols: 12, $cols-t: 4, $cols-m: 4) {
+@mixin grid-container($cols: 12, $cols-t: 4, $cols-m: 4, $cols-width: vpc(84), $cols-width-t: vpc(164), $cols-width-m: 1fr) {
     display: grid;
-    grid-template-columns: repeat($cols, 1fr);
+    grid-template-columns: repeat($cols, $cols-width);
     grid-column-gap: vpc(16);
+    align-content: start;
+    justify-content: center;
     padding-right: vpc(48);
     padding-left: vpc(48);
 
     @include tablet {
-        grid-template-columns: repeat($cols-t, 1fr);
+        grid-template-columns: repeat($cols-t, $cols-width-t);
         padding-right: vpc(32);
         padding-left: vpc(32);
     }
 
     @include mobile {
-        grid-template-columns: repeat($cols-m, 1fr);
+        grid-template-columns: repeat($cols-m, $cols-width-m);
         padding-right: vpc(16);
         padding-left: vpc(16);
     }

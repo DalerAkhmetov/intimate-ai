@@ -1,0 +1,38 @@
++e.SECTION.section--soon
+    +e.content
+        +e.H2.title.text--h3.js-text-scramble Join the waiting list -&nbsp;secure your exclusive access
+
+        +e.description
+            +e.P.text Don't miss the opportunity to connect with the most sophisticated AI girlfriend, who's not only a skilled conversationalist but can also bring any persona to life for your personal roleplay. Early adopters can enjoy lifetime access for a limited-time offer of #[b $100] - act now!
+
+            +e.button
+                +button({
+                    modifier: 'secondary',
+                    text: 'Get access for $100',
+                }).js-popup-open(data-popup-id="get-access")
+
+    +e.soon
+        +e.soon-mask
+            +e.soon-bg
+                +image({
+                    path: `@pages/main/soon/images/bg`,
+                    ext: 'jpg',
+                    mime: 'webp',
+                })
+
+    +e.lines
+        - let lineLightIndex = 6;
+
+        while lineLightIndex > 0
+            +e.line
+                +e.line-light
+                    include images/line-light.svg
+                    include images/line-light-m.svg
+
+                +e.line-light
+                    include images/line-light.svg
+                    include images/line-light-m.svg
+
+            - lineLightIndex--;
+
+    +e.fill-circle

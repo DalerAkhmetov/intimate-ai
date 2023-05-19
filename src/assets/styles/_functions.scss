@@ -4,6 +4,10 @@
     @return calc(var(--vh) * $value);
 }
 
+@function vmax($value) {
+    @return calc(var(--vmax) * $value);
+}
+
 @function vpc($value) {
     @return calc(#{$value} * var(--width-multiplier));
 }

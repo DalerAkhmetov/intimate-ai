@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import sectionApp from '@pages/main/app';
 import sectionDream from '@pages/main/dream';
 import sectionIntro from '@pages/main/intro';
+import sectionSoon from '@pages/main/soon';
 import sectionWait from '@pages/main/wait';
 
 const $main = document.querySelector('.main');
@@ -17,6 +18,9 @@ const lightMove = () => {
     if (!$light.length) {
         return;
     }
+
+    const randomSnapX = innerWidth / 10;
+    const randomSnapY = innerHeight / 10;
 
     if (lightObserver) {
         lightObserver.disconnect();
@@ -57,8 +61,8 @@ const lightMove = () => {
             paused: true,
             repeat: -1,
             repeatRefresh: true,
-            x: `random(${-lightHalfWidth}, ${maxX})`,
-            y: `random(${-lightHalfWidth}, ${maxY})`,
+            x: `random(${-lightHalfWidth}, ${maxX}, ${randomSnapX})`,
+            y: `random(${-lightHalfWidth}, ${maxY}, ${randomSnapY})`,
         });
 
         lightObserver.observe($sectionCurrent);
@@ -72,9 +76,10 @@ const resize = () => {
 
     lightMove();
 
-    sectionApp.resize();
-    sectionDream.resize();
     sectionIntro.resize();
+    sectionDream.resize();
+    sectionSoon.resize();
+    sectionApp.resize();
     sectionWait.resize();
 };
 
@@ -85,9 +90,10 @@ const init = () => {
 
     lightMove();
 
-    sectionApp.init();
-    sectionDream.init();
     sectionIntro.init();
+    sectionDream.init();
+    sectionSoon.init();
+    sectionApp.init();
     sectionWait.init();
 };
 
