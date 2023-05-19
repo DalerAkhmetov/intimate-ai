@@ -6,9 +6,9 @@ const $button = $section.querySelector('.main__button');
 const gsapCtx = gsap.context(() => {});
 
 const animateOnScroll = () => {
-    // TODO: fix resize
-
-    gsapCtx.revert();
+    if (gsapCtx.data.length) {
+        gsapCtx.revert();
+    }
 
     gsapCtx.add(() => {
         gsap.from($button, {

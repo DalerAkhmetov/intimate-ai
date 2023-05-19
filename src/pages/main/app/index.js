@@ -10,9 +10,9 @@ const $image = $images.querySelectorAll('.main__image');
 const gsapCtx = gsap.context(() => {});
 
 const animateOnScroll = () => {
-    // TODO: fix resize
-
-    gsapCtx.revert();
+    if (gsapCtx.data.length) {
+        gsapCtx.revert();
+    }
 
     gsapCtx.add(() => {
         if (isDesktop()) {

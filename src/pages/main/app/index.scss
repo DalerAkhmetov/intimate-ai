@@ -3,22 +3,26 @@
 .main__section--app {
     $p: '.main';
 
+    @include grid-container;
+
     overflow: hidden;
-    padding: vpc(72) vpc(50);
+    padding-top: vpc(72);
+    padding-bottom: vpc(72);
     height: vh(100);
     color: $color-mine-shaft2;
     background-color: $color-whisper;
 
-    @include tablet {
-        padding: vpc(72) vpc(32);
-    }
-
     @include mobile {
-        padding: vpc(60) vpc(16) vpc(55);
+        padding-top: vpc(60);
+        padding-bottom: vpc(55);
     }
 
     #{$p}__title {
+        grid-column: 1 / -1;
+        padding-left: vpc(2);
+
         @include tablet {
+            padding-left: 0;
             max-width: vpc(460);
         }
 
@@ -31,11 +35,14 @@
     #{$p}__images {
         display: flex;
         justify-content: space-between;
+        grid-column: 1 / -1;
         margin-top: vpc(35);
+        padding: 0 vpc(3);
 
         @include tablet {
             margin-top: vpc(39);
             margin-left: vpc(-5);
+            padding: 0;
         }
 
         @include mobile {
@@ -47,6 +54,7 @@
     #{$p}__image {
         flex-shrink: 0;
         width: vpc(250);
+        user-select: none;
 
         &:first-child {
             margin-left: 0;
