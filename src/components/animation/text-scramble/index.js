@@ -1,36 +1,43 @@
 import { gsap } from 'gsap';
 
-const $jsTextScrabmle = document.querySelectorAll('.js-text-scrabmle');
+const $jsTextScramble = document.querySelectorAll('.js-text-scramble');
 
 const symbols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '§', '$', '%', '&', '/', '(', ')', '=', '?', '_', '<', '>', '^', '°', '*', '#', '-', ':', ';', '~'];
 const duration = 2; // sec
-const delay = 0.5; // from 0 to 1
+const delay = 0.5; // from 0 to 1, where 0 - faster, 1 - slower
 const sliceCount = Math.round((Math.min(delay, 1) / 1) * symbols.length);
 
-const animate = ($jsTextScrabmleCurrent) => {
-    if (!$jsTextScrabmleCurrent.generatedText) {
+const animate = ($jsTextScrambleCurrent) => {
+    if (!$jsTextScrambleCurrent.generatedText) {
         return;
     }
 
-    const generatedTextLength = $jsTextScrabmleCurrent.generatedText.length;
+    const counter = { i: 0 };
 
-    let i = 0;
+    gsap.set($jsTextScrambleCurrent, {
+        overflow: 'hidden',
+        width: $jsTextScrambleCurrent.clientWidth,
+        height: $jsTextScrambleCurrent.clientHeight,
+    });
 
-    const interval = setInterval(() => {
-        $jsTextScrabmleCurrent.textContent = $jsTextScrabmleCurrent.generatedText[i];
+    gsap.to(counter, {
+        duration,
+        ease: 'none',
+        roundProps: 'i',
+        i: $jsTextScrambleCurrent.generatedText.length - 1,
+        onUpdate() {
+            $jsTextScrambleCurrent.textContent = $jsTextScrambleCurrent.generatedText[counter.i];
+        },
+        onComplete() {
+            delete $jsTextScrambleCurrent.generatedText;
 
-        i++;
-
-        if (i >= generatedTextLength) {
-            clearInterval(interval);
-
-            delete $jsTextScrabmleCurrent.generatedText;
-        }
-    }, (duration * 1000) / generatedTextLength);
+            gsap.set($jsTextScrambleCurrent, { clearProps: 'all' });
+        },
+    });
 };
 
-const generate = ($jsTextScrabmleCurrent) => {
-    const splittedText = $jsTextScrabmleCurrent.textContent.split('').map((char, charIndex) => {
+const generate = ($jsTextScrambleCurrent) => {
+    const splittedText = $jsTextScrambleCurrent.textContent.split('').map((char, charIndex) => {
         if (char === ' ') {
             return char;
         }
@@ -48,10 +55,10 @@ const generate = ($jsTextScrabmleCurrent) => {
 
     const generatedTextLength = splittedText.at(-1).length;
 
-    $jsTextScrabmleCurrent.generatedText = [];
+    $jsTextScrambleCurrent.generatedText = [];
 
     for (let i = 0; i < generatedTextLength; i++) {
-        $jsTextScrabmleCurrent.generatedText.push(
+        $jsTextScrambleCurrent.generatedText.push(
             splittedText
                 .map((charSet) => {
                     if (typeof charSet === 'string') {
@@ -68,7 +75,7 @@ const generate = ($jsTextScrabmleCurrent) => {
 };
 
 const init = () => {
-    if (!$jsTextScrabmle.length) {
+    if (!$jsTextScramble.length) {
         return;
     }
 
@@ -85,10 +92,10 @@ const init = () => {
         { threshold: 1 }
     );
 
-    $jsTextScrabmle.forEach(($jsTextScrabmleCurrent) => {
-        generate($jsTextScrabmleCurrent);
+    $jsTextScramble.forEach(($jsTextScrambleCurrent) => {
+        generate($jsTextScrambleCurrent);
 
-        observer.observe($jsTextScrabmleCurrent);
+        observer.observe($jsTextScrambleCurrent);
     });
 };
 
