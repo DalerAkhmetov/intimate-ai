@@ -6,10 +6,12 @@
     @include grid-container;
 
     overflow: hidden;
-    padding-top: vpc(354);
+    margin-top: vpc(-80);
+    padding-top: vpc(434);
     padding-bottom: vpc(132);
 
     @include tablet {
+        margin-top: 0;
         padding-top: vpc(440);
         padding-bottom: vpc(159);
     }

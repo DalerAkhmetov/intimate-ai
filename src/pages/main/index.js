@@ -1,6 +1,8 @@
 import { gsap } from 'gsap';
 
 import sectionApp from '@pages/main/app';
+import sectionCards from '@pages/main/cards';
+import sectionChat from '@pages/main/chat';
 import sectionDream from '@pages/main/dream';
 import sectionIntro from '@pages/main/intro';
 import sectionSoon from '@pages/main/soon';
@@ -78,6 +80,8 @@ const resize = () => {
 
     sectionIntro.resize();
     sectionDream.resize();
+    sectionChat.resize();
+    sectionCards.resize();
     sectionSoon.resize();
     sectionApp.resize();
     sectionWait.resize();
@@ -92,6 +96,8 @@ const init = () => {
 
     sectionIntro.init();
     sectionDream.init();
+    sectionChat.init();
+    sectionCards.init();
     sectionSoon.init();
     sectionApp.init();
     sectionWait.init();

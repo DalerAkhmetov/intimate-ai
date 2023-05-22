@@ -1,8 +1,9 @@
 mixin image(props = {})
     -
-        const src = `${props.path}.${props.ext}?format=webp`;
-        const srcTablet = !props.noTablet ? `${props.path}-t.${props.ext}?format=webp` : null;
-        const srcMobile = !props.noMobile ? `${props.path}-m.${props.ext}?format=webp` : null;
+        const format = props.noFormat ? '' : '?format=webp'
+        const src = `${props.path}.${props.ext}${format}`;
+        const srcTablet = !props.noTablet ? `${props.path}-t.${props.ext}${format}` : null;
+        const srcMobile = !props.noMobile ? `${props.path}-m.${props.ext}${format}` : null;
         const alt = props.alt ?? '';
         const mime = props.mime ?? props.ext;
         const decoding = props.decoding ?? 'async';

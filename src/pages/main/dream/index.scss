@@ -7,7 +7,7 @@
     color: $color-dove-gray;
 
     @include tablet {
-        padding: vpc(160) 0;
+        padding: vpc(160) 0 vpc(154);
     }
 
     @include mobile {
@@ -27,8 +27,9 @@
 
         &:nth-child(2) {
             #{$p}__ticker-part {
+                @include gradient-accent;
+
                 -webkit-text-fill-color: transparent;
-                background: $gradient-accent;
                 background-clip: text;
             }
         }

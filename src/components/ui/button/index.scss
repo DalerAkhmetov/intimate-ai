@@ -103,6 +103,8 @@
     }
 
     &--small {
+        @include gradient-accent;
+
         border: 0;
         padding: vpc(7) vpc(20);
         min-height: vpc(32);
@@ -110,7 +112,6 @@
         font-size: vpc(14);
         line-height: math.div(18, 14);
         color: $color-mine-shaft;
-        background: $gradient-accent;
 
         @include desktop {
             &::before {

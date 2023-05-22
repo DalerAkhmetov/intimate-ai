@@ -121,3 +121,7 @@
         padding-left: vpc(16);
     }
 }
+
+@mixin gradient-accent($angle: 164.22) {
+    background: linear-gradient(#{$angle}deg, $color-inch-worm 4.33%, $color-caper 49.61%, $color-pastel-green 98.28%);
+}

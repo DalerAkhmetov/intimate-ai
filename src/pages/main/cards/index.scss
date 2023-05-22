@@ -1,0 +1,235 @@
+@use 'sass:math';
+
+.main__section--cards {
+    $p: '.main';
+
+    z-index: 2;
+
+    #{$p}__area {
+        @include grid-container;
+
+        &--top {
+            padding-top: vpc(99);
+            padding-bottom: vpc(130);
+            color: $color-mine-shaft2;
+            background-color: $color-whisper;
+        }
+
+        &--bottom {
+            margin-top: vpc(-78);
+        }
+
+        @include tablet {
+            display: block;
+
+            &--top {
+                padding-top: vpc(72);
+                padding-bottom: vpc(122);
+            }
+
+            &--bottom {
+                margin-top: 0;
+                padding: 0 !important;
+            }
+        }
+
+        @include mobile {
+            &--top {
+                padding-top: vpc(60);
+                padding-bottom: vpc(60);
+            }
+        }
+    }
+
+    #{$p}__title {
+        grid-column: 1 / span 5;
+        margin-left: vpc(2);
+
+        @include tablet {
+            margin-left: 0;
+            max-width: vpc(550);
+        }
+    }
+
+    #{$p}__cards {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        grid-column: span 6 / -2;
+        margin-left: vpc(-2);
+
+        @include tablet {
+            margin-top: vpc(40);
+            margin-left: 0;
+        }
+
+        @include mobile {
+            margin-top: vpc(24);
+        }
+    }
+
+    #{$p}__card {
+        position: relative;
+        z-index: 1;
+        border: 1px solid $color-mine-shaft2;
+        border-radius: vpc(40);
+        padding: vpc(23);
+        padding-top: vpc(31);
+        width: vpc(384);
+        background-color: $color-white;
+
+        &:nth-child(2) {
+            margin-top: vpc(-396);
+            margin-left: vpc(202);
+        }
+
+        &:nth-child(3) {
+            margin-top: vpc(-418);
+            margin-left: vpc(-200);
+        }
+
+        @include tablet {
+            border-radius: vpc(30);
+            padding: vpc(19);
+            padding-top: vpc(23);
+            width: vpc(344);
+
+            &:nth-child(2) {
+                margin-top: vpc(-420);
+                margin-left: vpc(144);
+            }
+
+            &:nth-child(3) {
+                margin-top: vpc(-420);
+                margin-left: vpc(-144);
+            }
+        }
+
+        @include mobile {
+            padding: vpc(15);
+            padding-top: vpc(23);
+            width: 100%;
+
+            &:nth-child(2),
+            &:nth-child(3) {
+                margin-top: vpc(12);
+                margin-left: 0;
+            }
+        }
+    }
+
+    #{$p}__card-text {
+        margin-top: vpc(8);
+        color: $color-dove-gray;
+    }
+
+    #{$p}__card-image {
+        overflow: hidden;
+        margin-top: vpc(16);
+        border-radius: vpc(20);
+
+        @include tablet-only {
+            border-radius: vpc(16);
+        }
+
+        @include mobile {
+            margin-top: vpc(32);
+        }
+    }
+
+    #{$p}__card:nth-child(3) #{$p}__card-image {
+        margin-top: vpc(37);
+
+        @include tablet {
+            margin-top: vpc(33);
+        }
+
+        @include mobile {
+            margin-top: vpc(19);
+        }
+    }
+
+    #{$p}__image {
+        grid-column: 1 / -1;
+        overflow: hidden;
+        margin-left: vpc(-2);
+        border-radius: vpc(80);
+
+        @include tablet {
+            margin-left: 0;
+            border-radius: 0;
+        }
+    }
+
+    #{$p}__image-wrapper {
+        position: relative;
+        padding-top: percentage(math.div(850, 1186));
+        height: 0;
+
+        > picture {
+            position: absolute;
+            left: 50%;
+            bottom: vpc(-17);
+            margin-left: vpc(-727);
+            width: vpc(1927);
+        }
+
+        @include tablet {
+            padding-top: percentage(math.div(622, 768));
+
+            > picture {
+                bottom: vpc(-12);
+                margin-left: vpc(-532);
+                width: vpc(1410);
+            }
+        }
+
+        @include mobile {
+            padding-top: percentage(math.div(392, 360));
+
+            > picture {
+                bottom: vpc(-5);
+                margin-left: vpc(-358);
+                width: vpc(915);
+            }
+        }
+    }
+
+    #{$p}__girl {
+        position: absolute;
+        left: 50%;
+        bottom: vpc(-492);
+        z-index: 1;
+        margin-left: vpc(-247);
+        width: vpc(520);
+
+        @include tablet {
+            bottom: vpc(-438);
+            margin-left: vpc(-202);
+            width: vpc(426);
+        }
+
+        @include mobile {
+            bottom: vpc(-278);
+            margin-left: vpc(-129);
+            width: vpc(275);
+        }
+    }
+
+    #{$p}__button {
+        position: absolute;
+        left: 0;
+        bottom: vpc(-139);
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        @include tablet {
+            bottom: vpc(-92);
+        }
+
+        @include mobile {
+            bottom: vpc(-86);
+        }
+    }
+}
