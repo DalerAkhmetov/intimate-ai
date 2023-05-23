@@ -7,9 +7,19 @@ const duration = 2; // sec
 const delay = 0.5; // from 0 to 1, where 0 - faster, 1 - slower
 const sliceCount = Math.round((Math.min(delay, 1) / 1) * symbols.length);
 
-const animate = ($jsTextScrambleCurrent) => {
+const animate = ($jsTextScrambleCurrent, reverse = false) => {
     if (!$jsTextScrambleCurrent.generatedText) {
         return;
+    }
+
+    $jsTextScrambleCurrent.classList.toggle('is-animated', !reverse);
+
+    if (reverse) {
+        return;
+    }
+
+    if ($jsTextScrambleCurrent.animation) {
+        $jsTextScrambleCurrent.animation.kill();
     }
 
     const counter = { i: 0 };
@@ -20,7 +30,7 @@ const animate = ($jsTextScrambleCurrent) => {
         height: $jsTextScrambleCurrent.clientHeight,
     });
 
-    gsap.to(counter, {
+    $jsTextScrambleCurrent.animation = gsap.to(counter, {
         duration,
         ease: 'none',
         roundProps: 'i',
@@ -29,9 +39,9 @@ const animate = ($jsTextScrambleCurrent) => {
             $jsTextScrambleCurrent.textContent = $jsTextScrambleCurrent.generatedText[counter.i];
         },
         onComplete() {
-            delete $jsTextScrambleCurrent.generatedText;
-
             gsap.set($jsTextScrambleCurrent, { clearProps: 'all' });
+
+            delete $jsTextScrambleCurrent.animation;
         },
     });
 };
@@ -79,26 +89,12 @@ const init = () => {
         return;
     }
 
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    animate(entry.target);
-
-                    observer.unobserve(entry.target);
-                }
-            });
-        },
-        { threshold: 1 }
-    );
-
     $jsTextScramble.forEach(($jsTextScrambleCurrent) => {
         generate($jsTextScrambleCurrent);
-
-        observer.observe($jsTextScrambleCurrent);
     });
 };
 
 export default {
     init,
+    animate,
 };

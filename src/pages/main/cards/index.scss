@@ -4,6 +4,7 @@
     $p: '.main';
 
     z-index: 2;
+    background-color: $color-cod-gray; // remove
 
     #{$p}__area {
         @include grid-container;

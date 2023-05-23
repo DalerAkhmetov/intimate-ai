@@ -1,0 +1,12 @@
+@use 'sass:math';
+
+.js-text-scramble {
+    opacity: 0;
+    transition: opacity $transition;
+    transition-duration: $transition-duration * 2;
+    transform: translateZ(0);
+
+    &.is-animated {
+        opacity: 1;
+    }
+}

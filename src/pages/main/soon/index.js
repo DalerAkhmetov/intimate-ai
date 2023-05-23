@@ -1,11 +1,12 @@
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { isDesktop } from '@scripts/helpers';
-
-// TODO: scroll animation for transition with circle on devices
+import animationTextScramble from '@components/animation/text-scramble';
 
 const $section = document.querySelector('.main__section--soon');
-const $content = $section.querySelector('.main__content');
+const $title = $section.querySelector('.main__title');
+const $description = $section.querySelector('.main__description');
 const $soon = $section.querySelector('.main__soon');
 const $soonBg = $soon.querySelector('.main__soon-bg');
 const $line = $section.querySelectorAll('.main__line');
@@ -84,7 +85,7 @@ const animateOnScroll = () => {
         gsap.from($soonBg, {
             scrollTrigger: {
                 trigger: $soon,
-                endTrigger: isDesktopNow ? $content : $section,
+                endTrigger: isDesktopNow ? $description : $section,
                 start: 'top bottom',
                 end: 'bottom bottom',
                 scrub: true,
@@ -93,9 +94,20 @@ const animateOnScroll = () => {
             yPercent: -35,
         });
 
-        gsap.from($content, {
+        ScrollTrigger.create({
+            trigger: $title,
+            start: 'bottom bottom',
+            onEnter() {
+                animationTextScramble.animate($title);
+            },
+            onLeaveBack() {
+                animationTextScramble.animate($title, true);
+            },
+        });
+
+        gsap.from($description, {
             scrollTrigger: {
-                trigger: $content,
+                trigger: $description,
                 endTrigger: $section,
                 start: `${isDesktopNow ? 'top' : 'center'} bottom`,
                 end: 'bottom bottom',
@@ -104,10 +116,6 @@ const animateOnScroll = () => {
             ease: 'none',
             opacity: 0,
         });
-
-        if (isDesktopNow) {
-            return;
-        }
 
         gsap.to($fillCircle, {
             scrollTrigger: {

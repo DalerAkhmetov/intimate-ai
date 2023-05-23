@@ -9,6 +9,7 @@
     margin-top: vpc(-80);
     padding-top: vpc(434);
     padding-bottom: vpc(132);
+    background-color: $color-cod-gray; // remove
 
     @include tablet {
         margin-top: 0;
@@ -213,20 +214,5 @@
                 }
             }
         }
-    }
-
-    #{$p}__fill-circle {
-        position: absolute;
-        left: 100%;
-        bottom: 0;
-        z-index: 1;
-        display: block;
-        border-radius: 50%;
-        margin-bottom: vmax(-50);
-        margin-left: vmax(-100);
-        width: vmax(200);
-        height: vmax(200);
-        background-color: $color-whisper;
-        transform: scale(0);
     }
 }

@@ -1,6 +1,6 @@
 +e.SECTION.section--chat
     +e.content
-        +e.H2.title.text--h2 Bid farewell to boredom with playful interaction
+        +e.H2.title.text--h2.js-text-scramble Bid farewell to boredom with playful interaction
 
         +e.P.text Experience a playful and interactive dating simulation without any commitments. Chat and participate in carefree role-playing games to improve your communication and&nbsp;relationship skills
 
@@ -43,21 +43,23 @@
                             })
 
                         +e.voice
-                            +image({
-                                path: '@pages/main/chat/images/voice',
-                                ext: 'svg',
-                                noTablet: true,
-                                noMobile: true,
-                                noFormat: true,
-                            })
+                            +e.voice-track
+                                +image({
+                                    path: '@pages/main/chat/images/voice',
+                                    ext: 'svg',
+                                    noTablet: true,
+                                    noMobile: true,
+                                    noFormat: true,
+                                })
 
-                            +image({
-                                path: '@pages/main/chat/images/voice',
-                                ext: 'svg',
-                                noTablet: true,
-                                noMobile: true,
-                                noFormat: true,
-                            })
+                            +e.voice-track
+                                +image({
+                                    path: '@pages/main/chat/images/voice',
+                                    ext: 'svg',
+                                    noTablet: true,
+                                    noMobile: true,
+                                    noFormat: true,
+                                })
 
                     +e.message What are you wearing now?
 
@@ -85,3 +87,4 @@
         })
 
     +e.light
+    +e.fill-circle

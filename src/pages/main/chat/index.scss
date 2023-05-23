@@ -191,7 +191,9 @@
 
         img {
             &:last-child {
-                display: none;
+                position: absolute;
+                left: 0;
+                top: 0;
             }
         }
     }
@@ -201,14 +203,26 @@
         flex-shrink: 0;
         margin-left: vpc(5);
         width: vpc(130);
+    }
+
+    #{$p}__voice-track {
+        overflow: hidden;
 
         img {
-            &:last-child {
-                position: absolute;
-                left: 0;
-                top: 0;
-                display: block;
-            }
+            width: vpc(130);
+            max-width: none;
+        }
+
+        &:first-child {
+            opacity: 0.3;
+        }
+
+        &:last-child {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: block;
+            width: 0;
         }
     }
 

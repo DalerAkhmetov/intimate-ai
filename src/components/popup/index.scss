@@ -21,6 +21,11 @@
     -webkit-overflow-scrolling: touch;
     pointer-events: none;
 
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+
     &.is-active {
         opacity: 1;
         visibility: visible;

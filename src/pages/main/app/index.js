@@ -2,8 +2,11 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { isDesktop } from '@scripts/helpers';
+import animationTextScramble from '@components/animation/text-scramble';
 
 const $section = document.querySelector('.main__section--app');
+const $container = $section.querySelector('.main__container');
+const $title = $section.querySelector('.main__title');
 const $images = $section.querySelector('.main__images');
 const $image = $images.querySelectorAll('.main__image');
 
@@ -15,39 +18,45 @@ const animateOnScroll = () => {
     }
 
     gsapCtx.add(() => {
-        if (isDesktop()) {
-            const pinDuration = $section.clientHeight;
+        gsap.set($section, {
+            marginTop: -innerHeight,
+            autoAlpha: 0,
+        });
 
-            ScrollTrigger.create({
+        const pinDuration = isDesktop() ? $section.clientHeight : $images.scrollWidth - $images.clientWidth;
+        const timeline = gsap.timeline({
+            scrollTrigger: {
                 trigger: $section,
                 start: 'top top',
                 end: `+=${pinDuration}`,
+                scrub: true,
                 pin: true,
-            });
+                onEnter() {
+                    gsap.set($section, { autoAlpha: 1 });
 
-            gsap.from($image, {
-                scrollTrigger: {
-                    trigger: $section,
-                    start: 'top bottom',
-                    end: `bottom+=${pinDuration} bottom`,
-                    scrub: true,
+                    animationTextScramble.animate($title);
                 },
+                onLeaveBack() {
+                    gsap.set($section, { autoAlpha: 0 });
+
+                    animationTextScramble.animate($title, true);
+                },
+            },
+        });
+        // .from($container, {
+        //     ease: 'none',
+        //     opacity: 0,
+        // });
+
+        if (isDesktop()) {
+            timeline.from($image, {
                 ease: 'none',
                 stagger: 0.25,
                 opacity: 0,
                 yPercent: 100,
             });
         } else {
-            const pinDuration = $images.scrollWidth - $images.clientWidth;
-
-            gsap.to($images, {
-                scrollTrigger: {
-                    trigger: $section,
-                    start: 'top top',
-                    end: `+=${pinDuration}`,
-                    scrub: true,
-                    pin: true,
-                },
+            timeline.to($images, {
                 ease: 'none',
                 x: -pinDuration,
             });
