@@ -133,6 +133,12 @@
         margin-top: vpc(16);
         border-radius: vpc(20);
 
+        picture,
+        img {
+            pointer-events: none;
+            user-select: none;
+        }
+
         @include tablet-only {
             border-radius: vpc(16);
         }
@@ -157,6 +163,12 @@
     #{$p}__image {
         grid-column: 1 / -1;
         margin-left: vpc(-2);
+
+        picture,
+        img {
+            pointer-events: none;
+            user-select: none;
+        }
 
         @include tablet {
             margin-left: 0;
@@ -209,21 +221,21 @@
     #{$p}__girl {
         position: absolute;
         left: 50%;
-        bottom: vpc(-492);
+        bottom: vpc(-46);
         z-index: 1;
-        margin-left: vpc(-247);
-        width: vpc(520);
+        margin-left: vpc(-313);
+        width: vpc(624);
 
         @include tablet {
-            bottom: vpc(-438);
-            margin-left: vpc(-202);
-            width: vpc(426);
+            bottom: vpc(-72);
+            margin-left: vpc(-259);
+            width: vpc(518);
         }
 
         @include mobile {
-            bottom: vpc(-278);
-            margin-left: vpc(-129);
-            width: vpc(275);
+            bottom: 0;
+            margin-left: vpc(-152);
+            width: vpc(306);
         }
     }
 
