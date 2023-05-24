@@ -23,8 +23,6 @@ ScrollTrigger.config({
 
 let resizeWidth = null;
 
-window.ScrollTrigger = ScrollTrigger;
-
 const resize = () => {
     if (isTablet() && resizeWidth && resizeWidth === innerWidth) {
         return;
