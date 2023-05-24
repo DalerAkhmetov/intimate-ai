@@ -3,21 +3,18 @@
 .main__section--app {
     $p: '.main';
 
+    @include grid-container;
+
     overflow: hidden;
+    padding-top: vpc(72);
+    padding-bottom: vpc(72);
+    height: vh(100);
     color: $color-mine-shaft2;
     background-color: $color-whisper;
 
-    #{$p}__container {
-        @include grid-container;
-
-        padding-top: vpc(72);
-        padding-bottom: vpc(72);
-        height: vh(100);
-
-        @include mobile {
-            padding-top: vpc(60);
-            padding-bottom: vpc(55);
-        }
+    @include mobile {
+        padding-top: vpc(60);
+        padding-bottom: vpc(55);
     }
 
     #{$p}__title {

@@ -11,7 +11,6 @@ const $soon = $section.querySelector('.main__soon');
 const $soonBg = $soon.querySelector('.main__soon-bg');
 const $line = $section.querySelectorAll('.main__line');
 const $lineLight = $section.querySelectorAll('.main__line-light');
-const $fillCircle = $section.querySelector('.main__fill-circle');
 
 const gsapCtx = gsap.context(() => {});
 
@@ -117,16 +116,11 @@ const animateOnScroll = () => {
             opacity: 0,
         });
 
-        gsap.to($fillCircle, {
-            scrollTrigger: {
-                trigger: $section,
-                start: 'bottom bottom',
-                end: `+=${innerHeight / 2}`,
-                scrub: true,
-                pin: true,
-            },
-            ease: 'none',
-            scale: 1,
+        ScrollTrigger.create({
+            trigger: $section,
+            start: 'bottom bottom',
+            end: `+=${innerHeight / 1.75}`,
+            pin: true,
         });
     });
 };

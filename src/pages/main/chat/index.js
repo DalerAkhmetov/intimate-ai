@@ -14,7 +14,6 @@ const $message = $screen.querySelectorAll('.main__message');
 const $pause = $screen.querySelector('.main__play-pause img:last-child');
 const $voiceTrack = $screen.querySelector('.main__voice-track:last-child');
 const $button = $screen.querySelector('.main__button');
-const $fillCircle = $section.querySelector('.main__fill-circle');
 
 const gsapCtx = gsap.context(() => {});
 
@@ -109,11 +108,10 @@ const animateOnScroll = () => {
             }
         });
 
-        messagesTimeline.to($fillCircle, {
+        messagesTimeline.to($section, {
             delay: 0.5,
             duration: (messagesDistance / (innerHeight / 2)) * 0.5,
             ease: 'none',
-            scale: 1,
         });
     });
 };
