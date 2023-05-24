@@ -47,21 +47,24 @@ const animate = ($jsTextScrambleCurrent, reverse = false) => {
 };
 
 const generate = ($jsTextScrambleCurrent) => {
-    const splittedText = $jsTextScrambleCurrent.textContent.split('').map((char, charIndex) => {
-        if (char === ' ') {
-            return char;
-        }
+    const splittedText = $jsTextScrambleCurrent.textContent
+        .trim()
+        .split('')
+        .map((char, charIndex) => {
+            if (char === ' ') {
+                return char;
+            }
 
-        const charSet = gsap.utils.shuffle([...symbols]);
+            const charSet = gsap.utils.shuffle([...symbols]);
 
-        if (sliceCount > 0 && charIndex) {
-            charSet.push(...Array(charIndex).fill(charSet.slice(0, sliceCount)).flat());
-        }
+            if (sliceCount > 0 && charIndex) {
+                charSet.push(...Array(charIndex).fill(charSet.slice(0, sliceCount)).flat());
+            }
 
-        charSet.push(char);
+            charSet.push(char);
 
-        return charSet;
-    });
+            return charSet;
+        });
 
     const generatedTextLength = splittedText.at(-1).length;
 
