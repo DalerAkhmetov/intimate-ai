@@ -6,7 +6,7 @@
 
 @mixin desktop-h {
     @include desktop {
-        @media (max-height: ($bp-desktop-h * 1px)) {
+        @media (min-aspect-ratio: #{$layout-width-desktop}/#{$layout-height-desktop}) {
             @content;
         }
     }
@@ -20,7 +20,7 @@
 
 @mixin tablet-h {
     @include tablet {
-        @media (max-height: ($bp-tablet-h * 1px)) {
+        @media (min-aspect-ratio: #{$layout-width-tablet}/#{$layout-height-tablet}) {
             @content;
         }
     }
@@ -36,7 +36,7 @@
 
 @mixin tablet-only-h {
     @include tablet-only {
-        @media (max-height: ($bp-tablet-h * 1px)) {
+        @media (min-aspect-ratio: #{$layout-width-tablet}/#{$layout-height-tablet}) {
             @content;
         }
     }
@@ -50,7 +50,7 @@
 
 @mixin mobile-h {
     @include mobile {
-        @media (max-height: ($bp-mobile-h * 1px)) {
+        @media (min-aspect-ratio: #{$layout-width-mobile}/#{$layout-height-mobile}) {
             @content;
         }
     }
