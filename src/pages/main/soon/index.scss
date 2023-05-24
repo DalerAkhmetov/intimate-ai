@@ -43,28 +43,26 @@
     #{$p}__title {
         grid-column: 1 / span 6;
         padding-right: vpc(40);
+        max-width: vpc(550);
         color: $color-conifer;
 
         @include tablet {
             margin-left: vpc(8);
             padding-right: 0;
-            max-width: vpc(550);
         }
 
         @include mobile {
             margin-left: 0;
-            max-width: none;
+            max-width: vpc(328);
         }
     }
 
     #{$p}__description {
         grid-column: 7 / -1;
         margin-top: vpc(-2);
-        padding-right: vpc(40);
 
         @include tablet {
             margin-top: vpc(20);
-            padding-right: 0;
         }
 
         @include mobile {
@@ -73,14 +71,11 @@
     }
 
     #{$p}__text {
+        max-width: vpc(550);
         color: $color-dusty-gray;
 
-        @include tablet-only {
-            max-width: vpc(550);
-        }
-
         @include mobile {
-            padding-right: vpc(10);
+            max-width: vpc(320);
         }
     }
 
@@ -112,50 +107,50 @@
         justify-content: center;
         flex-shrink: 0;
         margin-left: vpc(-24);
-        width: vpc(1348);
-        height: vpc(616);
+        width: vpw(1348);
+        height: vpw(616);
         mask-image: url('@pages/main/soon/images/mask.svg');
         mask-size: 100%;
 
         @include tablet {
             margin-left: 0;
-            width: vpc(802);
-            height: vpc(366);
+            width: vpwt(802);
+            height: vpwt(366);
         }
 
         @include mobile {
-            width: vpc(370);
-            height: vpc(169);
+            width: vpwm(370);
+            height: vpwm(169);
         }
     }
 
     #{$p}__soon-bg {
         position: relative;
-        left: vpc(13);
-        top: vpc(-182);
+        left: vpw(13);
+        top: vpw(-182);
         flex-shrink: 0;
-        width: vpc(1374);
+        width: vpw(1374);
         max-width: none;
         pointer-events: none;
         user-select: none;
 
         @include tablet {
-            left: vpc(8);
-            top: vpc(-109);
-            width: vpc(817);
+            left: vpwt(8);
+            top: vpwt(-109);
+            width: vpwt(817);
         }
 
         @include mobile {
             left: 0;
-            top: vpc(-6);
-            width: vpc(399);
+            top: vpwm(-6);
+            width: vpwm(399);
         }
     }
 
     #{$p}__lines {
         position: absolute;
-        left: vpc(62);
-        right: vpc(62);
+        left: vpw(62);
+        right: vpw(62);
         top: 0;
         bottom: 0;
         z-index: -1;
@@ -164,13 +159,13 @@
         pointer-events: none;
 
         @include tablet {
-            left: vpc(32);
-            right: vpc(32);
+            left: vpwt(32);
+            right: vpwt(32);
         }
 
         @include mobile {
-            left: vpc(50);
-            right: vpc(50);
+            left: vpwm(50);
+            right: vpwm(50);
         }
     }
 

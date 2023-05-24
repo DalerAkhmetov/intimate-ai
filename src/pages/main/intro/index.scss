@@ -35,11 +35,11 @@
                 }
 
                 &:nth-child(2) {
-                    transform: translate(vpc(250), vpc(-430));
+                    transform: translate(vpw(250), vpc(-430));
                 }
 
                 &:nth-child(3) {
-                    transform: translate(vpc(100), vpc(-180));
+                    transform: translate(vpw(100), vpc(-180));
                 }
 
                 &:nth-child(4) {
@@ -47,11 +47,11 @@
                 }
 
                 &:nth-child(5) {
-                    transform: translate(vpc(810), vpc(-230));
+                    transform: translate(vpw(810), vpc(-230));
                 }
 
                 &:nth-child(6) {
-                    transform: translate(vpc(490), vpc(-460));
+                    transform: translate(vpw(490), vpc(-460));
                 }
             }
 
@@ -61,7 +61,7 @@
                 }
 
                 &:nth-child(2) {
-                    transform: translate(vpc(-110), vpc(200));
+                    transform: translate(vpw(-110), vpc(200));
                 }
 
                 &:nth-child(4) {
@@ -71,53 +71,53 @@
 
             &:nth-child(3) #{$p}__title-char {
                 &:nth-child(1) {
-                    transform: translate(vpc(-180), vpc(-130));
+                    transform: translate(vpw(-180), vpc(-130));
                 }
 
                 &:nth-child(2) {
-                    transform: translate(vpc(-120), vpc(220));
+                    transform: translate(vpw(-120), vpc(220));
                 }
 
                 &:nth-child(3) {
-                    transform: translate(vpc(180), vpc(-110));
+                    transform: translate(vpw(180), vpc(-110));
                 }
 
                 &:nth-child(4) {
-                    transform: translate(vpc(-270), vpc(310));
+                    transform: translate(vpw(-270), vpc(310));
                 }
 
                 &:nth-child(5) {
-                    transform: translate(vpc(370), vpc(210));
+                    transform: translate(vpw(370), vpc(210));
                 }
 
                 &:nth-child(6) {
-                    transform: translate(vpc(210), vpc(-560));
+                    transform: translate(vpw(210), vpc(-560));
                 }
             }
 
             &:nth-child(4) #{$p}__title-char {
                 &:nth-child(1) {
-                    transform: translate(vpc(-450), vpc(-570));
+                    transform: translate(vpw(-450), vpc(-570));
                 }
 
                 &:nth-child(2) {
-                    transform: translate(vpc(380), vpc(-150));
+                    transform: translate(vpw(380), vpc(-150));
                 }
 
                 &:nth-child(3) {
-                    transform: translate(vpc(-620), vpc(-180));
+                    transform: translate(vpw(-620), vpc(-180));
                 }
 
                 &:nth-child(4) {
-                    transform: translate(vpc(440), vpc(260));
+                    transform: translate(vpw(440), vpc(260));
                 }
 
                 &:nth-child(5) {
-                    transform: translate(vpc(-720), vpc(10));
+                    transform: translate(vpw(-720), vpc(10));
                 }
 
                 &:nth-child(6) {
-                    transform: translate(vpc(260), vpc(-590));
+                    transform: translate(vpw(260), vpc(-590));
                 }
             }
 
@@ -128,29 +128,29 @@
                     }
 
                     &:nth-child(2) {
-                        transform: translate(vpc(130), vpc(-650));
+                        transform: translate(vpwt(130), vpc(-650));
                     }
 
                     &:nth-child(3) {
-                        transform: translate(vpc(60), vpc(-290));
+                        transform: translate(vpwt(60), vpc(-290));
                     }
 
                     &:nth-child(4) {
-                        transform: translate(vpc(50), vpc(140));
+                        transform: translate(vpwt(50), vpc(140));
                     }
 
                     &:nth-child(5) {
-                        transform: translate(vpc(480), vpc(-290));
+                        transform: translate(vpwt(480), vpc(-290));
                     }
 
                     &:nth-child(6) {
-                        transform: translate(vpc(330), vpc(-700));
+                        transform: translate(vpwt(330), vpc(-700));
                     }
                 }
 
                 &:nth-child(2) #{$p}__title-char {
                     &:nth-child(1) {
-                        transform: translate(vpc(60), vpc(-430));
+                        transform: translate(vpwt(60), vpc(-430));
                     }
 
                     &:nth-child(2) {
@@ -158,51 +158,51 @@
                     }
 
                     &:nth-child(3) {
-                        transform: translate(vpc(40), vpc(-210));
+                        transform: translate(vpwt(40), vpc(-210));
                     }
 
                     &:nth-child(4) {
-                        transform: translate(vpc(80), vpc(-470));
+                        transform: translate(vpwt(80), vpc(-470));
                     }
                 }
 
                 &:nth-child(3) #{$p}__title-char {
                     &:nth-child(1) {
-                        transform: translate(vpc(-130), vpc(-290));
+                        transform: translate(vpwt(-130), vpc(-290));
                     }
 
                     &:nth-child(2) {
-                        transform: translate(vpc(-40), vpc(130));
+                        transform: translate(vpwt(-40), vpc(130));
                     }
 
                     &:nth-child(3) {
-                        transform: translate(vpc(-40), vpc(-560));
+                        transform: translate(vpwt(-40), vpc(-560));
                     }
 
                     &:nth-child(4) {
-                        transform: translate(vpc(160), vpc(-130));
+                        transform: translate(vpwt(160), vpc(-130));
                     }
 
                     &:nth-child(5) {
-                        transform: translate(vpc(310), vpc(110));
+                        transform: translate(vpwt(310), vpc(110));
                     }
 
                     &:nth-child(6) {
-                        transform: translate(vpc(90), vpc(-700));
+                        transform: translate(vpwt(90), vpc(-700));
                     }
                 }
 
                 &:nth-child(4) #{$p}__title-char {
                     &:nth-child(1) {
-                        transform: translate(vpc(-270), vpc(-780));
+                        transform: translate(vpwt(-270), vpc(-780));
                     }
 
                     &:nth-child(2) {
-                        transform: translate(vpc(-150), 0);
+                        transform: translate(vpwt(-150), 0);
                     }
 
                     &:nth-child(3) {
-                        transform: translate(vpc(-350), vpc(-260));
+                        transform: translate(vpwt(-350), vpc(-260));
                     }
 
                     &:nth-child(4) {
@@ -210,11 +210,11 @@
                     }
 
                     &:nth-child(5) {
-                        transform: translate(vpc(-430), vpc(-100));
+                        transform: translate(vpwt(-430), vpc(-100));
                     }
 
                     &:nth-child(6) {
-                        transform: translate(vpc(50), vpc(-210));
+                        transform: translate(vpwt(50), vpc(-210));
                     }
 
                     &:nth-child(7) {
@@ -226,11 +226,11 @@
             @include mobile {
                 &:nth-child(1) #{$p}__title-char {
                     &:nth-child(1) {
-                        transform: translate(vpc(20), vpc(-40));
+                        transform: translate(vpwm(20), vpc(-40));
                     }
 
                     &:nth-child(2) {
-                        transform: translate(vpc(-70), vpc(-270));
+                        transform: translate(vpwm(-70), vpc(-270));
                     }
 
                     &:nth-child(3) {
@@ -238,47 +238,47 @@
                     }
 
                     &:nth-child(4) {
-                        transform: translate(vpc(190), vpc(-590));
+                        transform: translate(vpwm(190), vpc(-590));
                     }
 
                     &:nth-child(5) {
-                        transform: translate(vpc(110), vpc(-640));
+                        transform: translate(vpwm(110), vpc(-640));
                     }
 
                     &:nth-child(6) {
-                        transform: translate(vpc(120), vpc(-370));
+                        transform: translate(vpwm(120), vpc(-370));
                     }
                 }
 
                 &:nth-child(2) #{$p}__title-char {
                     &:nth-child(1) {
-                        transform: translate(vpc(-90), vpc(-200));
+                        transform: translate(vpwm(-90), vpc(-200));
                     }
 
                     &:nth-child(2) {
-                        transform: translate(vpc(260), vpc(-260));
+                        transform: translate(vpwm(260), vpc(-260));
                     }
 
                     &:nth-child(3) {
-                        transform: translate(vpc(-30), vpc(-330));
+                        transform: translate(vpwm(-30), vpc(-330));
                     }
 
                     &:nth-child(4) {
-                        transform: translate(vpc(30), vpc(-430));
+                        transform: translate(vpwm(30), vpc(-430));
                     }
                 }
 
                 &:nth-child(3) #{$p}__title-char {
                     &:nth-child(1) {
-                        transform: translate(vpc(60), vpc(-260));
+                        transform: translate(vpwm(60), vpc(-260));
                     }
 
                     &:nth-child(2) {
-                        transform: translate(vpc(150), vpc(-270));
+                        transform: translate(vpwm(150), vpc(-270));
                     }
 
                     &:nth-child(3) {
-                        transform: translate(vpc(160), vpc(-150));
+                        transform: translate(vpwm(160), vpc(-150));
                     }
 
                     &:nth-child(4) {
@@ -286,21 +286,21 @@
                     }
 
                     &:nth-child(5) {
-                        transform: translate(vpc(140), 0);
+                        transform: translate(vpwm(140), 0);
                     }
 
                     &:nth-child(6) {
-                        transform: translate(vpc(10), vpc(-350));
+                        transform: translate(vpwm(10), vpc(-350));
                     }
                 }
 
                 &:nth-child(4) #{$p}__title-char {
                     &:nth-child(1) {
-                        transform: translate(vpc(-30), vpc(-50));
+                        transform: translate(vpwm(-30), vpc(-50));
                     }
 
                     &:nth-child(2) {
-                        transform: translate(vpc(-20), vpc(100));
+                        transform: translate(vpwm(-20), vpc(100));
                     }
 
                     &:nth-child(3) {
@@ -308,11 +308,11 @@
                     }
 
                     &:nth-child(4) {
-                        transform: translate(vpc(70), vpc(50));
+                        transform: translate(vpwm(70), vpc(50));
                     }
 
                     &:nth-child(5) {
-                        transform: translate(vpc(90), vpc(120));
+                        transform: translate(vpwm(90), vpc(120));
                     }
 
                     &:nth-child(6) {
@@ -320,7 +320,7 @@
                     }
 
                     &:nth-child(7) {
-                        transform: translate(vpc(100), vpc(-120));
+                        transform: translate(vpwm(100), vpc(-120));
                     }
                 }
             }
@@ -371,7 +371,16 @@
     }
 
     #{$p}__title {
+        max-width: vpc(1100);
         transition: color $transition;
+
+        @include tablet {
+            max-width: vpc(640);
+        }
+
+        @include mobile {
+            max-width: vpc(288);
+        }
     }
 
     #{$p}__title-word {

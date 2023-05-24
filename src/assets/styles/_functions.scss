@@ -11,3 +11,15 @@
 @function vpc($value) {
     @return calc(#{$value} * var(--width-multiplier));
 }
+
+@function vpw($value) {
+    @return math.div($value, $layout-width-desktop) * 100vw;
+}
+
+@function vpwt($value) {
+    @return math.div($value, $layout-width-tablet) * 100vw;
+}
+
+@function vpwm($value) {
+    @return math.div($value, $layout-width-mobile) * 100vw;
+}

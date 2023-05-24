@@ -25,10 +25,14 @@
     #{$p}__content {
         grid-column: 2 / span 5;
         padding-bottom: vpc(107);
+        max-width: vpc(490);
 
         @include tablet {
             padding-bottom: 0;
-            max-width: vpc(490);
+        }
+
+        @include mobile {
+            max-width: vpc(328);
         }
     }
 

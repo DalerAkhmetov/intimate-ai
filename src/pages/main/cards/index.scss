@@ -45,10 +45,14 @@
     #{$p}__title {
         grid-column: 1 / span 5;
         margin-left: vpc(2);
+        max-width: vpc(550);
 
         @include tablet {
             margin-left: 0;
-            max-width: vpc(550);
+        }
+
+        @include mobile {
+            max-width: vpc(328);
         }
     }
 
@@ -152,46 +156,52 @@
 
     #{$p}__image {
         grid-column: 1 / -1;
-        overflow: hidden;
         margin-left: vpc(-2);
-        border-radius: vpc(80);
 
         @include tablet {
             margin-left: 0;
-            border-radius: 0;
         }
     }
 
     #{$p}__image-wrapper {
         position: relative;
-        padding-top: percentage(math.div(850, 1186));
-        height: 0;
+        overflow: hidden;
+        // padding-top: percentage(math.div(850, 1186));
+        margin: 0 auto;
+        border-radius: vpc(80);
+        width: vpw(1186);
+        height: vpc(850);
 
         > picture {
             position: absolute;
             left: 50%;
             bottom: vpc(-17);
-            margin-left: vpc(-727);
-            width: vpc(1927);
+            margin-left: vpw(-727);
+            width: vpw(1927);
         }
 
         @include tablet {
-            padding-top: percentage(math.div(622, 768));
+            // padding-top: percentage(math.div(622, 768));
+            border-radius: 0;
+            width: vpwt(768);
+            height: vpc(622);
 
             > picture {
                 bottom: vpc(-12);
-                margin-left: vpc(-532);
-                width: vpc(1410);
+                margin-left: vpwt(-532);
+                width: vpwt(1410);
             }
         }
 
         @include mobile {
-            padding-top: percentage(math.div(392, 360));
+            // padding-top: percentage(math.div(392, 360));
+            width: vpwm(360);
+            height: vpc(392);
 
             > picture {
                 bottom: vpc(-5);
-                margin-left: vpc(-358);
-                width: vpc(915);
+                margin-left: vpwm(-358);
+                width: vpwm(915);
             }
         }
     }
