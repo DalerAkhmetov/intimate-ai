@@ -6,8 +6,10 @@ append globals
     - keywords = 'intimate, app, chat'
 
 block page
-    include @pages/main/index
+    main(asscroll-container)
+        div
+            include @pages/main/index
+            include @components/footer/index
 
-    include @components/footer/index
     include @components/popup/form-success/index
     include @components/popup/get-access/index

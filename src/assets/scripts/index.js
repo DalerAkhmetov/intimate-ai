@@ -10,6 +10,7 @@ import animationTextScramble from '@components/animation/text-scramble';
 import form from '@components/form';
 import popup from '@components/popup';
 import preloader from '@components/preloader';
+import scroller from '@components/scroller';
 import input from '@components/ui/input';
 
 import main from '@pages/main';
@@ -22,6 +23,8 @@ ScrollTrigger.config({
 
 let resizeWidth = null;
 
+window.ScrollTrigger = ScrollTrigger;
+
 const resize = () => {
     if (isTablet() && resizeWidth && resizeWidth === innerWidth) {
         return;
@@ -30,7 +33,17 @@ const resize = () => {
     uaParser.resize();
     vUnits.resize();
 
-    main.resize();
+    const lastPosition = scroller.getPosition();
+
+    scroller.setPosition(0);
+
+    setTimeout(() => {
+        main.resize();
+
+        ScrollTrigger.refresh();
+
+        scroller.setPosition(lastPosition);
+    }, 100);
 
     resizeWidth = innerWidth;
 };
@@ -38,6 +51,7 @@ const resize = () => {
 const init = () => {
     uaParser.init();
     vUnits.init();
+    scroller.init();
 
     preloader
         .init(async () => {

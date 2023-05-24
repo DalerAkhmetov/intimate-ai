@@ -1,5 +1,7 @@
 import * as bodyScrollLock from 'body-scroll-lock';
 
+import scroller from '@src/components/scroller';
+
 let dataScrollLocks;
 
 export const isDesktop = () => innerWidth >= 1024;
@@ -8,6 +10,8 @@ export const isTabletOnly = () => innerWidth < 1024 && innerWidth >= 768;
 export const isMobile = () => innerWidth < 768;
 
 export const lockScroll = (state, $element, name) => {
+    const scrollerInstance = scroller.getInstance();
+
     if (typeof dataScrollLocks === 'undefined') {
         dataScrollLocks = new Set();
     }
@@ -26,6 +30,10 @@ export const lockScroll = (state, $element, name) => {
         setTimeout(() => {
             document.documentElement.classList.add('is-scroll-locked');
         }, 0);
+
+        if (scrollerInstance) {
+            scrollerInstance.disable({ inputOnly: true });
+        }
     } else {
         if (typeof name === 'string') {
             scrollLocks.delete(name);
@@ -37,6 +45,10 @@ export const lockScroll = (state, $element, name) => {
             bodyScrollLock.clearAllBodyScrollLocks();
 
             document.documentElement.classList.remove('is-scroll-locked');
+
+            if (scrollerInstance) {
+                scrollerInstance.enable();
+            }
         }
     }
 };
