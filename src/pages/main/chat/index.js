@@ -68,7 +68,6 @@ const animateOnScroll = () => {
 
         $message.forEach(($messageCurrent, messageIndex) => {
             messagesTimeline.to($messages, {
-                delay: 0.5,
                 ease: 'none',
                 y: `-=${(messageIndex ? 0 : gsap.getProperty($messages, 'paddingTop') + gsap.getProperty($messages, 'paddingBottom')) + $messageCurrent.clientHeight + gsap.getProperty($messageCurrent, 'marginTop')}`,
             });
@@ -81,7 +80,6 @@ const animateOnScroll = () => {
                         $pause,
                         { opacity: 0 },
                         {
-                            delay: 0.5,
                             ease: 'none',
                             opacity: 1,
                         }
@@ -103,7 +101,6 @@ const animateOnScroll = () => {
             if ($messageCurrent.classList.contains('main__message--image')) {
                 messagesTimeline.from($button, {
                     ...baseProps,
-                    delay: 0.5,
                 });
             }
         });
