@@ -64,18 +64,4 @@
             margin-left: vpc(22);
         }
     }
-
-    #{$p}__light {
-        width: vpc(312);
-        height: vpc(312);
-        opacity: 0.35;
-        filter: blur(vpc(75));
-
-        @include mobile {
-            width: vpc(250);
-            height: vpc(250);
-            background: $color-purple-heart2;
-            filter: blur(vpc(25));
-        }
-    }
 }

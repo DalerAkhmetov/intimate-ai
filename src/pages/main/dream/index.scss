@@ -61,10 +61,4 @@
             content: none;
         }
     }
-
-    #{$p}__light {
-        @include mobile {
-            background: $color-heliotrope3;
-        }
-    }
 }
