@@ -78,12 +78,7 @@
                             })
 
     +e.grid
-        +image({
-            path: '@pages/main/chat/images/grid',
-            ext: 'svg',
-            noTablet: true,
-            noMobile: true,
-            noFormat: true,
-        })
+        +e.VIDEO.video(autoplay loop muted playsinline preload="none")
+            source(src=`${baseDir}video/grid.mp4` type="video/mp4")
 
     +e.light

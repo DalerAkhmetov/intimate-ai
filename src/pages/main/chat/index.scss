@@ -242,22 +242,41 @@
 
     #{$p}__grid {
         position: absolute;
-        left: vpc(-802);
-        right: vpc(-784);
+        left: 0;
+        right: 0;
+        bottom: vpc(-120);
         z-index: -1;
-        bottom: 0;
         pointer-events: none;
         user-select: none;
 
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: vpc(-1);
+            z-index: 1;
+            display: block;
+            width: 100%;
+            height: vpc(300);
+            background: linear-gradient(to bottom, $color-cod-gray, rgba($color-cod-gray, 0));
+        }
+
         @include tablet {
-            left: vpc(-380);
-            right: vpc(-381);
-            opacity: 0.1;
+            bottom: vpc(-90);
+
+            &::before {
+                height: vpc(200);
+            }
         }
 
         @include mobile {
-            left: vpc(-248);
-            right: vpc(-244);
+            left: vpc(-100);
+            right: vpc(-100);
+            bottom: 0;
+
+            &::before {
+                height: vpc(150);
+            }
         }
     }
 }
