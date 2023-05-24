@@ -11,6 +11,7 @@
     align-items: flex-start;
     overflow: hidden;
     overflow-y: auto;
+    overscroll-behavior: none;
     padding: vpc(32);
     width: 100%;
     height: 100%;

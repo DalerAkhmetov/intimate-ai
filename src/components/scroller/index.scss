@@ -24,6 +24,7 @@ html.asscroll-touch {
     .asscroll-touch & {
         position: relative;
         overflow-y: auto;
+        overscroll-behavior: none;
         -webkit-overflow-scrolling: touch;
     }
 }
