@@ -66,7 +66,7 @@ const generate = ($jsTextScrambleCurrent) => {
             return charSet;
         });
 
-    const generatedTextLength = splittedText.at(-1).length;
+    const generatedTextLength = splittedText[splittedText.length - 1].length;
 
     $jsTextScrambleCurrent.generatedText = [];
 
@@ -77,7 +77,7 @@ const generate = ($jsTextScrambleCurrent) => {
                     if (typeof charSet === 'string') {
                         return charSet;
                     } else if (i >= charSet.length) {
-                        return charSet.at(-1);
+                        return charSet[charSet.length - 1];
                     } else {
                         return charSet[i];
                     }
