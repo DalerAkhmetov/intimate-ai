@@ -2,6 +2,7 @@ import debounce from 'lodash.debounce';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import currentYear from '@scripts/current-year';
 import { isTablet } from '@scripts/helpers';
 import uaParser from '@scripts/ua-parser';
 import vUnits from '@src/assets/scripts/v-units';
@@ -47,6 +48,7 @@ const resize = () => {
 };
 
 const init = () => {
+    currentYear.init();
     uaParser.init();
     vUnits.init();
     scroller.init();
