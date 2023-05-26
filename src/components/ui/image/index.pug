@@ -11,16 +11,16 @@ mixin image(props = {})
         const mediaTablet = '(max-width: 1023px)';
         const mediaMobile = '(max-width: 767px)';
 
-    if srcTablet || srcMobile
+    if srcTablet || srcMobile || props.srcTablet || props.srcMobile
         picture&attributes(attributes)
-            if srcMobile
-                source(srcset=require(srcMobile) type=`image/${mime}` media=mediaMobile)
+            if srcMobile || props.srcMobile
+                source(srcset=(props.srcMobile || require(srcMobile)) type=`image/${mime}` media=mediaMobile)
 
-            if srcTablet
-                source(srcset=require(srcTablet) type=`image/${mime}` media=mediaTablet)
+            if srcTablet || props.srcTablet
+                source(srcset=(props.srcTablet || require(srcTablet)) type=`image/${mime}` media=mediaTablet)
 
-            source(srcset=require(src) type=`image/${mime}` media=mediaDesktop)
-            img(src=require(src) alt=alt decoding=decoding width=props.width height=props.height)
+            source(srcset=(props.src || require(src)) type=`image/${mime}` media=mediaDesktop)
+            img(src=(props.src || require(src)) alt=alt decoding=decoding width=props.width height=props.height)
 
     else
-        img(src=require(src) alt=alt decoding=decoding width=props.width height=props.height)&attributes(attributes)
+        img(src=(props.src || require(src)) alt=alt decoding=decoding width=props.width height=props.height)&attributes(attributes)

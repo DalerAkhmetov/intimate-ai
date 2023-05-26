@@ -1,10 +1,27 @@
+import { gsap } from 'gsap';
+
 import { lockScroll } from '@scripts/helpers';
+
+const $preloader = document.querySelector('.preloader');
 
 const debug = false;
 const animationDelay = 0.75;
 const timeoutDelay = 45;
 
 let finished = false;
+
+const hide = () => {
+    return new Promise((resolve) => {
+        gsap.to($preloader, {
+            opacity: 0,
+            onComplete() {
+                $preloader.parentNode.removeChild($preloader);
+
+                resolve();
+            },
+        });
+    });
+};
 
 const getFilesToLoad = (element = document) => {
     return {
@@ -118,4 +135,5 @@ const init = (loadScripts) => {
 
 export default {
     init,
+    hide,
 };

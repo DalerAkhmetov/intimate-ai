@@ -60,6 +60,7 @@ const init = () => {
 
             main.init();
 
+            await preloader.hide();
             await main.animateOnLoad();
         })
         .then(() => {
