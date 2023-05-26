@@ -1,0 +1,8 @@
+@use 'sass:math';
+
+.form {
+    &.is-loading {
+        cursor: progress;
+        pointer-events: none;
+    }
+}

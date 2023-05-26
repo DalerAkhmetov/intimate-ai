@@ -2,8 +2,6 @@ import popup from '@components/popup';
 import popupFormSuccess from '@components/popup/form-success';
 import input from '@components/ui/input';
 
-// TODO: validation inputs on change event with button disabled state changing...
-
 const $form = document.querySelectorAll('.form');
 
 const apiUrl = '';
@@ -12,7 +10,7 @@ const errorMessages = {
         default: 'This field is required',
     },
     email: 'Invalid email',
-    formSend: 'Send error',
+    formSend: 'Something went wrong',
 };
 
 const regExp = {
@@ -21,29 +19,12 @@ const regExp = {
 
 const getFields = ($formCurrent) => $formCurrent.querySelectorAll('input, textarea');
 
-const reset = ($formCurrent) => {
-    const $errorCurrent = $formCurrent.querySelector('.form__error');
-
-    getFields($formCurrent).forEach(($fieldCurrent) => {
-        if ($fieldCurrent.type === 'hidden') {
-            return;
-        } else {
-            $fieldCurrent.value = '';
-
-            input.toggleError($fieldCurrent, false);
-        }
-
-        $fieldCurrent.dispatchEvent(new Event('change'));
-    });
-
-    if ($errorCurrent) {
-        $errorCurrent.classList.remove('is-active');
-        $errorCurrent.textContent = '';
-    }
-};
-
 const toggleLoadingState = ($formCurrent, state) => {
     $formCurrent.classList.toggle('is-loading', state);
+};
+
+const toggleButtonDisabledState = ($formCurrent, state) => {
+    $formCurrent.querySelector('button[type="submit"]').disabled = state;
 };
 
 const toggleError = ($fieldCurrent, state, text) => {
@@ -55,6 +36,27 @@ const toggleError = ($fieldCurrent, state, text) => {
     } else {
         input.toggleError(...args);
     }
+};
+
+const reset = ($formCurrent) => {
+    const $errorCurrent = $formCurrent.querySelector('.form__error');
+
+    getFields($formCurrent).forEach(($fieldCurrent) => {
+        if ($fieldCurrent.type !== 'hidden') {
+            $fieldCurrent.value = '';
+        }
+
+        toggleError($fieldCurrent, false);
+
+        $fieldCurrent.dispatchEvent(new Event('change'));
+    });
+
+    if ($errorCurrent) {
+        $errorCurrent.classList.remove('is-active');
+        $errorCurrent.textContent = '';
+    }
+
+    toggleButtonDisabledState($formCurrent, false);
 };
 
 const validateField = ($fieldCurrent) => {
@@ -86,26 +88,18 @@ const validate = ($formCurrent) => {
         }
     });
 
+    toggleButtonDisabledState($formCurrent, !isValid);
+
     return isValid;
 };
 
-const result = ($formCurrent, response) => {
-    if (response.success) {
-        popupFormSuccess.setMessage($formCurrent.dataset.successMessage);
+const result = ($formCurrent) => {
+    popupFormSuccess.setMessage($formCurrent.dataset.successMessage);
 
-        popup.closeActive();
-        popup.open('form-success');
+    popup.closeActive();
+    popup.open('form-success');
 
-        reset($formCurrent);
-    } else if (response.errors) {
-        getFields($formCurrent).forEach(($fieldCurrent) => {
-            const error = response.errors[$fieldCurrent.name];
-
-            if (error) {
-                toggleError($fieldCurrent, true, error);
-            }
-        });
-    }
+    reset($formCurrent);
 };
 
 const request = ($formCurrent) => {
@@ -114,8 +108,8 @@ const request = ($formCurrent) => {
         method: $formCurrent.getAttribute('method').toUpperCase(),
     })
         .then((response) => response.json())
-        .then((response) => {
-            result($formCurrent, response);
+        .then(() => {
+            result($formCurrent);
         })
         .catch((error) => {
             const $errorCurrent = $formCurrent.querySelector('.form__error');
@@ -127,6 +121,22 @@ const request = ($formCurrent) => {
                 $errorCurrent.classList.add('is-active');
             }
         });
+};
+
+const changeHandler = (e) => {
+    const $formCurrent = e.currentTarget.closest('.form');
+
+    let canSend = true;
+
+    validateField(e.currentTarget);
+
+    getFields($formCurrent).forEach(($fieldCurrent) => {
+        if (input.hasError($fieldCurrent)) {
+            canSend = false;
+        }
+    });
+
+    toggleButtonDisabledState($formCurrent, !canSend);
 };
 
 const submitHandler = async (e) => {
@@ -150,6 +160,10 @@ const init = () => {
 
     $form.forEach(($formCurrent) => {
         $formCurrent.addEventListener('submit', submitHandler);
+
+        getFields($formCurrent).forEach(($fieldCurrent) => {
+            $fieldCurrent.addEventListener('change', changeHandler);
+        });
     });
 };
 

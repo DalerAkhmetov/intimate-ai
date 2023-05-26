@@ -1,6 +1,8 @@
 const $input = document.querySelectorAll('.input');
 const $field = document.querySelectorAll('.input__field');
 
+const hasError = ($fieldCurrent) => $fieldCurrent.parentNode.classList.contains('is-error');
+
 const toggleError = ($fieldCurrent, state, errorText) => {
     const $inputCurrent = $fieldCurrent.parentNode;
     const $errorCurrent = $inputCurrent.querySelector('.input__error');
@@ -33,4 +35,5 @@ const init = () => {
 export default {
     init,
     toggleError,
+    hasError,
 };
