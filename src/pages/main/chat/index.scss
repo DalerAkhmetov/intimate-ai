@@ -244,8 +244,9 @@
         position: absolute;
         left: 0;
         right: 0;
-        bottom: vpc(-120);
+        bottom: vpc(-150);
         z-index: -1;
+        opacity: 0.25;
         pointer-events: none;
         user-select: none;
 
@@ -270,8 +271,8 @@
         }
 
         @include mobile {
-            left: vpc(-100);
-            right: vpc(-100);
+            left: vpc(-80);
+            right: vpc(-80);
             bottom: 0;
 
             &::before {
