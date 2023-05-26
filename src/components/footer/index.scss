@@ -16,19 +16,39 @@
             border-width: 1px;
         }
 
-        &--bottom {
-            margin-bottom: vpc(24);
+        &--center {
             border-bottom: 2px solid $color-mine-shaft3;
             padding-top: vpc(32);
-            padding-bottom: vpc(22);
+            padding-bottom: vpc(36);
+        }
+
+        &--bottom {
+            border: 0;
+            padding-top: vpc(16);
+            padding-bottom: vpc(17);
+            color: $color-dove-gray;
+
+            a {
+                color: $color-silver;
+            }
+        }
+
+        @include desktop {
+            &--bottom a:hover {
+                color: $color-conifer;
+            }
         }
 
         @include tablet {
             border-width: 1px;
 
+            &--center {
+                padding-top: vpc(24);
+                padding-bottom: vpc(22);
+            }
+
             &--bottom {
-                margin-bottom: vpc(16);
-                padding-bottom: vpc(15);
+                padding-bottom: vpc(12);
             }
         }
 
@@ -39,10 +59,18 @@
                 border: 0;
             }
 
-            &--bottom {
+            &--center {
                 margin-bottom: 0;
                 border-bottom: 0;
-                padding-bottom: vpc(15);
+                padding-top: vpc(32);
+                padding-bottom: vpc(10);
+            }
+
+            &--bottom {
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: space-between;
+                padding-top: vpc(10);
             }
         }
     }
@@ -207,34 +235,49 @@
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+        align-self: end;
         grid-column: span 6 / -1;
-        padding-top: vpc(8);
-        padding-right: vpc(2);
+        padding-bottom: vpc(1);
         text-align: right;
 
         @include tablet {
             grid-column-start: span 2;
-            padding-top: 0;
-            padding-right: 0;
         }
 
         @include mobile {
             display: block;
             margin-top: vpc(59);
+            padding-bottom: 0;
             text-align: left;
         }
     }
 
-    &__copy {
-        margin-top: vpc(32);
-        color: $color-dove-gray;
+    &__team {
+        grid-column: 1 / span 6;
 
         @include tablet {
-            margin-top: vpc(27);
+            grid-column-end: span 2;
         }
 
         @include mobile {
-            margin-top: vpc(12);
+            flex: 1;
+            padding-left: vpc(8);
+            text-align: right;
+        }
+    }
+
+    &__copy {
+        grid-column: span 6 / -1;
+        text-align: right;
+
+        @include tablet {
+            grid-column-start: span 2;
+        }
+
+        @include mobile {
+            flex: 1;
+            padding-right: vpc(8);
+            text-align: left;
         }
     }
 }
