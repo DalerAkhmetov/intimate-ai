@@ -238,6 +238,7 @@
         justify-content: center;
         width: 100%;
         transform: translate(-50%, -50%);
+        pointer-events: auto;
     }
 
     #{$p}__grid {
