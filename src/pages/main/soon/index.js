@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import { isDesktop } from '@scripts/helpers';
+import { isDesktop, isMobile } from '@scripts/helpers';
 import animationTextScramble from '@components/animation/text-scramble';
 
 const $section = document.querySelector('.main__section--soon');
@@ -79,18 +79,19 @@ const animateOnScroll = () => {
     }
 
     const isDesktopNow = isDesktop();
+    const isMobileNow = isMobile();
 
     gsapCtx.add(() => {
-        gsap.from($soonBg, {
+        gsap.to($soonBg, {
             scrollTrigger: {
                 trigger: $soon,
-                endTrigger: isDesktopNow ? $description : $section,
+                endTrigger: $section,
                 start: 'top bottom',
                 end: 'bottom bottom',
                 scrub: true,
             },
             ease: 'none',
-            yPercent: -35,
+            yPercent: isMobileNow ? -50 : -35,
         });
 
         ScrollTrigger.create({
