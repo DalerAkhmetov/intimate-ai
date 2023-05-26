@@ -13,6 +13,7 @@ let finished = false;
 const hide = () => {
     return new Promise((resolve) => {
         gsap.to($preloader, {
+            delay: 0.5,
             opacity: 0,
             onComplete() {
                 $preloader.parentNode.removeChild($preloader);
