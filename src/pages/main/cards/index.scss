@@ -2,6 +2,48 @@
 
 .main__section--cards {
     $p: '.main';
+    $widthStart: 336;
+    $widthEnd: 1184;
+    $widthStartT: 304;
+    $widthEndT: 768;
+    $widthStartM: 296;
+    $widthEndM: 360;
+    $heightStart: 234;
+    $heightEnd: 658;
+    $heightStartT: 234;
+    $heightEndT: 622;
+    $heightStartM: 234;
+    $heightEndM: 392;
+    $scaleX: math.div($widthStart, $widthEnd);
+    $scaleY: math.div($heightStart, $heightEnd);
+    $scaleXT: math.div($widthStartT, $widthEndT);
+    $scaleYT: math.div($heightStartT, $heightEndT);
+    $scaleXM: math.div($widthStartM, $widthEndM);
+    $scaleYM: math.div($heightStartM, $heightEndM);
+    $scaleWrapperX: 1;
+    $scaleWrapperY: 1;
+    $scaleWrapperXT: 1;
+    $scaleWrapperYT: 1;
+    $scaleWrapperXM: 1;
+    $scaleWrapperYM: 1;
+
+    @if $scaleX < $scaleY {
+        $scaleWrapperX: math.div($widthEnd * $scaleY, $widthStart);
+    } @else {
+        $scaleWrapperY: math.div($heightEnd * $scaleX, $heightStart);
+    }
+
+    @if $scaleXT < $scaleYT {
+        $scaleWrapperXT: math.div($widthEndT * $scaleYT, $widthStartT);
+    } @else {
+        $scaleWrapperYT: math.div($heightEndT * $scaleXT, $heightStartT);
+    }
+
+    @if $scaleXM < $scaleYM {
+        $scaleWrapperXM: math.div($widthEndM * $scaleYM, $widthStartM);
+    } @else {
+        $scaleWrapperYM: math.div($heightEndM * $scaleXM, $heightStartM);
+    }
 
     z-index: 2;
 
@@ -75,7 +117,6 @@
 
     #{$p}__card {
         position: relative;
-        z-index: 1;
         border: 1px solid $color-mine-shaft2;
         border-radius: vpc(40);
         padding: vpc(23);
@@ -111,14 +152,15 @@
         }
 
         @include mobile {
+            margin: 0 auto;
             padding: vpc(15);
             padding-top: vpc(23);
-            width: 100%;
+            width: vpc(328);
 
             &:nth-child(2),
             &:nth-child(3) {
                 margin-top: vpc(12);
-                margin-left: 0;
+                margin-left: auto;
             }
         }
     }
@@ -148,6 +190,25 @@
         }
     }
 
+    #{$p}__card:nth-child(1) #{$p}__card-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+        width: vpc($widthStart);
+        height: vpc($heightStart);
+
+        @include tablet {
+            width: vpc($widthStartT);
+            height: vpc($heightStartT);
+        }
+
+        @include mobile {
+            width: vpc($widthStartM);
+            height: vpc($heightStartM);
+        }
+    }
+
     #{$p}__card:nth-child(3) #{$p}__card-image {
         margin-top: vpc(37);
 
@@ -160,9 +221,15 @@
         }
     }
 
-    #{$p}__image {
-        grid-column: 1 / -1;
-        margin-left: vpc(-2);
+    #{$p}__image-scale {
+        position: relative;
+        z-index: 1;
+        flex-shrink: 0;
+        overflow: hidden;
+        border-radius: vpc(80);
+        width: vpc($widthEnd);
+        height: vpc($heightEnd);
+        transform: scale($scaleX, $scaleY);
 
         picture,
         img {
@@ -171,71 +238,95 @@
         }
 
         @include tablet {
-            margin-left: 0;
-        }
-    }
-
-    #{$p}__image-wrapper {
-        position: relative;
-        overflow: hidden;
-        // padding-top: percentage(math.div(850, 1186));
-        margin: 0 auto;
-        border-radius: vpc(80);
-        width: vpw(1186);
-        height: vpc(850);
-
-        > picture {
-            position: absolute;
-            left: 50%;
-            bottom: vpc(-17);
-            margin-left: vpw(-727);
-            width: vpw(1927);
-        }
-
-        @include tablet {
-            // padding-top: percentage(math.div(622, 768));
-            border-radius: 0;
-            width: vpwt(768);
-            height: vpc(622);
-
-            > picture {
-                bottom: vpc(-12);
-                margin-left: vpwt(-532);
-                width: vpwt(1410);
-            }
+            border-radius: vpc(52);
+            width: vpc($widthEndT);
+            height: vpc($heightEndT);
+            transform: scale($scaleXT, $scaleYT);
         }
 
         @include mobile {
-            // padding-top: percentage(math.div(392, 360));
-            width: vpwm(360);
-            height: vpc(392);
-
-            > picture {
-                bottom: vpc(-5);
-                margin-left: vpwm(-358);
-                width: vpwm(915);
-            }
+            border-radius: vpc(30);
+            width: vpc($widthEndM);
+            height: vpc($heightEndM);
+            transform: scale($scaleXM, $scaleYM);
         }
     }
 
-    #{$p}__girl {
+    #{$p}__image-scale-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform: scale($scaleWrapperX, $scaleWrapperY);
+
+        @include tablet {
+            transform: scale($scaleWrapperXT, $scaleWrapperYT);
+        }
+
+        @include mobile {
+            transform: scale($scaleWrapperXM, $scaleWrapperYM);
+        }
+    }
+
+    #{$p}__image-scale-bg {
+        position: absolute;
+        left: 50%;
+        bottom: vpc(-17);
+        margin-left: vpw(-727);
+        width: vpw(1927);
+        transform: scale(0.8) translate(vpw(-152), vpw(125));
+
+        @include tablet {
+            bottom: vpc(-12);
+            margin-left: vpwt(-532);
+            width: vpwt(1410);
+            transform: scale(0.98) translate(vpwt(-30), vpwt(-13));
+        }
+
+        @include mobile {
+            bottom: vpc(-5);
+            margin-left: vpwm(-358);
+            width: vpwm(915);
+            transform: scale(0.72) translate(vpwm(-40), vpwm(20));
+        }
+    }
+
+    #{$p}__image-scale-girl {
         position: absolute;
         left: 50%;
         bottom: vpc(-46);
         z-index: 1;
-        margin-left: vpc(-313);
-        width: vpc(624);
+        margin-left: vpc(-270);
+        width: vpc(550);
+        transform-origin: center bottom;
+        transform: scale(1.1) translate(vpc(-3), vpc(44));
 
         @include tablet {
             bottom: vpc(-72);
             margin-left: vpc(-259);
             width: vpc(518);
+            transform: scale(1.05) translate(vpc(-11), vpc(-1));
         }
 
         @include mobile {
             bottom: 0;
             margin-left: vpc(-152);
             width: vpc(306);
+            transform: scale(0.84) translate(vpc(-1), vpc(-19));
+        }
+    }
+
+    #{$p}__image-space {
+        grid-column: 1 / -1;
+        height: vpc($heightEnd);
+
+        @include tablet {
+            width: vpwt($widthEndT);
+            height: vpc($heightEndT);
+        }
+
+        @include mobile {
+            width: vpwm($widthEndM);
+            height: vpc($heightEndM);
         }
     }
 
@@ -243,6 +334,7 @@
         position: absolute;
         left: 0;
         bottom: vpc(-139);
+        z-index: 2;
         display: flex;
         justify-content: center;
         width: 100%;

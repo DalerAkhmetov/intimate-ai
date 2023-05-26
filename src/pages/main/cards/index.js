@@ -8,6 +8,12 @@ const $section = document.querySelector('.main__section--cards');
 const $areaTop = $section.querySelector('.main__area--top');
 const $title = $section.querySelector('.main__title');
 const $card = $section.querySelectorAll('.main__card');
+const $imageScale = $section.querySelector('.main__image-scale');
+const $imageScaleWrapper = $section.querySelector('.main__image-scale-wrapper');
+const $imageScaleBg = $section.querySelector('.main__image-scale-bg');
+const $imageScaleGirl = $section.querySelector('.main__image-scale-girl');
+const $imageSpace = $section.querySelector('.main__image-space');
+const $button = $section.querySelector('.main__button');
 
 const gsapCtx = gsap.context(() => {});
 
@@ -19,8 +25,42 @@ const getClipPathCircle = (size) => {
     return `circle(${size}px at ${innerWidth}px ${innerHeight / 2}px)`;
 };
 
+const setImageScaleSize = () => {
+    const $cardFirstImage = $card[0].querySelector('.main__card-image');
+
+    gsap.set([$imageScale, $imageScaleWrapper], { clearProps: 'all' });
+
+    const widthStart = $cardFirstImage.clientWidth;
+    const heightStart = $cardFirstImage.clientHeight;
+    const widthEnd = $imageSpace.clientWidth;
+    const heightEnd = $imageSpace.clientHeight;
+    const scaleX = widthStart / widthEnd;
+    const scaleY = heightStart / heightEnd;
+
+    let scaleWrapperX = 1;
+    let scaleWrapperY = 1;
+
+    if (scaleX < scaleY) {
+        scaleWrapperX = (widthEnd * scaleY) / widthStart;
+    } else {
+        scaleWrapperY = (heightEnd * scaleX) / heightStart;
+    }
+
+    gsap.set($imageScale, {
+        width: widthEnd,
+        height: heightEnd,
+        scaleX,
+        scaleY,
+    });
+
+    gsap.set($imageScaleWrapper, {
+        scaleX: scaleWrapperX,
+        scaleY: scaleWrapperY,
+    });
+};
+
 const animateOnScroll = () => {
-    // TODO: fix timing (duration and scroll distance), image scale animation
+    // TODO: fix timing (duration and scroll distance)
     if (gsapCtx.data.length) {
         gsapCtx.revert();
     }
@@ -30,8 +70,11 @@ const animateOnScroll = () => {
     const neededProgressValue = isDesktopNow ? 0.85 : 0.55;
 
     let clipPathCompleted = false;
+    let imageScaleMoveTo = 0;
 
     gsapCtx.add(() => {
+        setImageScaleSize();
+
         gsap.set($section, {
             marginTop: -innerHeight * 1.5,
             clipPath: getClipPathCircle(0),
@@ -60,6 +103,12 @@ const animateOnScroll = () => {
                     end: `+=${innerHeight * 3}`,
                     scrub: true,
                     pin: true,
+                    onLeave() {
+                        gsap.set($card[0], { zIndex: 1 });
+                    },
+                    onEnterBack() {
+                        gsap.set($card[0], { clearProps: 'zIndex' });
+                    },
                 },
             })
             .to($section, {
@@ -90,6 +139,12 @@ const animateOnScroll = () => {
         $card.forEach(($cardCurrent, cardIndex) => {
             $cardCurrent.BCR = $cardCurrent.getBoundingClientRect();
 
+            if (!cardIndex) {
+                const cardImageCurrentBCR = $cardCurrent.querySelector('.main__card-image').getBoundingClientRect();
+
+                imageScaleMoveTo = cardImageCurrentBCR.top + cardImageCurrentBCR.height / 2 - $cardCurrent.BCR.top;
+            }
+
             timeline.from($cardCurrent, {
                 ease: 'none',
                 x: $cardCurrent.BCR.width * (cardIndex % 2 ? cardFromXDirection : -cardFromXDirection),
@@ -99,10 +154,13 @@ const animateOnScroll = () => {
 
         const areaTopBCR = $areaTop.getBoundingClientRect();
         const titleBCR = $title.getBoundingClientRect();
+        const imageSpaceBCR = $imageSpace.getBoundingClientRect();
         const cardsBottomOffset = (innerHeight - (titleBCR.bottom - areaTopBCR.top) - $card[0].clientHeight) / 2;
 
         $card.forEach(($cardCurrent, cardIndex) => {
             if (isMobileNow && !cardIndex) {
+                imageScaleMoveTo = imageSpaceBCR.top + imageSpaceBCR.height / 2 - ($cardCurrent.BCR.top + imageScaleMoveTo);
+
                 return;
             }
 
@@ -145,7 +203,48 @@ const animateOnScroll = () => {
                 },
                 isFirstCardInTimeline ? undefined : '<'
             );
+
+            if (!cardIndex) {
+                imageScaleMoveTo = imageSpaceBCR.top + imageSpaceBCR.height / 2 - ($cardCurrent.BCR.top + y + imageScaleMoveTo);
+            }
         });
+
+        const imageTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: $section,
+                endTrigger: $button,
+                start: `bottom bottom+=${$section.clientHeight - (innerHeight + 1)}`,
+                end: `bottom-=${$button.clientHeight} bottom`,
+                scrub: true,
+            },
+        });
+
+        imageTimeline
+            .to([$imageScaleWrapper, $imageScaleBg, $imageScaleGirl], {
+                ease: 'none',
+                x: 0,
+                y: 0,
+                scale: 1,
+            })
+            .to(
+                $imageScale,
+                {
+                    ease: 'none',
+                    borderRadius: isDesktopNow ? undefined : 0,
+                    x: 0,
+                    y: imageScaleMoveTo,
+                    scale: 1,
+                },
+                '<'
+            )
+            .from(
+                $button,
+                {
+                    ease: 'none',
+                    yPercent: 100,
+                },
+                '<'
+            );
     });
 };
 

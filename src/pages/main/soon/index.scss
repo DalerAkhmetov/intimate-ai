@@ -2,22 +2,26 @@
 
 .main__section--soon {
     $p: '.main';
+    $sectionCardsAreaBottomSize: 658 - 78;
+    $sectionCardsAreaBottomSizeT: 622;
+    $sectionCardsAreaBottomSizeM: 392;
 
     @include grid-container;
 
     overflow: hidden;
-    margin-top: vpc(-80);
-    padding-top: vpc(434);
+    margin-top: vpc(-$sectionCardsAreaBottomSize);
+    padding-top: vpc(356 + $sectionCardsAreaBottomSize);
     padding-bottom: vpc(132);
 
     @include tablet {
-        margin-top: 0;
-        padding-top: vpc(440);
+        margin-top: vpc(-$sectionCardsAreaBottomSizeT);
+        padding-top: vpc(440 + $sectionCardsAreaBottomSizeT);
         padding-bottom: vpc(159);
     }
 
     @include mobile {
-        padding-top: vpc(378);
+        margin-top: vpc(-$sectionCardsAreaBottomSizeM);
+        padding-top: vpc(378 + $sectionCardsAreaBottomSizeM);
         padding-bottom: vpc(72);
     }
 

@@ -8,11 +8,21 @@
                 +e.P.card-text Chat, flirt, and have a blast. Your AI&nbsp;girlfriend is available 24/7, always understanding when you spend time with your real-life friends
 
                 +e.card-image
-                    +image({
-                        path: `@pages/main/cards/images/card-1`,
-                        ext: 'jpg',
-                        mime: 'webp',
-                    })
+                    +e.image-scale
+                        +e.image-scale-wrapper
+                            +e.image-scale-bg
+                                +image({
+                                    path: `@pages/main/cards/images/bg`,
+                                    ext: 'jpg',
+                                    mime: 'webp',
+                                })
+
+                            +e.image-scale-girl
+                                +image({
+                                    path: `@pages/main/cards/images/girl`,
+                                    ext: 'png',
+                                    mime: 'webp',
+                                })
 
             +e.card
                 +e.H4.card-title.text--h4 Voice messages and photo exchange
@@ -37,20 +47,6 @@
                     })
 
     +e.area--bottom
-        +e.image
-            +e.image-wrapper
-                +image({
-                    path: `@pages/main/cards/images/bg`,
-                    ext: 'jpg',
-                    mime: 'webp',
-                })
-
-                +e.girl
-                    +image({
-                        path: `@pages/main/cards/images/girl`,
-                        ext: 'png',
-                        mime: 'webp',
-                    })
-
+        +e.image-space
         +e.button
             include @components/ui/button-circle/index
