@@ -34,23 +34,34 @@ const setImageScaleSize = () => {
     const heightStart = $cardFirstImage.clientHeight;
     const widthEnd = $imageSpace.clientWidth;
     const heightEnd = $imageSpace.clientHeight;
-    const scaleX = widthStart / widthEnd;
-    const scaleY = heightStart / heightEnd;
 
+    let scaleX = widthStart / widthEnd;
+    let scaleY = heightStart / heightEnd;
     let scaleWrapperX = 1;
     let scaleWrapperY = 1;
+    let clipX = 0;
+    let clipY = 0;
 
     if (scaleX < scaleY) {
-        scaleWrapperX = (widthEnd * scaleY) / widthStart;
+        scaleX = scaleY;
+        clipX = ((widthEnd * scaleX - widthStart) / 2) * (heightEnd / heightStart);
     } else {
-        scaleWrapperY = (heightEnd * scaleX) / heightStart;
+        scaleY = scaleX;
+        clipY = ((heightEnd * scaleY - heightStart) / 2) * (widthEnd / widthStart);
     }
+
+    $imageScale.style.setProperty('--clip-path-top', `${clipY}px`);
+    $imageScale.style.setProperty('--clip-path-right', `${clipX}px`);
+    $imageScale.style.setProperty('--clip-path-bottom', `${clipY}px`);
+    $imageScale.style.setProperty('--clip-path-left', `${clipX}px`);
+    $imageScale.style.setProperty('--clip-path-radius', `${gsap.getProperty($imageScale, '--radius-from')}`);
 
     gsap.set($imageScale, {
         width: widthEnd,
         height: heightEnd,
         scaleX,
         scaleY,
+        clipPath: 'inset(var(--clip-path-top) var(--clip-path-right) var(--clip-path-bottom) var(--clip-path-left) round var(--clip-path-radius))',
     });
 
     gsap.set($imageScaleWrapper, {
@@ -230,10 +241,14 @@ const animateOnScroll = () => {
                 $imageScale,
                 {
                     ease: 'none',
-                    borderRadius: isDesktopNow ? undefined : 0,
                     x: 0,
                     y: imageScaleMoveTo,
                     scale: 1,
+                    '--clip-path-top': '0px',
+                    '--clip-path-right': '0px',
+                    '--clip-path-bottom': '0px',
+                    '--clip-path-left': '0px',
+                    '--clip-path-radius': gsap.getProperty($imageScale, '--radius-to'),
                 },
                 '<'
             )

@@ -222,11 +222,13 @@
     }
 
     #{$p}__image-scale {
+        --radius-from: #{vpc(56)};
+        --radius-to: #{vpc(80)};
+
         position: relative;
         z-index: 1;
         flex-shrink: 0;
         overflow: hidden;
-        border-radius: vpc(80);
         width: vpc($widthEnd);
         height: vpc($heightEnd);
         transform: scale($scaleX, $scaleY);
@@ -238,14 +240,17 @@
         }
 
         @include tablet {
-            border-radius: vpc(52);
+            --radius-from: #{vpc(40)};
+            --radius-to: #{vpc(0)};
+
             width: vpc($widthEndT);
             height: vpc($heightEndT);
             transform: scale($scaleXT, $scaleYT);
         }
 
         @include mobile {
-            border-radius: vpc(30);
+            --radius-from: #{vpc(24)};
+
             width: vpc($widthEndM);
             height: vpc($heightEndM);
             transform: scale($scaleXM, $scaleYM);
