@@ -1,7 +1,7 @@
 +popup({ id: 'get-access' })
     +e.H4.title.text--h4 Get access
 
-    +e.FORM.form.form(action="#" method="post" novalidate)
+    +e.FORM.form.form(action=env.reqEp method="post" novalidate)
         +e.input
             +input({
                 id: 'ga-name',

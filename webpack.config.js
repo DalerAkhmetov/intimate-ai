@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const path = require('path');
 const glob = require('glob');
 const PugPlugin = require('pug-plugin');
@@ -85,6 +87,18 @@ module.exports = (env, argv) => {
                     options: {
                         data: {
                             publicPath,
+                            env: {
+                                reqEp: process.env.CALLBACK_REQUEST_ENDPOINT_API,
+                                mainLink: process.env.MAIN_LINK,
+                                socials: {
+                                    fb: process.env.SOCIAL_FACEBOOK,
+                                    ig: process.env.SOCIAL_INSTAGRAM,
+                                    tw: process.env.SOCIAL_TWITTER,
+                                    yt: process.env.SOCIAL_YOUTUBE,
+                                },
+                                privacyPolicyLink: process.env.PRIVACY_POLICY_LINK,
+                                legalNoticeLink: process.env.LEGAL_NOTICE_LINK,
+                            },
                         },
                     },
                 },

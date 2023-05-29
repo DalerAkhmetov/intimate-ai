@@ -4,7 +4,7 @@
             +e.H2.title.text--h4 Join our newsletter
             +e.P.text Get all the latest news about the future of&nbsp;App
 
-            +e.FORM.form.form(action="#" method="post" novalidate data-success-message="The subscription has been successfully issued")
+            +e.FORM.form.form(action=env.reqEp method="post" novalidate data-success-message="The subscription has been successfully issued")
                 +e.input
                     +input({
                         id: 'subscribe-email',
@@ -24,22 +24,22 @@
 
         +e.links
             +link-mask({
-                link: '#',
+                link: env.socials.fb,
                 text: 'On facebook'
             }).__link--big.text--h5(target="_blank")
 
             +link-mask({
-                link: '#',
+                link: env.socials.ig,
                 text: 'On instagram'
             }).__link--big.text--h5(target="_blank")
 
             +link-mask({
-                link: '#',
+                link: env.socials.tw,
                 text: 'On twitter'
             }).__link--big.text--h5(target="_blank")
 
             +link-mask({
-                link: '#',
+                link: env.socials.yt,
                 text: 'On youtube'
             }).__link--big.text--h5(target="_blank")
 
@@ -50,8 +50,8 @@
             +e.A.link--small(href="mailto:contact@intimate.ai") contact@intimate.ai
 
         +e.info.text--sm
-            +e.A.link(href="#" target="_blank") Privacy Policy &amp;&nbsp;Cookies
-            +e.A.link(href="#" target="_blank") Legal Notice
+            +e.A.link(href=env.privacyPolicyLink target="_blank") Privacy Policy &amp;&nbsp;Cookies
+            +e.A.link(href=env.legalNoticeLink target="_blank") Legal Notice
 
     +e.section--bottom.text--sm
         +e.team Website by&nbsp;#[a(href="https://bytetown.ru/" target="_blank") ByteTown]
