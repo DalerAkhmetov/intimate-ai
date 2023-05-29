@@ -224,7 +224,7 @@ const animateOnScroll = () => {
             scrollTrigger: {
                 trigger: $section,
                 endTrigger: $button,
-                start: `bottom bottom+=${$section.clientHeight - (innerHeight + 1)}`,
+                start: `bottom bottom+=${$section.clientHeight - (innerHeight + 10)}`,
                 end: `bottom-=${$button.clientHeight} bottom`,
                 scrub: true,
             },
