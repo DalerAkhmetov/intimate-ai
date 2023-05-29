@@ -232,12 +232,16 @@
         overflow: hidden;
         width: vpc($widthEnd);
         height: vpc($heightEnd);
-        transform: scale($scaleX, $scaleY);
+        transform: scale($scaleX, $scaleY) translateZ(0);
 
         picture,
         img {
             pointer-events: none;
             user-select: none;
+        }
+
+        .asscroll-touch & {
+            transition: transform 0.5s linear;
         }
 
         @include tablet {
