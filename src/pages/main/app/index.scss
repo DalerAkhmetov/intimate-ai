@@ -11,6 +11,7 @@
     min-height: vh(100);
     color: $color-mine-shaft2;
     background-color: $color-whisper;
+    transform: translateZ(0);
 
     @include tablet {
         padding-bottom: vpc(253);
