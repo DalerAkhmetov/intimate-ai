@@ -25,7 +25,10 @@
                     +e.message Hey, I'd like to have a little chat with you
 
                     +e.message--from.--voice
-                        +e.play-pause
+                        +e.AUDIO.audio(preload="none")
+                            source(src=`${baseDir}audio/voice-message.mp3`)
+
+                        +e.BUTTON.play-pause(type="button")
                             +image({
                                 path: '@pages/main/chat/images/play',
                                 ext: 'svg',

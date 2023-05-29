@@ -11,11 +11,34 @@ const $device = $section.querySelector('.main__device');
 const $screen = $device.querySelector('.main__screen');
 const $messages = $screen.querySelector('.main__messages');
 const $message = $screen.querySelectorAll('.main__message');
-const $pause = $screen.querySelector('.main__play-pause img:last-child');
+const $audio = $screen.querySelector('.main__audio');
+const $playPause = $screen.querySelector('.main__play-pause');
 const $voiceTrack = $screen.querySelector('.main__voice-track:last-child');
 const $button = $screen.querySelector('.main__button');
 
 const gsapCtx = gsap.context(() => {});
+
+const audioPlayPauseHadler = () => {
+    $playPause.classList.toggle('is-playing', !$audio.paused);
+};
+
+const audioTimeupdateHandler = () => {
+    gsap.killTweensOf($voiceTrack);
+
+    gsap.to($voiceTrack, {
+        duration: 0.3,
+        ease: 'none',
+        width: `${($audio.currentTime / $audio.duration) * 100}%`,
+    });
+};
+
+const playPauseClickHandler = () => {
+    if ($audio.paused) {
+        $audio.play();
+    } else {
+        $audio.pause();
+    }
+};
 
 const animateOnScroll = () => {
     if (gsapCtx.data.length) {
@@ -74,30 +97,6 @@ const animateOnScroll = () => {
 
             messagesTimeline.from($messageCurrent, baseProps, '<');
 
-            if ($messageCurrent.classList.contains('main__message--voice')) {
-                messagesTimeline
-                    .fromTo(
-                        $pause,
-                        { opacity: 0 },
-                        {
-                            ease: 'none',
-                            opacity: 1,
-                        }
-                    )
-                    .to($voiceTrack, {
-                        ease: 'none',
-                        width: '100%',
-                    })
-                    .fromTo(
-                        $pause,
-                        { opacity: 1 },
-                        {
-                            ease: 'none',
-                            opacity: 0,
-                        }
-                    );
-            }
-
             if ($messageCurrent.classList.contains('main__message--image')) {
                 messagesTimeline.from($button, {
                     ...baseProps,
@@ -106,7 +105,6 @@ const animateOnScroll = () => {
         });
 
         messagesTimeline.to($section, {
-            delay: 0.5,
             duration: (messagesDistance / (innerHeight / 2)) * 0.5,
             ease: 'none',
         });
@@ -127,6 +125,11 @@ const init = () => {
     }
 
     animateOnScroll();
+
+    $audio.addEventListener('play', audioPlayPauseHadler);
+    $audio.addEventListener('pause', audioPlayPauseHadler);
+    $audio.addEventListener('timeupdate', audioTimeupdateHandler);
+    $playPause.addEventListener('click', playPauseClickHandler);
 };
 
 export default {

@@ -186,18 +186,30 @@
         }
     }
 
+    #{$p}__audio {
+        display: none;
+    }
+
     #{$p}__play-pause {
         position: relative;
         flex-shrink: 0;
         border-radius: 50%;
         width: vpc(28);
         height: vpc(28);
+        pointer-events: auto;
 
         img {
             &:last-child {
                 position: absolute;
                 left: 0;
                 top: 0;
+                opacity: 0;
+            }
+        }
+
+        &.is-playing {
+            img:last-child {
+                opacity: 1;
             }
         }
     }
