@@ -1,16 +1,4 @@
-.is-scroller-asscroll {
-    [asscroll-container] {
-        position: fixed;
-        left: 0;
-        top: 0;
-        z-index: 1;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-    }
-}
-
-.is-scroller-normalizer {
+html.asscroll-touch {
     overflow: hidden;
     height: -webkit-fill-available;
 
@@ -22,16 +10,21 @@
         width: 100%;
         height: 100%;
     }
+}
 
-    [asscroll-container] {
+[asscroll-container] {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+
+    .asscroll-touch & {
         position: relative;
         overflow-y: auto;
-        height: 100%;
         overscroll-behavior: none;
         -webkit-overflow-scrolling: touch;
-    }
-
-    &.is-scroll-locked [asscroll-container] {
-        overflow: hidden;
     }
 }
