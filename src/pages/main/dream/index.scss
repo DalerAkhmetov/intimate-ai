@@ -57,9 +57,5 @@
             content: ' ';
             white-space: pre;
         }
-
-        &:last-child::after {
-            content: none;
-        }
     }
 }
