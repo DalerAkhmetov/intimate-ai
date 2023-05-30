@@ -240,10 +240,6 @@
             user-select: none;
         }
 
-        .asscroll-touch & {
-            // transition: transform 0.5s linear;
-        }
-
         @include tablet {
             --radius-from: #{vpc(40)};
             --radius-to: #{vpc(0)};

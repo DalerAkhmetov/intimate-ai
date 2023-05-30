@@ -1,27 +1,19 @@
 import ASScroll from '@ashthornton/asscroll';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Observer } from 'gsap/Observer';
-
-gsap.registerPlugin(Observer);
 
 import { isScrollLocked } from '@scripts/helpers';
 
 const $scroller = document.querySelector('[asscroll-container]');
 
-const isTouch = 'ontouchstart' in document.documentElement;
-
+let isTouch = null;
 let scroller = null;
-
-const setScrollValue = (value) => {
-    document.documentElement.style.setProperty('--scroll-value', value);
-};
 
 const getElement = () => $scroller;
 
 const getInstance = () => scroller;
 
-const getPosition = () => scroller.currentPos;
+const getPosition = () => (isTouch ? pageYOffset : scroller.currentPos);
 
 const setPosition = (position, smooth = false) => {
     if (position < 0) {
@@ -32,9 +24,7 @@ const setPosition = (position, smooth = false) => {
 
     if (smooth) {
         if (isTouch) {
-            scroller.currentPos = position;
-
-            $scroller.scrollTo({
+            window.scrollTo({
                 top: position,
                 behavior: 'smooth',
             });
@@ -42,18 +32,20 @@ const setPosition = (position, smooth = false) => {
             scroller.scrollTo(position);
         }
     } else {
-        scroller.currentPos = position;
-
         if (isTouch) {
-            $scroller.scrollTop = position;
-
-            setScrollValue(getPosition() / (scroller.maxScroll - innerHeight));
+            window.scrollTo(0, position);
+        } else {
+            scroller.currentPos = position;
         }
     }
 };
 
 const offScroll = (callback) => {
-    scroller.off('scroll', callback);
+    if (isTouch) {
+        window.removeEventListener('scroll', callback);
+    } else {
+        scroller.off('scroll', callback);
+    }
 };
 
 const onScroll = (callback, options = {}) => {
@@ -64,13 +56,25 @@ const onScroll = (callback, options = {}) => {
             offScroll(func);
         };
 
-        scroller.on('scroll', func);
+        if (isTouch) {
+            window.addEventListener('scroll', func);
+        } else {
+            scroller.on('scroll', func);
+        }
     } else {
-        scroller.on('scroll', callback);
+        if (isTouch) {
+            window.addEventListener('scroll', callback);
+        } else {
+            scroller.on('scroll', callback);
+        }
     }
 };
 
 const makeFriendsWithScrollTrigger = () => {
+    if (isTouch) {
+        return;
+    }
+
     gsap.ticker.add(scroller.update);
 
     ScrollTrigger.defaults({
@@ -101,16 +105,38 @@ const makeFriendsWithScrollTrigger = () => {
     scroller.on('update', ScrollTrigger.update);
 };
 
+const disable = () => {
+    if (!scroller) {
+        return;
+    }
+
+    scroller.disable(isTouch ? undefined : { inputOnly: true });
+};
+
+const enable = () => {
+    if (!scroller) {
+        return;
+    }
+
+    scroller.enable();
+};
+
 const init = () => {
     if (!$scroller) {
         return;
     }
 
+    isTouch = 'ontouchstart' in document.documentElement;
+
     if (isTouch) {
-        ScrollTrigger.normalizeScroll(true);
+        scroller = ScrollTrigger.normalizeScroll({
+            lockAxis: false,
+        });
 
         return;
     }
+
+    $scroller.classList.add('is-inited');
 
     scroller = new ASScroll({
         customScrollbar: false,
@@ -121,27 +147,15 @@ const init = () => {
 
     makeFriendsWithScrollTrigger();
 
-    if (isTouch) {
-        setScrollValue(getPosition() / (scroller.maxScroll - innerHeight));
-
-        onScroll((scrollPos) => {
-            setScrollValue(scrollPos / (scroller.maxScroll - innerHeight));
-        });
-
-        document.documentElement.classList.add('asscroll-touch');
-    } else {
-        scroller.on('update', ({ currentPos }) => {
-            setScrollValue(currentPos / scroller.maxScroll);
-        });
-    }
-
     if (!isScrollLocked()) {
-        scroller.enable();
+        enable();
     }
 };
 
 export default {
     init,
+    enable,
+    disable,
     onScroll,
     offScroll,
     setPosition,
