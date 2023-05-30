@@ -35,7 +35,7 @@ const tickerMove = () => {
         const tickerWidth = $tickerCurrent.clientWidth;
         const tickerPartBCR = $tickerPartCurrent.getBoundingClientRect();
         const additionalWidth = tickerPartBCR.left >= 0 ? 0 : Math.abs(tickerPartBCR.left);
-        const clonesCount = tickerPartBCR.width - additionalWidth >= tickerWidth ? 1 : Math.ceil(tickerWidth / tickerPartBCR.width);
+        const clonesCount = (tickerPartBCR.width - additionalWidth >= tickerWidth ? 1 : Math.ceil(tickerWidth / tickerPartBCR.width)) + 1;
 
         for (let i = clonesCount; i > 0; i--) {
             const $tickerPartCurrentClone = $tickerPartCurrent.cloneNode(true);
@@ -44,11 +44,17 @@ const tickerMove = () => {
             $tickerPartCurrentClone.classList.add('is-clone');
         }
 
-        tickerAnimation.to(
+        const distance = tickerPartBCR.width * (isLtr ? 1 : -1);
+        const startOffset = distance / 2 - tickerPartBCR.left;
+
+        tickerAnimation.fromTo(
             $tickerWrapperCurrent,
             {
+                x: startOffset,
+            },
+            {
                 ease: 'none',
-                x: tickerPartBCR.width * (isLtr ? 1 : -1),
+                x: startOffset + distance,
             },
             0
         );
