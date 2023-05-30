@@ -13,7 +13,7 @@ const getElement = () => $scroller;
 
 const getInstance = () => scroller;
 
-const getPosition = () => (isTouch ? pageYOffset : scroller.currentPos);
+const getPosition = () => (isTouch ? $scroller.scrollTop : scroller.currentPos);
 
 const setPosition = (position, smooth = false) => {
     if (position < 0) {
@@ -24,7 +24,7 @@ const setPosition = (position, smooth = false) => {
 
     if (smooth) {
         if (isTouch) {
-            window.scrollTo({
+            $scroller.scrollTo({
                 top: position,
                 behavior: 'smooth',
             });
@@ -33,7 +33,7 @@ const setPosition = (position, smooth = false) => {
         }
     } else {
         if (isTouch) {
-            window.scrollTo(0, position);
+            $scroller.scrollTo(0, position);
         } else {
             scroller.currentPos = position;
         }
@@ -42,7 +42,7 @@ const setPosition = (position, smooth = false) => {
 
 const offScroll = (callback) => {
     if (isTouch) {
-        window.removeEventListener('scroll', callback);
+        $scroller.removeEventListener('scroll', callback);
     } else {
         scroller.off('scroll', callback);
     }
@@ -57,13 +57,13 @@ const onScroll = (callback, options = {}) => {
         };
 
         if (isTouch) {
-            window.addEventListener('scroll', func);
+            $scroller.addEventListener('scroll', func);
         } else {
             scroller.on('scroll', func);
         }
     } else {
         if (isTouch) {
-            window.addEventListener('scroll', callback);
+            $scroller.addEventListener('scroll', callback);
         } else {
             scroller.on('scroll', callback);
         }
@@ -71,11 +71,9 @@ const onScroll = (callback, options = {}) => {
 };
 
 const makeFriendsWithScrollTrigger = () => {
-    if (isTouch) {
-        return;
+    if (!isTouch) {
+        gsap.ticker.add(scroller.update);
     }
-
-    gsap.ticker.add(scroller.update);
 
     ScrollTrigger.defaults({
         scroller: $scroller,
@@ -100,9 +98,11 @@ const makeFriendsWithScrollTrigger = () => {
         pinType: isTouch ? 'fixed' : 'transform',
     });
 
-    ScrollTrigger.addEventListener('refresh', scroller.resize);
+    if (!isTouch) {
+        ScrollTrigger.addEventListener('refresh', scroller.resize);
 
-    scroller.on('update', ScrollTrigger.update);
+        scroller.on('update', ScrollTrigger.update);
+    }
 };
 
 const disable = () => {
@@ -129,21 +129,23 @@ const init = () => {
     isTouch = 'ontouchstart' in document.documentElement;
 
     if (isTouch) {
+        document.documentElement.classList.add('is-scroller-normalizer');
+
         scroller = ScrollTrigger.normalizeScroll({
+            debounce: false,
             lockAxis: false,
+            target: $scroller,
         });
+    } else {
+        document.documentElement.classList.add('is-scroller-asscroll');
 
-        return;
+        scroller = new ASScroll({
+            customScrollbar: false,
+            scrollbarStyles: false,
+            disableRaf: true,
+            touchScrollType: isTouch ? 'scrollTop' : undefined,
+        });
     }
-
-    $scroller.classList.add('is-inited');
-
-    scroller = new ASScroll({
-        customScrollbar: false,
-        scrollbarStyles: false,
-        disableRaf: true,
-        touchScrollType: isTouch ? 'scrollTop' : undefined,
-    });
 
     makeFriendsWithScrollTrigger();
 

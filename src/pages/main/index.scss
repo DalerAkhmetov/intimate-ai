@@ -18,6 +18,15 @@
     &__section {
         position: relative;
         z-index: 1;
+
+        .is-scroller-normalizer & {
+            pointer-events: none !important;
+
+            a,
+            button {
+                pointer-events: auto !important;
+            }
+        }
     }
 
     &__bg {
