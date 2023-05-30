@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { lockScroll } from '@scripts/helpers';
 
 const $preloader = document.querySelector('.preloader');
+const $spinner = document.querySelector('.preloader__spinner');
 
 const debug = false;
 const animationDelay = 0.75;
@@ -12,15 +13,25 @@ let finished = false;
 
 const hide = () => {
     return new Promise((resolve) => {
-        gsap.to($preloader, {
-            delay: 0.5,
-            opacity: 0,
+        gsap.timeline({
             onComplete() {
                 $preloader.parentNode.removeChild($preloader);
 
                 resolve();
             },
-        });
+        })
+            .to($preloader, {
+                delay: 0.5,
+                opacity: 0,
+            })
+            .to(
+                $spinner,
+                {
+                    duration: 0.25,
+                    opacity: 0,
+                },
+                '<'
+            );
     });
 };
 
