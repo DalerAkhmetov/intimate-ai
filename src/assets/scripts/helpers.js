@@ -10,7 +10,7 @@ export const isTabletOnly = () => innerWidth < 1024 && innerWidth >= 768;
 export const isMobile = () => innerWidth < 768;
 
 export const lockScroll = (state, $element, name) => {
-    const scrollerInstance = scroller.getInstance();
+    // const scrollerInstance = scroller.getInstance();
 
     if (typeof dataScrollLocks === 'undefined') {
         dataScrollLocks = new Set();
@@ -31,9 +31,9 @@ export const lockScroll = (state, $element, name) => {
             document.documentElement.classList.add('is-scroll-locked');
         }, 0);
 
-        if (scrollerInstance) {
-            scrollerInstance.disable({ inputOnly: true });
-        }
+        // if (scrollerInstance) {
+        //     scrollerInstance.disable({ inputOnly: true });
+        // }
     } else {
         if (typeof name === 'string') {
             scrollLocks.delete(name);
@@ -46,9 +46,9 @@ export const lockScroll = (state, $element, name) => {
 
             document.documentElement.classList.remove('is-scroll-locked');
 
-            if (scrollerInstance) {
-                scrollerInstance.enable();
-            }
+            // if (scrollerInstance) {
+            //     scrollerInstance.enable();
+            // }
         }
     }
 };

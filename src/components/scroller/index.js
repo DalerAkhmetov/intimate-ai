@@ -1,6 +1,9 @@
 import ASScroll from '@ashthornton/asscroll';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Observer } from 'gsap/Observer';
+
+gsap.registerPlugin(Observer);
 
 import { isScrollLocked } from '@scripts/helpers';
 
@@ -100,6 +103,12 @@ const makeFriendsWithScrollTrigger = () => {
 
 const init = () => {
     if (!$scroller) {
+        return;
+    }
+
+    if (isTouch) {
+        ScrollTrigger.normalizeScroll(true);
+
         return;
     }
 
