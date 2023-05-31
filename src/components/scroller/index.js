@@ -1,7 +1,6 @@
 import ASScroll from '@ashthornton/asscroll';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from '@studio-freight/lenis';
 
 import { isScrollLocked } from '@scripts/helpers';
 
@@ -15,7 +14,7 @@ const getElement = () => $scroller;
 
 const getInstance = () => scroller;
 
-const getPosition = () => (isTouch ? $scroller.scrollTop : scroller.currentPos);
+const getPosition = () => scroller.currentPos;
 
 const setPosition = (position, smooth = false) => {
     if (position < 0) {
@@ -26,6 +25,8 @@ const setPosition = (position, smooth = false) => {
 
     if (smooth) {
         if (isTouch) {
+            scroller.currentPos = position;
+
             $scroller.scrollTo({
                 top: position,
                 behavior: 'smooth',
@@ -34,10 +35,10 @@ const setPosition = (position, smooth = false) => {
             scroller.scrollTo(position);
         }
     } else {
+        scroller.currentPos = position;
+
         if (isTouch) {
             $scroller.scrollTop = position;
-        } else {
-            scroller.currentPos = position;
         }
     }
 };
@@ -61,13 +62,7 @@ const onScroll = (callback, options = {}) => {
 };
 
 const makeFriendsWithScrollTrigger = () => {
-    if (isTouch) {
-        gsap.ticker.add((time) => {
-            scroller.raf(time * 1000);
-        });
-    } else {
-        gsap.ticker.add(scroller.update);
-    }
+    gsap.ticker.add(scroller.update);
 
     ScrollTrigger.defaults({
         scroller: $scroller,
@@ -92,13 +87,9 @@ const makeFriendsWithScrollTrigger = () => {
         pinType: isTouch ? 'fixed' : 'transform',
     });
 
-    if (isTouch) {
-        onScroll(ScrollTrigger.update);
-    } else {
-        ScrollTrigger.addEventListener('refresh', scroller.resize);
+    ScrollTrigger.addEventListener('refresh', scroller.resize);
 
-        scroller.on('update', ScrollTrigger.update);
-    }
+    scroller.on('update', ScrollTrigger.update);
 };
 
 const disable = () => {
@@ -106,11 +97,7 @@ const disable = () => {
         return;
     }
 
-    if (isTouch) {
-        scroller.stop();
-    } else {
-        scroller.disable({ inputOnly: true });
-    }
+    scroller.disable({ inputOnly: true });
 };
 
 const enable = () => {
@@ -118,11 +105,7 @@ const enable = () => {
         return;
     }
 
-    if (isTouch) {
-        scroller.start();
-    } else {
-        scroller.enable();
-    }
+    scroller.enable();
 };
 
 const init = () => {
@@ -130,33 +113,12 @@ const init = () => {
         return;
     }
 
-    if (isTouch) {
-        document.documentElement.classList.add('is-scroller-lenis');
-
-        scroller = new Lenis({
-            wrapper: $scroller,
-            content: $scroller.querySelector('div'),
-            duration: 1.5,
-            smoothTouch: true,
-        });
-
-        const raf = (time) => {
-            scroller.raf(time);
-
-            requestAnimationFrame(raf);
-        };
-
-        requestAnimationFrame(raf);
-    } else {
-        document.documentElement.classList.add('is-scroller-asscroll');
-
-        scroller = new ASScroll({
-            customScrollbar: false,
-            scrollbarStyles: false,
-            disableRaf: true,
-            touchScrollType: isTouch ? 'scrollTop' : undefined,
-        });
-    }
+    scroller = new ASScroll({
+        customScrollbar: false,
+        scrollbarStyles: false,
+        disableRaf: true,
+        touchScrollType: isTouch ? 'scrollTop' : undefined,
+    });
 
     makeFriendsWithScrollTrigger();
 
