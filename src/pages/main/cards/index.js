@@ -14,53 +14,8 @@ const $imageScaleBg = $section.querySelector('.main__image-scale-bg');
 const $imageScaleGirl = $section.querySelector('.main__image-scale-girl');
 const $imageSpace = $section.querySelector('.main__image-space');
 const $button = $section.querySelector('.main__button');
-const $canvas = $section.querySelector('.main__canvas');
-const $canvasImage = $imageScaleBg.querySelector('img');
 
 const gsapCtx = gsap.context(() => {});
-
-let canvasCtx = null;
-let canvasWidth = null;
-let canvasHeight = null;
-let canvasImageWidth = null;
-let canvasImageHeight = null;
-let canvasAnimation = {
-    from: {
-        x: 0,
-        y: 0,
-        scale: 1,
-    },
-    to: {
-        x: 0,
-        y: 0,
-        scale: 1,
-    },
-};
-
-const canvasDraw = (x, y, scale) => {
-    canvasCtx.clearRect(0, 0, canvasWidth, canvasHeight);
-    canvasCtx.drawImage($canvasImage, x, y, canvasImageWidth * scale, canvasImageHeight * scale);
-};
-
-const canvasCreate = (height) => {
-    $canvas.style.height = `${height}px`;
-
-    canvasCtx = $canvas.getContext('2d');
-    canvasWidth = $canvas.clientWidth;
-    canvasHeight = $canvas.clientHeight;
-    canvasImageWidth = $canvasImage.clientWidth;
-    canvasImageHeight = $canvasImage.clientHeight;
-
-    $canvas.width = canvasWidth * window.devicePixelRatio;
-    $canvas.height = canvasHeight * window.devicePixelRatio;
-
-    canvasCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
-
-    canvasAnimation.from.scale = innerWidth / canvasImageWidth;
-    canvasAnimation.to.x = (innerWidth - canvasImageWidth) / 2;
-
-    canvasDraw(canvasAnimation.from.x, canvasAnimation.from.y, canvasAnimation.from.scale);
-};
 
 const getClipPathCircle = (size) => {
     if (typeof size === 'undefined') {
@@ -199,10 +154,6 @@ const animateOnScroll = () => {
                 const cardImageCurrentBCR = $cardCurrent.querySelector('.main__card-image').getBoundingClientRect();
 
                 imageScaleMoveTo = cardImageCurrentBCR.top + cardImageCurrentBCR.height / 2 - $cardCurrent.BCR.top;
-
-                canvasCreate($section.clientHeight - (cardImageCurrentBCR.top - $areaTop.getBoundingClientRect().top));
-
-                canvasAnimation.to.y = $imageSpace.getBoundingClientRect().top - $canvas.getBoundingClientRect().top;
             }
 
             timeline.from($cardCurrent, {
@@ -280,44 +231,35 @@ const animateOnScroll = () => {
         });
 
         imageTimeline
-            // .to([$imageScaleWrapper, $imageScaleBg, $imageScaleGirl], {
-            //     ease: 'none',
-            //     x: 0,
-            //     y: 0,
-            //     scale: 1,
-            // })
-            // .to(
-            //     $imageScale,
-            //     {
-            //         ease: 'none',
-            //         x: 0,
-            //         y: imageScaleMoveTo,
-            //         scale: 1,
-            //         '--clip-path-top': '0px',
-            //         '--clip-path-right': '0px',
-            //         '--clip-path-bottom': '0px',
-            //         '--clip-path-left': '0px',
-            //         '--clip-path-radius': gsap.getProperty($imageScale, '--radius-to'),
-            //     },
-            //     '<'
-            // )
-            // .from(
-            //     $button,
-            //     {
-            //         ease: 'none',
-            //         yPercent: 100,
-            //     },
-            //     '<'
-            // )
-            .to(canvasAnimation.from, {
+            .to([$imageScaleWrapper, $imageScaleBg, $imageScaleGirl], {
                 ease: 'none',
-                x: canvasAnimation.to.x,
-                y: canvasAnimation.to.y,
-                scale: canvasAnimation.to.scale,
-                onUpdate() {
-                    canvasDraw(canvasAnimation.from.x, canvasAnimation.from.y, canvasAnimation.from.scale);
+                x: 0,
+                y: 0,
+                scale: 1,
+            })
+            .to(
+                $imageScale,
+                {
+                    ease: 'none',
+                    x: 0,
+                    y: imageScaleMoveTo,
+                    scale: 1,
+                    '--clip-path-top': '0px',
+                    '--clip-path-right': '0px',
+                    '--clip-path-bottom': '0px',
+                    '--clip-path-left': '0px',
+                    '--clip-path-radius': gsap.getProperty($imageScale, '--radius-to'),
                 },
-            });
+                '<'
+            )
+            .from(
+                $button,
+                {
+                    ease: 'none',
+                    yPercent: 100,
+                },
+                '<'
+            );
     });
 };
 
