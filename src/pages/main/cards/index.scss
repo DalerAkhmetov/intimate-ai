@@ -233,6 +233,7 @@
         width: vpc($widthEnd);
         height: vpc($heightEnd);
         transform: scale($scaleX, $scaleY) translateZ(0);
+        will-change: transform;
 
         picture,
         img {
