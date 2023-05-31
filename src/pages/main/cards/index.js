@@ -249,6 +249,7 @@ const animateOnScroll = () => {
                     '--clip-path-bottom': '0px',
                     '--clip-path-left': '0px',
                     '--clip-path-radius': gsap.getProperty($imageScale, '--radius-to'),
+                    roundProps: 'y',
                 },
                 '<'
             )
