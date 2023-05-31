@@ -70,6 +70,7 @@
         width: vpc(260);
         height: vpc(260);
         animation: button-circle-text-rotate 20s linear infinite;
+        will-change: transform;
 
         @include tablet {
             margin-top: vpc(-84);
