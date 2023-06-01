@@ -93,9 +93,9 @@
         border-radius: 50%;
         width: vpc(30);
         height: vpc(30);
-        background-color: $color-heliotrope4;
+        background-color: $color-light-wisteria;
         transition: background-color $transition;
-        filter: blur(vpc(15));
+        filter: blur(vpc(6));
         will-change: transform;
 
         @include mobile {
@@ -103,7 +103,6 @@
             margin-left: vpc(-10);
             width: vpc(20);
             height: vpc(20);
-            filter: blur(vpc(10));
         }
     }
 }
