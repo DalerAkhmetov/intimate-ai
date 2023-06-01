@@ -52,11 +52,24 @@
         @include grid-container;
 
         &--top {
+            position: relative;
             align-items: start;
             padding-top: vpc(99);
             padding-bottom: vpc(130);
             color: $color-mine-shaft2;
             background-color: $color-whisper;
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: -1px;
+                bottom: -1px;
+                z-index: -1;
+                display: block;
+                background-color: inherit;
+            }
         }
 
         &--bottom {
