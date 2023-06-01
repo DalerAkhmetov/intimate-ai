@@ -10,18 +10,18 @@
 
     overflow: hidden;
     margin-top: vpc(-$sectionCardsAreaBottomSize);
-    padding-top: vpc(356 + $sectionCardsAreaBottomSize);
+    padding-top: vpc(242 + $sectionCardsAreaBottomSize);
     padding-bottom: vpc(132);
 
     @include tablet {
         margin-top: vpc(-$sectionCardsAreaBottomSizeT);
-        padding-top: vpc(440 + $sectionCardsAreaBottomSizeT);
+        padding-top: vpc(116 + $sectionCardsAreaBottomSizeT);
         padding-bottom: vpc(159);
     }
 
     @include mobile {
         margin-top: vpc(-$sectionCardsAreaBottomSizeM);
-        padding-top: vpc(378 + $sectionCardsAreaBottomSizeM);
+        padding-top: vpc(209 + $sectionCardsAreaBottomSizeM);
         padding-bottom: vpc(72);
     }
 
