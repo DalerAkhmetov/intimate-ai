@@ -51,6 +51,11 @@ const animateOnScroll = () => {
         opacity: 0,
     };
 
+    const messagesFirstPosition = gsap.getProperty($messages, 'paddingTop') + gsap.getProperty($messages, 'paddingBottom') + $message[0].clientHeight + gsap.getProperty($message[0], 'marginTop');
+    const messagesDistance = $messages.clientHeight - messagesFirstPosition + $button.clientHeight + innerHeight / 2;
+
+    const getDurationFromDistance = (value) => (value / messagesDistance) * 0.5;
+
     gsapCtx.add(() => {
         ScrollTrigger.create({
             trigger: $title,
@@ -63,20 +68,29 @@ const animateOnScroll = () => {
             },
         });
 
+        gsap.set($messages, { y: $messages.clientHeight });
+
         gsap.timeline({
             scrollTrigger: {
-                trigger: isDesktopNow ? $text : $section,
-                endTrigger: isDesktopNow ? $section : undefined,
-                start: isDesktopNow ? 'top bottom' : 'top top',
-                end: isDesktopNow ? 'bottom bottom' : `+=${innerHeight / 2}`,
+                trigger: $text,
+                endTrigger: $section,
+                start: isDesktopNow ? 'top bottom' : 'bottom bottom',
+                end: 'bottom bottom',
                 scrub: true,
-                pin: !isDesktopNow,
             },
         })
             .from($text, baseProps)
-            .from($device, baseProps);
+            .from($device, baseProps, '<50%')
+            .to(
+                $messages,
+                {
+                    ease: 'none',
+                    y: `-=${messagesFirstPosition}`,
+                },
+                '<'
+            )
+            .from($message[0], baseProps, '<');
 
-        const messagesDistance = innerHeight * 2;
         const messagesTimeline = gsap.timeline({
             scrollTrigger: {
                 trigger: $section,
@@ -87,25 +101,38 @@ const animateOnScroll = () => {
             },
         });
 
-        gsap.set($messages, { y: $messages.clientHeight });
-
         $message.forEach(($messageCurrent, messageIndex) => {
+            if (!messageIndex) {
+                return;
+            }
+
+            const positionToMove = $messageCurrent.clientHeight + gsap.getProperty($messageCurrent, 'marginTop');
+
             messagesTimeline.to($messages, {
+                duration: getDurationFromDistance(positionToMove),
                 ease: 'none',
-                y: `-=${(messageIndex ? 0 : gsap.getProperty($messages, 'paddingTop') + gsap.getProperty($messages, 'paddingBottom')) + $messageCurrent.clientHeight + gsap.getProperty($messageCurrent, 'marginTop')}`,
+                y: `-=${positionToMove}`,
             });
 
-            messagesTimeline.from($messageCurrent, baseProps, '<');
+            messagesTimeline.from(
+                $messageCurrent,
+                {
+                    ...baseProps,
+                    duration: getDurationFromDistance(positionToMove),
+                },
+                '<'
+            );
 
             if ($messageCurrent.classList.contains('main__message--image')) {
                 messagesTimeline.from($button, {
                     ...baseProps,
+                    duration: getDurationFromDistance($button.clientHeight),
                 });
             }
         });
 
         messagesTimeline.to($section, {
-            duration: (messagesDistance / (innerHeight / 2)) * 0.5,
+            duration: getDurationFromDistance(innerHeight / 2),
             ease: 'none',
         });
     });
