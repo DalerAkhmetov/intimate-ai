@@ -66,3 +66,5 @@ export const loadingState = (state) => {
 
     return document.documentElement.classList.contains('is-loading');
 };
+
+export const getTotalScrub = () => (document.documentElement.classList.contains('is-os-android') ? true : 0.5);

@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import { isDesktop, isMobile } from '@scripts/helpers';
+import { isDesktop, isMobile, getTotalScrub } from '@scripts/helpers';
 import animationTextScramble from '@components/animation/text-scramble';
 
 const $section = document.querySelector('.main__section--soon');
@@ -88,7 +88,7 @@ const animateOnScroll = () => {
                 endTrigger: $section,
                 start: 'top bottom',
                 end: 'bottom bottom',
-                scrub: 0.5,
+                scrub: getTotalScrub(),
             },
             ease: 'none',
             yPercent: isMobileNow ? -50 : -35,
@@ -111,7 +111,7 @@ const animateOnScroll = () => {
                 endTrigger: $section,
                 start: `${isDesktopNow ? 'top' : 'center'} bottom`,
                 end: 'bottom bottom',
-                scrub: 0.5,
+                scrub: getTotalScrub(),
             },
             ease: 'none',
             opacity: 0,

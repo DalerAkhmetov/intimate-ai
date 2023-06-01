@@ -1,5 +1,7 @@
 import { gsap } from 'gsap';
 
+import { getTotalScrub } from '@scripts/helpers';
+
 const $section = document.querySelector('.main__section--dream');
 const $ticker = $section.querySelectorAll('.main__ticker');
 
@@ -23,7 +25,7 @@ const tickerMove = () => {
             trigger: $section,
             start: `top+=${gsap.getProperty($section, 'paddingTop')} bottom`,
             end: `bottom-=${gsap.getProperty($section, 'paddingBottom')} top`,
-            scrub: 0.5,
+            scrub: getTotalScrub(),
         },
     });
 

@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
 
-import { isDesktop } from '@scripts/helpers';
+import { isDesktop, getTotalScrub } from '@scripts/helpers';
 import animationTextScramble from '@components/animation/text-scramble';
 
 const $section = document.querySelector('.main__section--app');
@@ -44,7 +44,7 @@ const animateOnScroll = () => {
                     trigger: $section,
                     start: 'top top',
                     end: `+=${animationTotalDistance}`,
-                    scrub: 0.5,
+                    scrub: getTotalScrub(),
                     pin: true,
                     anticipatePin: 1,
                 },

@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
 
-import { isMobile } from '@scripts/helpers';
+import { isMobile, getTotalScrub } from '@scripts/helpers';
 
 const $section = document.querySelector('.main__section--wait');
 const $content = $section.querySelector('.main__content');
@@ -161,7 +161,7 @@ const animateOnScroll = () => {
                 trigger: $section,
                 start: 'center bottom',
                 end: `bottom+=${$button.clientHeight / 2} bottom`,
-                scrub: 0.5,
+                scrub: getTotalScrub(),
             },
             ease: 'none',
             yPercent: 100,
