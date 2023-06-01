@@ -349,7 +349,7 @@
             color: $color-conifer;
         }
 
-        #{$p}__slider {
+        #{$p}__slider-light {
             background-color: transparent;
         }
     }
@@ -497,30 +497,6 @@
         @include mobile {
             top: vpc(6);
             padding: 0 vpc(5);
-        }
-    }
-
-    #{$p}__slider {
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: -1;
-        margin-top: vpc(-15);
-        margin-left: vpc(-15);
-        border-radius: 50%;
-        width: vpc(30);
-        height: vpc(30);
-        background-color: $color-heliotrope4;
-        transition: background-color $transition;
-        filter: blur(vpc(15));
-        will-change: transform;
-
-        @include mobile {
-            margin-top: vpc(-10);
-            margin-left: vpc(-10);
-            width: vpc(20);
-            height: vpc(20);
-            filter: blur(vpc(10));
         }
     }
 }

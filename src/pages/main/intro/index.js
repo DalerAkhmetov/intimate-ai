@@ -2,24 +2,24 @@ import { gsap } from 'gsap';
 
 import { isMobile } from '@scripts/helpers';
 
-const $sectionIntro = document.querySelector('.main__section--intro');
-const $title = $sectionIntro.querySelector('.main__title');
-const $button = $sectionIntro.querySelector('.main__button');
-const $frame = $sectionIntro.querySelectorAll('.main__frame');
-const $name = $sectionIntro.querySelector('.main__name');
-const $slider = $sectionIntro.querySelector('.main__slider');
+const $section = document.querySelector('.main__section--intro');
+const $title = $section.querySelector('.main__title');
+const $button = $section.querySelector('.main__button');
+const $frame = $section.querySelectorAll('.main__frame');
+const $name = $section.querySelector('.main__name');
+const $sliderLight = $section.querySelector('.main__slider-light');
 
 let frameBorderSize = 0;
-let sliderAnimation = null;
-let sliderObserver = null;
+let sliderLightAnimation = null;
+let sliderLightObserver = null;
 
 const animateAfterLoad = () => {
     return new Promise((resolve) => {
         gsap.timeline({
             onStart() {
-                $sectionIntro.classList.remove('is-loading');
+                $section.classList.remove('is-loading');
 
-                sliderMoveObserver();
+                sliderLightMoveObserver();
             },
             onComplete() {
                 gsap.set([$title, $title.querySelectorAll('.main__title-char'), $button], { clearProps: 'all' });
@@ -61,31 +61,37 @@ const animateOnLoad = () => {
     });
 };
 
-const sliderMoveObserver = () => {
-    if (sliderObserver) {
-        sliderObserver.disconnect();
+const sliderLightMoveObserver = () => {
+    if (sliderLightObserver) {
+        sliderLightObserver.disconnect();
     }
 
-    sliderObserver = new IntersectionObserver((entries) => {
+    sliderLightObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                sliderAnimation.play();
+                sliderLightAnimation.play();
             } else {
-                sliderAnimation.pause();
+                sliderLightAnimation.pause();
             }
         });
     });
 
-    sliderObserver.observe($sectionIntro);
+    sliderLightObserver.observe($section);
 };
 
-const sliderMoveCreate = () => {
-    if (sliderAnimation) {
-        sliderAnimation.revert();
+const sliderLightMoveCreate = () => {
+    if (sliderLightAnimation) {
+        sliderLightAnimation.revert();
     }
 
-    const frameBCR = $frame[0].getBoundingClientRect();
+    const sectionBCR = $section.getBoundingClientRect();
+    const frameBCR = JSON.parse(JSON.stringify($frame[0].getBoundingClientRect()));
     const frameBorderRadius = gsap.getProperty($frame[0], 'border-radius') - frameBorderSize / 2;
+
+    frameBCR.top = frameBCR.top - sectionBCR.top;
+    frameBCR.bottom = sectionBCR.bottom - frameBCR.bottom;
+    frameBCR.left = frameBCR.left - sectionBCR.left;
+    frameBCR.right = sectionBCR.right - frameBCR.right;
 
     const durationX = isMobile() ? 2 : 6;
     const durationY = (frameBCR.height / frameBCR.width) * durationX;
@@ -143,25 +149,25 @@ const sliderMoveCreate = () => {
             angle = (Math.PI * 3) / 2;
         }
 
-        return gsap.to($slider, {
+        return gsap.to($sliderLight, {
             duration: durationAngle,
             ease: 'none',
             onUpdate() {
                 const progress = this.progress();
                 const point = getPointOnCurve(startPoint, endPoint, angle, progress);
 
-                gsap.set($slider, { x: point.x, y: point.y });
+                gsap.set($sliderLight, { x: point.x, y: point.y });
             },
         });
     };
 
-    sliderAnimation = gsap
+    sliderLightAnimation = gsap
         .timeline({
             paused: true,
             repeat: -1,
         })
         .fromTo(
-            $slider,
+            $sliderLight,
             {
                 x: frameBCR.left + frameBorderSize / 2,
                 y: frameBCR.top + frameBorderSize / 2 + frameBorderRadius,
@@ -174,41 +180,41 @@ const sliderMoveCreate = () => {
             }
         )
         .add(moveOnRadius('bl'))
-        .to($slider, {
+        .to($sliderLight, {
             duration: durationX,
             ease: 'none',
             x: `+=${moveX}`,
         })
         .add(moveOnRadius('br'))
-        .to($slider, {
+        .to($sliderLight, {
             duration: durationY,
             ease: 'none',
             y: `-=${moveY}`,
         })
         .add(moveOnRadius('tr'))
-        .addLabel('testLabel')
-        .to($slider, {
+        .addLabel('opacityChange')
+        .to($sliderLight, {
             duration: durationX,
             ease: 'none',
             x: `-=${moveX}`,
         })
         .to(
-            $slider,
+            $sliderLight,
             {
                 duration: durationOpacity,
                 ease: 'none',
                 opacity: 0,
             },
-            `testLabel+=${positionOpacityTo}`
+            `opacityChange+=${positionOpacityTo}`
         )
         .to(
-            $slider,
+            $sliderLight,
             {
                 duration: durationOpacity,
                 ease: 'none',
                 opacity: 1,
             },
-            `testLabel+=${positionOpacityFrom}`
+            `opacityChange+=${positionOpacityFrom}`
         )
         .add(moveOnRadius('tl'));
 };
@@ -278,22 +284,22 @@ const splitTitle = () => {
 };
 
 const resize = () => {
-    if (!$sectionIntro) {
+    if (!$section) {
         return;
     }
 
     frameDraw();
-    sliderMoveCreate();
+    sliderLightMoveCreate();
 };
 
 const init = () => {
-    if (!$sectionIntro) {
+    if (!$section) {
         return;
     }
 
     splitTitle();
     frameDraw();
-    sliderMoveCreate();
+    sliderLightMoveCreate();
 };
 
 export default {
