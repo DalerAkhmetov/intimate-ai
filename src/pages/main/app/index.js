@@ -19,13 +19,15 @@ const getClipPathCircle = (size) => {
 };
 
 const animateOnScroll = () => {
-    // TODO: fix timing (duration and scroll distance)
     if (gsapCtx.data.length) {
         gsapCtx.revert();
     }
 
     const isDesktopNow = isDesktop();
     const neededProgressValue = isDesktopNow ? 0.85 : 0.55;
+
+    const animationTotalDistance = isDesktopNow ? innerHeight * 1.75 : innerHeight + $images.scrollWidth - $images.clientWidth;
+    const getDurationFromDistance = (value) => (value / animationTotalDistance) * 0.5;
 
     let clipPathCompleted = false;
 
@@ -36,18 +38,18 @@ const animateOnScroll = () => {
             pointerEvents: 'auto',
         });
 
-        const pinDuration = isDesktopNow ? $section.clientHeight * 2 : innerHeight + $images.scrollWidth - $images.clientWidth;
         const timeline = gsap
             .timeline({
                 scrollTrigger: {
                     trigger: $section,
                     start: 'top top',
-                    end: `+=${pinDuration}`,
+                    end: `+=${animationTotalDistance}`,
                     scrub: true,
                     pin: true,
                 },
             })
             .to($section, {
+                duration: getDurationFromDistance(innerHeight / 2),
                 ease: 'none',
                 clipPath: getClipPathCircle(),
                 onComplete() {
@@ -72,18 +74,21 @@ const animateOnScroll = () => {
 
         if (isDesktopNow) {
             timeline.from($image, {
+                duration: getDurationFromDistance(innerHeight / 2),
                 ease: 'none',
-                stagger: 0.25,
+                stagger: getDurationFromDistance(innerHeight / 4),
                 opacity: 0,
                 yPercent: 100,
             });
         } else {
             timeline
                 .from($images, {
+                    duration: getDurationFromDistance(innerHeight / 2),
                     ease: 'none',
                     opacity: 0,
                 })
                 .to($images, {
+                    duration: getDurationFromDistance($images.scrollWidth - $images.clientWidth),
                     ease: 'none',
                     x: -$images.scrollWidth + $images.clientWidth,
                 });
