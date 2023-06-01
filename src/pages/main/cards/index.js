@@ -71,7 +71,6 @@ const setImageScaleSize = () => {
 };
 
 const animateOnScroll = () => {
-    // TODO: fix timing (duration and scroll distance)
     if (gsapCtx.data.length) {
         gsapCtx.revert();
     }
@@ -82,6 +81,9 @@ const animateOnScroll = () => {
 
     let clipPathCompleted = false;
     let imageScaleMoveTo = 0;
+
+    const animationTotalDistance = innerHeight * 2.25;
+    const getDurationFromDistance = (value) => (value / animationTotalDistance) * 0.5;
 
     gsapCtx.add(() => {
         setImageScaleSize();
@@ -111,7 +113,7 @@ const animateOnScroll = () => {
                 scrollTrigger: {
                     trigger: $section,
                     start: 'top top',
-                    end: `+=${innerHeight * 3}`,
+                    end: `+=${animationTotalDistance}`,
                     scrub: true,
                     pin: true,
                     onLeave() {
@@ -123,6 +125,7 @@ const animateOnScroll = () => {
                 },
             })
             .to($section, {
+                duration: getDurationFromDistance(innerHeight / 2),
                 ease: 'none',
                 clipPath: getClipPathCircle(),
                 onComplete() {
@@ -157,6 +160,7 @@ const animateOnScroll = () => {
             }
 
             timeline.from($cardCurrent, {
+                duration: getDurationFromDistance(innerHeight / 3),
                 ease: 'none',
                 x: $cardCurrent.BCR.width * (cardIndex % 2 ? cardFromXDirection : -cardFromXDirection),
                 y: innerHeight,
@@ -206,7 +210,8 @@ const animateOnScroll = () => {
             timeline.to(
                 $cardCurrent,
                 {
-                    delay: isFirstCardInTimeline ? 0.5 : 0,
+                    delay: isFirstCardInTimeline ? getDurationFromDistance(innerHeight / 4) : 0,
+                    duration: getDurationFromDistance(innerHeight / 2),
                     ease: 'none',
                     x,
                     y,
