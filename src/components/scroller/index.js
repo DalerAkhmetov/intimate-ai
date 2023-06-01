@@ -1,7 +1,7 @@
 import ASScroll from '@ashthornton/asscroll';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import Lenis from '@studio-freight/lenis';
 import { isScrollLocked } from '@scripts/helpers';
 
 const $scroller = document.querySelector('[asscroll-container]');
@@ -9,6 +9,7 @@ const $scroller = document.querySelector('[asscroll-container]');
 const isTouch = 'ontouchstart' in document.documentElement;
 
 let scroller = null;
+let lenis = null;
 
 const getElement = () => $scroller;
 
@@ -55,16 +56,17 @@ const onScroll = (callback, options = {}) => {
             offScroll(func);
         };
 
-        scroller.on('scroll', func);
+        lenis.on('scroll', func);
     } else {
-        scroller.on('scroll', callback);
+        lenis.on('scroll', callback);
     }
 };
 
 const makeFriendsWithScrollTrigger = () => {
-    gsap.ticker.add(scroller.update);
-
-    ScrollTrigger.defaults({
+    gsap.ticker.add((time)=>{
+        lenis.raf(time * 1000)
+    })
+    /*ScrollTrigger.defaults({
         scroller: $scroller,
     });
 
@@ -85,11 +87,11 @@ const makeFriendsWithScrollTrigger = () => {
             };
         },
         pinType: isTouch ? 'fixed' : 'transform',
-    });
+    });*/
 
-    ScrollTrigger.addEventListener('refresh', scroller.resize);
+    //ScrollTrigger.addEventListener('refresh', scroller.resize);
 
-    scroller.on('update', ScrollTrigger.update);
+    //scroller.on('update', ScrollTrigger.update);
 };
 
 const disable = () => {
@@ -113,12 +115,13 @@ const init = () => {
         return;
     }
 
-    scroller = new ASScroll({
-        customScrollbar: false,
-        scrollbarStyles: false,
-        disableRaf: true,
-        touchScrollType: isTouch ? 'scrollTop' : undefined,
-    });
+    // scroller = new ASScroll({
+    //     customScrollbar: false,
+    //     scrollbarStyles: false,
+    //     disableRaf: true,
+    //    // touchScrollType: isTouch ? 'scrollTop' : undefined,
+    // });
+    lenis = new Lenis();
 
     makeFriendsWithScrollTrigger();
 

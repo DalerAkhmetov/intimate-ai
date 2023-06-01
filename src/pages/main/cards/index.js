@@ -1,9 +1,11 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import scroller from '@src/components/scroller';
 
 import { isDesktop, isMobile } from '@scripts/helpers';
 import animationTextScramble from '@components/animation/text-scramble';
 
+const $canvas = document.querySelector('.main__section-canvas');
 const $section = document.querySelector('.main__section--cards');
 const $areaTop = $section.querySelector('.main__area--top');
 const $title = $section.querySelector('.main__title');
@@ -235,7 +237,7 @@ const animateOnScroll = () => {
             },
         });
 
-        imageTimeline
+        /*imageTimeline
             .to([$imageScaleWrapper, $imageScaleBg, $imageScaleGirl], {
                 ease: 'none',
                 x: 0,
@@ -265,9 +267,105 @@ const animateOnScroll = () => {
                     yPercent: 100,
                 },
                 '<'
-            );
+            );*/
     });
 };
+
+function lerp(start, end, t) {
+    return start * (1 - t) + end * t;
+}
+function clamp(num, min, max) {
+    return Math.min(Math.max(num, min), max);
+}
+function mapLinear(x, a1, a2, b1, b2 ) {
+    //console.log(x, a1, a2, b1, b2);
+    return b1 + ( x - a1 ) * ( b2 - b1 ) / ( a2 - a1 );
+}
+
+const loadImage = (url) => {
+    return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = (error) => reject(error);
+        image.src = url;
+    });
+};
+
+class Playground {
+    constructor(canvas, textures) {
+        this.canvas = canvas;
+        this.background = textures.cardBackground;
+        this.progress = 0;
+        this.dpr = Math.min(2, window.devicePixelRatio)
+        this.renderParams = {};
+    }
+
+
+    setProgress = (p) => {
+        this.progress = p;
+        this.computeRenderParams();
+    }
+    create = () => {
+        console.log('start creating, add gsap ticker callback');
+        this.context = this.canvas.getContext("2d")
+        this.onResize()
+        gsap.ticker.add(this.update);
+        window.addEventListener("resize", this.onResize)
+    }
+    onResize = () => {
+        this.canvas.style.width = "".concat(window.innerWidth, "px")
+        this.canvas.style.height = "".concat(window.innerHeight, "px")
+        //this.canvas.style.marginTop = "".concat(-3000, "px")
+        this.canvas.width = window.innerWidth * this.dpr
+        this.canvas.height = window.innerHeight * this.dpr
+
+        this.computeRenderParams();
+    }
+    computeRenderParams = () => {
+        /*let ratio = 1198 / 798;
+        let width = lerp(200, window.innerWidth, this.progress);
+        let height = width / ratio;
+        let posX = (window.innerWidth - width) * 0.5,
+            posY = lerp(0, 200, this.progress);*/
+        let ratio = 1198 / 798;
+        let width = lerp(200, window.innerWidth, this.progress);
+        //let height = width / ratio;
+        let height = lerp(100, window.innerHeight, this.progress);
+        let posX = (window.innerWidth - width) * 0.5,
+            posY = lerp(200, 0, this.progress);
+
+        this.renderParams = {
+            ratio,
+            width,
+            height,
+            posX,
+            posY,
+        }
+    }
+    draw = () => {
+        let ctx = this.context;
+        // ctx.strokeStyle = "rgb(255, 0, 0)";
+        // ctx.fillStyle = "rgba(255, 255, 0, .5)";
+        let {ratio, width, height, posX, posY} = this.renderParams;
+        ctx.save();
+        ctx.translate(posX, posY);
+        ctx.beginPath();
+        //ctx.roundRect(0, 0, width, height, 20); не работает на iOS safari 14
+        ctx.rect(0, 0, width, height);
+        ctx.clip();
+        ctx.drawImage(this.background, 0, 0, width, height);
+        ctx.restore();
+        //ctx.stroke();
+        //ctx.fill();
+    }
+    update = () => {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.context.save()
+        this.context.scale(this.dpr, this.dpr)
+        this.draw()
+        this.context.restore()
+    }
+}
 
 const resize = () => {
     if (!$section) {
@@ -277,12 +375,59 @@ const resize = () => {
     animateOnScroll();
 };
 
-const init = () => {
+const loadResources = async () => {
+    let image = await loadImage('https://images.prismic.io/okcc-labs/367d3ec0-317b-4fac-ba90-d885e27c7cdd_card-primary.png?auto=compress,format&w=1200')
+    return {
+        textures: {
+            cardBackground: image,
+        }
+    }
+}
+
+class AnimationCreator {
+    constructor(textures) {
+        this.textures = textures;
+        this.steps = {
+            background: {start: 0, end: 0}
+        }
+    }
+    compute = () => {
+        let areaTopBCR = $areaTop.getBoundingClientRect();
+        let sectionBCR = $section.getBoundingClientRect();
+        this.steps.background.start = areaTopBCR.bottom + window.innerHeight * 1.5;
+        this.steps.background.end =  sectionBCR.bottom + window.innerHeight * 1.5;
+        this.steps.background.start = 3800;
+        this.steps.background.end =  4500;
+        // this.steps.background.start = 3000;
+        // this.steps.background.end = 4500;
+    }
+
+    async create() {
+        this.compute();
+        window.addEventListener("resize", this.compute)
+
+        let p = new Playground($canvas, this.textures);
+        p.create();
+        scroller.onScroll((t) => {
+            console.log(t.scroll);
+            console.log(this.steps);
+            p.setProgress(clamp(mapLinear(t.scroll, this.steps.background.start, this.steps.background.end, 0, 1), 0, 1));
+        });
+
+    }
+}
+
+const init = async () => {
     if (!$section) {
         return;
     }
-
     animateOnScroll();
+
+
+
+    const {textures} = await loadResources();
+    let animCreator = new AnimationCreator(textures);
+    setTimeout(animCreator.create.bind(animCreator), 3000); // вместо 3000 создание должно произойти после полной загрузки, так как от этого зависит расчет правильных точек анимации по скроллу
 };
 
 export default {

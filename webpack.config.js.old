@@ -28,10 +28,8 @@ const entries = pages.reduce((obj, page) => {
 }, {});
 
 module.exports = (env, argv) => {
-    console.log(env);
     const isDev = argv.mode === 'development';
     const publicPath = '/';
-    const shouldUseSourcemap = true;
 
     return {
         entry: entries,
@@ -106,12 +104,8 @@ module.exports = (env, argv) => {
                 },
                 {
                     test: /\.js$/,
+                    use: 'babel-loader',
                     exclude: /node_modules/,
-                    loader: 'babel-loader',
-                    options: {
-                        sourceMaps: shouldUseSourcemap,
-                        inputSourceMap: shouldUseSourcemap,
-                    }
                 },
                 {
                     test: /\.(scss|css)$/,
@@ -178,6 +172,6 @@ module.exports = (env, argv) => {
             watchFiles: path.join(__dirname, 'src'),
             port: 9000,
         },
-        devtool: !isDev ? (shouldUseSourcemap ? 'source-map' : false) : 'cheap-module-source-map',
+        devtool: isDev ? 'inline-source-map' : false,
     };
 };
