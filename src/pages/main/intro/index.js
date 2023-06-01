@@ -70,10 +70,8 @@ const sliderMoveObserver = () => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 sliderAnimation.play();
-                console.log('play');
             } else {
                 sliderAnimation.pause();
-                console.log('pause');
             }
         });
     });
