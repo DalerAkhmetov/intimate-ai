@@ -181,8 +181,7 @@ const animateOnScroll = () => {
             let y = 0;
 
             if (isMobileNow) {
-                x = ($cardCurrent.BCR.left - $card[0].BCR.left - $cardCurrent.BCR.width - $cardCurrent.marginTop) * (cardIndex > 1 ? 1 : -1);
-
+                x = ($cardCurrent.BCR.left * 2 + $cardCurrent.BCR.width) * (cardIndex > 1 ? 1 : -1);
                 y = -$cardCurrent.BCR.top + $card[0].BCR.top;
             } else {
                 y = innerHeight - ($cardCurrent.BCR.top - areaTopBCR.top + $cardCurrent.BCR.height) - cardsBottomOffset;
