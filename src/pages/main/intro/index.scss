@@ -513,6 +513,7 @@
         background-color: $color-heliotrope4;
         transition: background-color $transition;
         filter: blur(vpc(15));
+        will-change: transform;
 
         @include mobile {
             margin-top: vpc(-10);
