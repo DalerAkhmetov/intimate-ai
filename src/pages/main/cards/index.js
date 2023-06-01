@@ -116,6 +116,7 @@ const animateOnScroll = () => {
                     end: `+=${animationTotalDistance}`,
                     scrub: true,
                     pin: true,
+                    anticipatePin: 1,
                     onLeave() {
                         gsap.set($card[0], { zIndex: 1 });
                     },

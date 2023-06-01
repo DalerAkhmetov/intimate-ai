@@ -46,6 +46,7 @@ const animateOnScroll = () => {
                     end: `+=${animationTotalDistance}`,
                     scrub: true,
                     pin: true,
+                    anticipatePin: 1,
                 },
             })
             .to($section, {

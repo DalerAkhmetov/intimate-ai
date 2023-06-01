@@ -98,6 +98,7 @@ const animateOnScroll = () => {
                 end: `+=${messagesDistance}`,
                 scrub: true,
                 pin: true,
+                anticipatePin: 1,
             },
         });
 

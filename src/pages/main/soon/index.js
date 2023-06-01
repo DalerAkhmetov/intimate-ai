@@ -122,6 +122,7 @@ const animateOnScroll = () => {
             start: 'bottom bottom',
             end: `+=${innerHeight / 1.75}`,
             pin: true,
+            anticipatePin: 1,
         });
     });
 };
