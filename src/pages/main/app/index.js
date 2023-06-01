@@ -44,7 +44,7 @@ const animateOnScroll = () => {
                     trigger: $section,
                     start: 'top top',
                     end: `+=${animationTotalDistance}`,
-                    scrub: true,
+                    scrub: 0.5,
                     pin: true,
                     anticipatePin: 1,
                 },

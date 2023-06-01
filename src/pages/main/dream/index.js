@@ -23,7 +23,7 @@ const tickerMove = () => {
             trigger: $section,
             start: `top+=${gsap.getProperty($section, 'paddingTop')} bottom`,
             end: `bottom-=${gsap.getProperty($section, 'paddingBottom')} top`,
-            scrub: true,
+            scrub: 0.5,
         },
     });
 

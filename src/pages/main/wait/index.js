@@ -161,7 +161,7 @@ const animateOnScroll = () => {
                 trigger: $section,
                 start: 'center bottom',
                 end: `bottom+=${$button.clientHeight / 2} bottom`,
-                scrub: true,
+                scrub: 0.5,
             },
             ease: 'none',
             yPercent: 100,
