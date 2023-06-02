@@ -1,29 +1,31 @@
-html.asscroll-touch {
-    overflow: hidden;
-    height: -webkit-fill-available;
-
-    body {
+.is-scroller-asscroll {
+    [asscroll-container] {
         position: fixed;
         left: 0;
         top: 0;
+        z-index: 1;
         overflow: hidden;
         width: 100%;
         height: 100%;
     }
-}
 
-[asscroll-container] {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
+    &.asscroll-touch {
+        overflow: hidden;
+        height: -webkit-fill-available;
 
-    .asscroll-touch & {
-        position: relative;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
+        body {
+            position: fixed;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+
+        [asscroll-container] {
+            position: relative;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
     }
 }

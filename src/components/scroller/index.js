@@ -113,6 +113,8 @@ const init = () => {
         return;
     }
 
+    document.documentElement.classList.add('is-scroller-asscroll');
+
     scroller = new ASScroll({
         customScrollbar: false,
         scrollbarStyles: false,
