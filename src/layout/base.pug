@@ -302,6 +302,13 @@ html(class=html.classList)&attributes(html.attrs)
         block body-start
         block content
         block scripts
+            script.
+                const isDev = JSON.parse('#{env.isDev}');
+
+                if (isDev) {
+                    window.isDev = isDev;
+                }
+
             script(src=require('@scripts/index.js'))
 
         block body-end

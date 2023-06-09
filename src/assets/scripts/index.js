@@ -9,6 +9,7 @@ import vUnits from '@src/assets/scripts/v-units';
 
 import animationTextScramble from '@components/animation/text-scramble';
 import form from '@components/form';
+import fps from '@components/fps';
 import popup from '@components/popup';
 import preloader from '@components/preloader';
 import scroller from '@components/scroller';
@@ -57,6 +58,7 @@ const init = () => {
         .init(async () => {
             animationTextScramble.init();
             form.init();
+            fps.init();
             popup.init();
             input.init();
 

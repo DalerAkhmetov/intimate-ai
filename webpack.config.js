@@ -88,6 +88,7 @@ module.exports = (env, argv) => {
                         data: {
                             publicPath,
                             env: {
+                                isDev,
                                 reqEp: process.env.CALLBACK_REQUEST_ENDPOINT_API,
                                 mainLink: process.env.MAIN_LINK,
                                 socials: {
