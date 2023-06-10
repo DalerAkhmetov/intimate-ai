@@ -18,6 +18,8 @@
 
 ``CALLBACK_REQUEST_ENDPOINT_API`` - ссылка на запросы для отправки форм
 
+``CALLBACK_REQUEST_TOKEN`` - токен запроса авторизации (можно сгенерировать здесь - https://www.debugbear.com/basic-auth-header-generator)
+
 ``MAIN_LINK`` - ссылка на телеграм для кнопок **"Start chatting"**, **"View more"** и **"Try it now"**
 
 ``SOCIAL_FACEBOOK`` - ссылка на **Facebook**
@@ -31,3 +33,5 @@
 ``PRIVACY_POLICY_LINK`` - ссылка **"Privacy Policy & Cookies"** в подвале сайте
 
 ``LEGAL_NOTICE_LINK`` - ссылка **"Legal Notice"** в подвале сайта
+
+``CONTACT_EMAIL`` - контактная почта
