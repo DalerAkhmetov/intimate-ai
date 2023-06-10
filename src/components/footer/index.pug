@@ -47,7 +47,7 @@
         +e.contacts
             +e.H2.title.text--h4 Get in&nbsp;touch
 
-            +e.A.link--small(href="mailto:info@intimate.ai") info@intimate.ai
+            +e.A.link--small(href=`mailto:${env.contacts.email}`)!= env.contacts.email
 
         +e.info.text--sm
             +e.A.link(href=env.privacyPolicyLink target="_blank") Privacy Policy &amp;&nbsp;Cookies

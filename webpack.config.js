@@ -100,6 +100,9 @@ module.exports = (env, argv) => {
                                 },
                                 privacyPolicyLink: process.env.PRIVACY_POLICY_LINK,
                                 legalNoticeLink: process.env.LEGAL_NOTICE_LINK,
+                                contacts: {
+                                    email: process.env.CONTACT_EMAIL,
+                                },
                             },
                         },
                     },
