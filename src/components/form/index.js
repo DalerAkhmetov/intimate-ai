@@ -106,6 +106,9 @@ const request = ($formCurrent) => {
     return fetch(`${apiUrl}${$formCurrent.getAttribute('action')}`, {
         body: new FormData($formCurrent),
         method: $formCurrent.getAttribute('method').toUpperCase(),
+        headers: {
+            Authorization: `Basic ${window.reqToken}`,
+        },
     })
         .then((response) => response.json())
         .then(() => {

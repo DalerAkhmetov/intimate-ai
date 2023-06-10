@@ -90,6 +90,7 @@ module.exports = (env, argv) => {
                             env: {
                                 isDev,
                                 reqEp: process.env.CALLBACK_REQUEST_ENDPOINT_API,
+                                reqToken: process.env.CALLBACK_REQUEST_TOKEN,
                                 mainLink: process.env.MAIN_LINK,
                                 socials: {
                                     fb: process.env.SOCIAL_FACEBOOK,

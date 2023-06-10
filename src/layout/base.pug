@@ -304,9 +304,14 @@ html(class=html.classList)&attributes(html.attrs)
         block scripts
             script.
                 const isDev = JSON.parse('#{env.isDev}');
+                const reqToken = '#{env.reqToken}';
 
                 if (isDev) {
                     window.isDev = isDev;
+                }
+
+                if (reqToken) {
+                    window.reqToken = reqToken;
                 }
 
             script(src=require('@scripts/index.js'))
