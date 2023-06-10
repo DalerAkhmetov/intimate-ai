@@ -4,7 +4,6 @@ import input from '@components/ui/input';
 
 const $form = document.querySelectorAll('.form');
 
-const apiUrl = '';
 const errorMessages = {
     required: {
         default: 'This field is required',
@@ -103,7 +102,7 @@ const result = ($formCurrent) => {
 };
 
 const request = ($formCurrent) => {
-    return fetch(`${apiUrl}${$formCurrent.getAttribute('action')}`, {
+    return fetch($formCurrent.getAttribute('action'), {
         body: new FormData($formCurrent),
         method: $formCurrent.getAttribute('method').toUpperCase(),
         headers: {
