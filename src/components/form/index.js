@@ -102,11 +102,14 @@ const result = ($formCurrent) => {
 };
 
 const request = ($formCurrent) => {
+    const fd = new FormData($formCurrent);
+
     return fetch($formCurrent.getAttribute('action'), {
-        body: new FormData($formCurrent),
+        body: JSON.stringify(Object.fromEntries(fd.entries())),
         method: $formCurrent.getAttribute('method').toUpperCase(),
         headers: {
             Authorization: `Basic ${window.reqToken}`,
+            'Content-Type': 'application/json;charset=utf-8',
         },
     })
         .then((response) => response.json())
