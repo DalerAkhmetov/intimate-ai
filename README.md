@@ -22,6 +22,8 @@
 
 ``MAIN_LINK`` - ссылка на телеграм для кнопок **"Start chatting"**, **"View more"** и **"Try it now"**
 
+``MAIN_LINK_COOKIE_EXPIRES`` - время жизни **cookie** параметров для главной ссылки (на телеграм), в днях
+
 ``SOCIAL_FACEBOOK`` - ссылка на **Facebook**
 
 ``SOCIAL_INSTAGRAM`` - ссылка на **Instagram**

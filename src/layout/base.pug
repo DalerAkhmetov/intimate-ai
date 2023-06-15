@@ -305,6 +305,7 @@ html(class=html.classList)&attributes(html.attrs)
             script.
                 const isDev = JSON.parse('#{env.isDev}');
                 const reqToken = '#{env.reqToken}';
+                const mainLinkCookieExpires = '#{env.mainLinkCookieExpires}';
 
                 if (isDev) {
                     window.isDev = isDev;
@@ -312,6 +313,10 @@ html(class=html.classList)&attributes(html.attrs)
 
                 if (reqToken) {
                     window.reqToken = reqToken;
+                }
+
+                if (mainLinkCookieExpires) {
+                    window.mainLinkCookieExpires = +mainLinkCookieExpires;
                 }
 
             script(src=require('@scripts/index.js'))

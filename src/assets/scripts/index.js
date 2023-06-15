@@ -10,6 +10,7 @@ import vUnits from '@src/assets/scripts/v-units';
 import animationTextScramble from '@components/animation/text-scramble';
 import form from '@components/form';
 import fps from '@components/fps';
+import getParams from '@components/get-params';
 import popup from '@components/popup';
 import preloader from '@components/preloader';
 import scroller from '@components/scroller';
@@ -59,6 +60,7 @@ const init = () => {
             animationTextScramble.init();
             form.init();
             fps.init();
+            getParams.init();
             popup.init();
             input.init();
 

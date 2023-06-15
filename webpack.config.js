@@ -92,6 +92,7 @@ module.exports = (env, argv) => {
                                 reqEp: process.env.CALLBACK_REQUEST_ENDPOINT_API,
                                 reqToken: process.env.CALLBACK_REQUEST_TOKEN,
                                 mainLink: process.env.MAIN_LINK,
+                                mainLinkCookieExpires: process.env.MAIN_LINK_COOKIE_EXPIRES,
                                 socials: {
                                     fb: process.env.SOCIAL_FACEBOOK,
                                     ig: process.env.SOCIAL_INSTAGRAM,
