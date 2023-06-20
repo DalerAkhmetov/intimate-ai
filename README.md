@@ -24,16 +24,20 @@
 
 ``MAIN_LINK_COOKIE_EXPIRES`` - время жизни **cookie** параметров для главной ссылки (на телеграм), в днях
 
-``SOCIAL_FACEBOOK`` - ссылка на **Facebook**
+``SOCIAL_FACEBOOK`` - ссылка на **Facebook** (пустое значение - ссылка не отображается)
 
-``SOCIAL_INSTAGRAM`` - ссылка на **Instagram**
+``SOCIAL_INSTAGRAM`` - ссылка на **Instagram** (пустое значение - ссылка не отображается)
 
-``SOCIAL_TWITTER`` - ссылка на **Twitter**
+``SOCIAL_TWITTER`` - ссылка на **Twitter** (пустое значение - ссылка не отображается)
 
-``SOCIAL_YOUTUBE`` - ссылка на **Youtube**
+``SOCIAL_YOUTUBE`` - ссылка на **Youtube** (пустое значение - ссылка не отображается)
+
+``SOCIAL_TELEGRAM`` - ссылка на **Telegram** (пустое значение - ссылка не отображается)
 
 ``PRIVACY_POLICY_LINK`` - ссылка **"Privacy Policy & Cookies"** в подвале сайте
 
 ``LEGAL_NOTICE_LINK`` - ссылка **"Legal Notice"** в подвале сайта
 
 ``CONTACT_EMAIL`` - контактная почта
+
+``TEAM_LINK`` - отображение ссылки на команду разработки (**true** или **false**)

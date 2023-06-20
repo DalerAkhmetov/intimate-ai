@@ -23,25 +23,35 @@
                     })(type="submit")
 
         +e.links
-            +link-mask({
-                link: env.socials.fb,
-                text: 'On facebook'
-            }).__link--big.text--h5(target="_blank")
+            if env.socials.fb
+                +link-mask({
+                    link: env.socials.fb,
+                    text: 'On facebook'
+                }).__link--big.text--h5(target="_blank")
 
-            +link-mask({
-                link: env.socials.ig,
-                text: 'On instagram'
-            }).__link--big.text--h5(target="_blank")
+            if env.socials.ig
+                +link-mask({
+                    link: env.socials.ig,
+                    text: 'On instagram'
+                }).__link--big.text--h5(target="_blank")
 
-            +link-mask({
-                link: env.socials.tw,
-                text: 'On twitter'
-            }).__link--big.text--h5(target="_blank")
+            if env.socials.tw
+                +link-mask({
+                    link: env.socials.tw,
+                    text: 'On twitter'
+                }).__link--big.text--h5(target="_blank")
 
-            +link-mask({
-                link: env.socials.yt,
-                text: 'On youtube'
-            }).__link--big.text--h5(target="_blank")
+            if env.socials.yt
+                +link-mask({
+                    link: env.socials.yt,
+                    text: 'On youtube'
+                }).__link--big.text--h5(target="_blank")
+
+            if env.socials.tg
+                +link-mask({
+                    link: env.socials.tg,
+                    text: 'On telegram'
+                }).__link--big.text--h5(target="_blank")
 
     +e.section--center
         +e.contacts
@@ -54,5 +64,7 @@
             +e.A.link(href=env.legalNoticeLink target="_blank") Legal Notice
 
     +e.section--bottom.text--sm
-        +e.team Website by&nbsp;#[a(href="https://bytetown.ru/" target="_blank") ByteTown]
+        if String(env.teamLink).toLowerCase() === 'true'
+            +e.team Website by&nbsp;#[a(href="https://bytetown.ru/" target="_blank") ByteTown]
+
         +e.P.copy &copy;&nbsp;#[span.js-current-year #{new Date().getFullYear()}] Intimate.ai
