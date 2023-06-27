@@ -50,6 +50,7 @@
         "lodash.debounce": "^4.0.8",
         "lodash.throttle": "^4.1.1",
         "normalize.css": "^8.0.1",
-        "ua-parser-js": "^1.0.33"
+        "ua-parser-js": "^1.0.33",
+        "uuid": "^9.0.0"
     }
 }

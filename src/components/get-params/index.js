@@ -1,30 +1,72 @@
 import Cookies from 'js-cookie';
+import { v4 as uuidv4 } from 'uuid';
 
 const $jsGetParamsLink = document.querySelectorAll('.js-get-params-link');
 
 const cookieName = 'last-search-params';
 const cookieExpires = window.mainLinkCookieExpires || 30;
+const paramName = window.mainLinkParam || 'start';
 
-const getNewUrl = (href, params = '') => {
-    const url = new URL(href);
-    const urlSearchParams = new URLSearchParams(url.search);
-    const searchParams = new URLSearchParams(params);
+let dataFromCookie = null;
 
-    searchParams.forEach((value, key) => {
-        urlSearchParams.set(key, value);
+const sendData = () => {
+    if (!dataFromCookie) {
+        return;
+    }
+
+    fetch(`https://api.cloudflare.com/client/v4/accounts/${window.cf?.accountId}/storage/kv/namespaces/${window.cf?.spacenameId}/values/${dataFromCookie.key}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${window.cf?.bearerToken}`,
+        },
+        body: JSON.stringify({
+            expiration_ttl: 60,
+            value: dataFromCookie.value,
+        }),
+    }).catch((error) => {
+        console.error(error);
     });
+};
 
-    return `${url.origin}${url.pathname}?${urlSearchParams.toString()}`;
+const getNewUrl = (href) => {
+    const url = new URL(href);
+
+    return `${url.origin}${url.pathname}?${paramName}=${dataFromCookie.keyBase64}`;
 };
 
 const setParamsToLink = () => {
-    if (!$jsGetParamsLink.length) {
+    if (!$jsGetParamsLink.length || !dataFromCookie) {
         return;
     }
 
     $jsGetParamsLink.forEach(($jsGetParamsLinkCurrent) => {
-        $jsGetParamsLinkCurrent.setAttribute('href', getNewUrl($jsGetParamsLinkCurrent.getAttribute('href'), Cookies.get(cookieName)));
+        $jsGetParamsLinkCurrent.setAttribute('href', getNewUrl($jsGetParamsLinkCurrent.getAttribute('href')));
     });
+};
+
+const getJSONFromCookieParams = () => {
+    const cookieJSON = {};
+
+    new URLSearchParams(Cookies.get(cookieName)).forEach((value, key) => {
+        cookieJSON[key] = value;
+    });
+
+    return JSON.stringify(cookieJSON);
+};
+
+const createDataFromCookie = () => {
+    if (!Cookies.get(cookieName)) {
+        return;
+    }
+
+    const key = uuidv4();
+
+    dataFromCookie = {
+        key,
+        keyBase64: btoa(key),
+        value: getJSONFromCookieParams(),
+    };
 };
 
 const setCookies = () => {
@@ -35,7 +77,9 @@ const setCookies = () => {
 
 const init = () => {
     setCookies();
+    createDataFromCookie();
     setParamsToLink();
+    sendData();
 };
 
 export default {

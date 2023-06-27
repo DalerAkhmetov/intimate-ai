@@ -305,7 +305,13 @@ html(class=html.classList)&attributes(html.attrs)
             script.
                 const isDev = JSON.parse('#{env.isDev}');
                 const reqToken = '#{env.reqToken}';
+                const mainLinkParam = '#{env.mainLinkParam}';
                 const mainLinkCookieExpires = '#{env.mainLinkCookieExpires}';
+                const cf = {
+                    accountId: '#{env.cf.accountId}',
+                    namespaceId: '#{env.cf.spacenameId}',
+                    bearerToken: '#{env.cf.bearerToken}',
+                };
 
                 if (isDev) {
                     window.isDev = isDev;
@@ -315,9 +321,15 @@ html(class=html.classList)&attributes(html.attrs)
                     window.reqToken = reqToken;
                 }
 
+                if (mainLinkParam) {
+                    window.mainLinkParam = mainLinkParam;
+                }
+
                 if (mainLinkCookieExpires) {
                     window.mainLinkCookieExpires = +mainLinkCookieExpires;
                 }
+
+                window.cf = cf;
 
             script(src=require('@scripts/index.js'))
 

@@ -92,6 +92,7 @@ module.exports = (env, argv) => {
                                 reqEp: process.env.CALLBACK_REQUEST_ENDPOINT_API,
                                 reqToken: process.env.CALLBACK_REQUEST_TOKEN,
                                 mainLink: process.env.MAIN_LINK,
+                                mainLinkParam: process.env.MAIN_LINK_PARAM,
                                 mainLinkCookieExpires: process.env.MAIN_LINK_COOKIE_EXPIRES,
                                 socials: {
                                     fb: process.env.SOCIAL_FACEBOOK,
@@ -106,6 +107,11 @@ module.exports = (env, argv) => {
                                     email: process.env.CONTACT_EMAIL,
                                 },
                                 teamLink: process.env.TEAM_LINK,
+                                cf: {
+                                    accountId: process.env.CF_ACCOUNT_ID,
+                                    spacenameId: process.env.CF_SPACENAME_ID,
+                                    bearerToken: process.env.CF_BEARER_TOKEN,
+                                },
                             },
                         },
                     },

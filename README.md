@@ -22,6 +22,8 @@
 
 ``MAIN_LINK`` - ссылка на телеграм для кнопок **"Start chatting"**, **"View more"** и **"Try it now"**
 
+``MAIN_LINK_PARAM`` - название параметра для отправки ключа
+
 ``MAIN_LINK_COOKIE_EXPIRES`` - время жизни **cookie** параметров для главной ссылки (на телеграм), в днях
 
 ``SOCIAL_FACEBOOK`` - ссылка на **Facebook** (пустое значение - ссылка не отображается)
@@ -41,3 +43,9 @@
 ``CONTACT_EMAIL`` - контактная почта
 
 ``TEAM_LINK`` - отображение ссылки на команду разработки (**true** или **false**)
+
+``CF_ACCOUNT_ID`` - идентификатор аккаунта Cloudflare
+
+``CF_NAMESPACE_ID`` - идентификатор namespace KV
+
+``CF_BEARER_TOKEN`` - токен запроса авторизации Workers KV
