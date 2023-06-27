@@ -49,3 +49,5 @@
 ``CF_NAMESPACE_ID`` - идентификатор namespace KV
 
 ``CF_BEARER_TOKEN`` - токен запроса авторизации Workers KV
+
+``CF_DATA_EXPIRATION`` - время жизни записи данных Workers KV (в секундах)
