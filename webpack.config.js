@@ -111,6 +111,7 @@ module.exports = (env, argv) => {
                                     accountId: process.env.CF_ACCOUNT_ID,
                                     spacenameId: process.env.CF_SPACENAME_ID,
                                     bearerToken: process.env.CF_BEARER_TOKEN,
+                                    dataExpiration: process.env.CF_DATA_EXPIRATION,
                                 },
                             },
                         },

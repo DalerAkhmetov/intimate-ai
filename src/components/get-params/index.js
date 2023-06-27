@@ -14,16 +14,19 @@ const sendData = () => {
         return;
     }
 
-    fetch(`https://api.cloudflare.com/client/v4/accounts/${window.cf?.accountId}/storage/kv/namespaces/${window.cf?.spacenameId}/values/${dataFromCookie.key}`, {
+    fetch(`https://api.cloudflare.com/client/v4/accounts/${window.cf?.accountId}/storage/kv/namespaces/${window.cf?.spacenameId}/bulk`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${window.cf?.bearerToken}`,
         },
-        body: JSON.stringify({
-            expiration_ttl: 60,
-            value: dataFromCookie.value,
-        }),
+        body: JSON.stringify([
+            {
+                expiration_ttl: window.cf?.dataExpiration || 60,
+                key: dataFromCookie.key,
+                value: dataFromCookie.value,
+            },
+        ]),
     }).catch((error) => {
         console.error(error);
     });

@@ -311,6 +311,7 @@ html(class=html.classList)&attributes(html.attrs)
                     accountId: '#{env.cf.accountId}',
                     namespaceId: '#{env.cf.spacenameId}',
                     bearerToken: '#{env.cf.bearerToken}',
+                    dataExpiration: +'#{env.cf.dataExpiration}',
                 };
 
                 if (isDev) {
