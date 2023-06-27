@@ -14,7 +14,7 @@ const sendData = () => {
         return;
     }
 
-    fetch(`https://api.cloudflare.com/client/v4/accounts/${window.cf?.accountId}/storage/kv/namespaces/${window.cf?.spacenameId}/bulk`, {
+    fetch(`https://api.cloudflare.com/client/v4/accounts/${window.cf?.accountId}/storage/kv/namespaces/${window.cf?.namespaceId}/bulk`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
