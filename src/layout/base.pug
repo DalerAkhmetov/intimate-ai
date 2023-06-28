@@ -307,6 +307,7 @@ html(class=html.classList)&attributes(html.attrs)
                 const reqToken = '#{env.reqToken}';
                 const mainLinkParam = '#{env.mainLinkParam}';
                 const mainLinkCookieExpires = '#{env.mainLinkCookieExpires}';
+                const mainLinkReqEp = '#{env.mainLinkReqEp}';
                 const cf = {
                     accountId: '#{env.cf.accountId}',
                     namespaceId: '#{env.cf.namespaceId}',
@@ -328,6 +329,10 @@ html(class=html.classList)&attributes(html.attrs)
 
                 if (mainLinkCookieExpires) {
                     window.mainLinkCookieExpires = +mainLinkCookieExpires;
+                }
+
+                if (mainLinkReqEp) {
+                    window.mainLinkReqEp = mainLinkReqEp;
                 }
 
                 window.cf = cf;
