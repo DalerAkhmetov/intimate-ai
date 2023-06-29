@@ -14,7 +14,6 @@ const $message = $screen.querySelectorAll('.main__message');
 const $audio = $screen.querySelector('.main__audio');
 const $playPause = $screen.querySelector('.main__play-pause');
 const $voiceTrack = $screen.querySelector('.main__voice-track:last-child');
-const $button = $screen.querySelector('.main__button');
 
 const gsapCtx = gsap.context(() => {});
 
@@ -52,7 +51,7 @@ const animateOnScroll = () => {
     };
 
     const messagesFirstPosition = gsap.getProperty($messages, 'paddingTop') + gsap.getProperty($messages, 'paddingBottom') + $message[0].clientHeight + gsap.getProperty($message[0], 'marginTop');
-    const messagesDistance = $messages.clientHeight - messagesFirstPosition + $button.clientHeight + innerHeight / 2;
+    const messagesDistance = $messages.clientHeight - messagesFirstPosition + innerHeight / 2;
 
     const getDurationFromDistance = (value) => (value / messagesDistance) * 0.5;
 
@@ -123,13 +122,6 @@ const animateOnScroll = () => {
                 },
                 '<'
             );
-
-            if ($messageCurrent.classList.contains('main__message--image')) {
-                messagesTimeline.from($button, {
-                    ...baseProps,
-                    duration: getDurationFromDistance($button.clientHeight),
-                });
-            }
         });
 
         messagesTimeline.to($section, {
